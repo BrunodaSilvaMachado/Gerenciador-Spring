@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/Autistas")
+@RequestMapping("/Gerenciador/Autistas")
 public class AutistaController {
     @Autowired
     private AutistaDAO dao;
@@ -23,13 +23,13 @@ public class AutistaController {
     }
 
     @RequestMapping(value = "/selecionarAutista/{autistaId}", method = RequestMethod.GET)
-    public Autista selecionar(@PathVariable("autistaId") Integer bikeId) {
-        return dao.selecionar(bikeId);
+    public Autista selecionar(@PathVariable("autistaId") Integer autistaId) {
+        return dao.selecionar(autistaId);
     }
 
     @RequestMapping(value = "/inserirAutista", method = RequestMethod.POST)
-    public Autista salvar(@RequestBody Autista bike) {
-        return dao.salvar(bike);
+    public Autista salvar(@RequestBody Autista autista) {
+        return dao.salvar(autista);
     }
 
     @RequestMapping(value = "/alterarAutista", method = RequestMethod.POST)

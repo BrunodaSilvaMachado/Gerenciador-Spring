@@ -19,16 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_medicamento")
-@NamedQueries({
-    @NamedQuery(name = "Medicamento.findAll", query = "SELECT m FROM Medicamento m")
-    , @NamedQuery(name = "Medicamento.findById", query = "SELECT m FROM Medicamento m WHERE m.id = :id")
-    , @NamedQuery(name = "Medicamento.findByNome", query = "SELECT m FROM Medicamento m WHERE m.nome = :nome")
-    , @NamedQuery(name = "Medicamento.findByTipo", query = "SELECT m FROM Medicamento m WHERE m.tipo = :tipo")
-    , @NamedQuery(name = "Medicamento.findByComposicao", query = "SELECT m FROM Medicamento m WHERE m.composicao = :composicao")
-    , @NamedQuery(name = "Medicamento.findByLaboratorio", query = "SELECT m FROM Medicamento m WHERE m.laboratorio = :laboratorio")
-    , @NamedQuery(name = "Medicamento.findByPosologia", query = "SELECT m FROM Medicamento m WHERE m.posologia = :posologia")
-    , @NamedQuery(name = "Medicamento.findByObservacao", query = "SELECT m FROM Medicamento m WHERE m.observacao = :observacao")
-    , @NamedQuery(name = "Medicamento.findByStats", query = "SELECT m FROM Medicamento m WHERE m.stats = :stats")})
 public class Medicamento implements Serializable {
 
     private static final long serialVersionUID = 1L;

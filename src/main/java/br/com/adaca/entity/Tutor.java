@@ -17,18 +17,10 @@ import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author willi
+ * @author Willian
  */
 @Entity
-@Table(name = "tb_tutor", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"USUARIO"})})
-@NamedQueries({
-    @NamedQuery(name = "Tutor.findAll", query = "SELECT t FROM Tutor t")
-    , @NamedQuery(name = "Tutor.findById", query = "SELECT t FROM Tutor t WHERE t.id = :id")
-    , @NamedQuery(name = "Tutor.findByNome", query = "SELECT t FROM Tutor t WHERE t.nome = :nome")
-    , @NamedQuery(name = "Tutor.findByUsuario", query = "SELECT t FROM Tutor t WHERE t.usuario = :usuario")
-    , @NamedQuery(name = "Tutor.findBySenha", query = "SELECT t FROM Tutor t WHERE t.senha = :senha")
-    , @NamedQuery(name = "Tutor.findByArea", query = "SELECT t FROM Tutor t WHERE t.area = :area")})
+@Table(name = "tb_tutor", uniqueConstraints = {@UniqueConstraint(columnNames = {"USUARIO"})})
 public class Tutor implements Serializable {
 
     private static final long serialVersionUID = 1L;

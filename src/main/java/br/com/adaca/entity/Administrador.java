@@ -20,13 +20,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_administrador")
-@NamedQueries({
-    @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a")
-    , @NamedQuery(name = "Administrador.findById", query = "SELECT a FROM Administrador a WHERE a.id = :id")
-    , @NamedQuery(name = "Administrador.findByNome", query = "SELECT a FROM Administrador a WHERE a.nome = :nome")
-    , @NamedQuery(name = "Administrador.findByUsuario", query = "SELECT a FROM Administrador a WHERE a.usuario = :usuario")
-    , @NamedQuery(name = "Administrador.findBySenha", query = "SELECT a FROM Administrador a WHERE a.senha = :senha")
-    , @NamedQuery(name = "Administrador.findByNivelacesso", query = "SELECT a FROM Administrador a WHERE a.nivelacesso = :nivelacesso")})
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;

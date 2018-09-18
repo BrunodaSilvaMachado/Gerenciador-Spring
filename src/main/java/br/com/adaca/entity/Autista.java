@@ -24,25 +24,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_autista")
-@NamedQueries({
-    @NamedQuery(name = "Autista.findAll", query = "SELECT a FROM Autista a")
-    , @NamedQuery(name = "Autista.findById", query = "SELECT a FROM Autista a WHERE a.id = :id")
-    , @NamedQuery(name = "Autista.findByNome", query = "SELECT a FROM Autista a WHERE a.nome = :nome")
-    , @NamedQuery(name = "Autista.findBySexo", query = "SELECT a FROM Autista a WHERE a.sexo = :sexo")
-    , @NamedQuery(name = "Autista.findByDtnasc", query = "SELECT a FROM Autista a WHERE a.dtnasc = :dtnasc")
-    , @NamedQuery(name = "Autista.findByClassificacao", query = "SELECT a FROM Autista a WHERE a.classificacao = :classificacao")
-    , @NamedQuery(name = "Autista.findByEscola", query = "SELECT a FROM Autista a WHERE a.escola = :escola")
-    , @NamedQuery(name = "Autista.findByMediador", query = "SELECT a FROM Autista a WHERE a.mediador = :mediador")
-    , @NamedQuery(name = "Autista.findByMedicamentos", query = "SELECT a FROM Autista a WHERE a.medicamentos = :medicamentos")
-    , @NamedQuery(name = "Autista.findByBrinquedo", query = "SELECT a FROM Autista a WHERE a.brinquedo = :brinquedo")
-    , @NamedQuery(name = "Autista.findByAlimento", query = "SELECT a FROM Autista a WHERE a.alimento = :alimento")
-    , @NamedQuery(name = "Autista.findByBebida", query = "SELECT a FROM Autista a WHERE a.bebida = :bebida")
-    , @NamedQuery(name = "Autista.findByAtividade", query = "SELECT a FROM Autista a WHERE a.atividade = :atividade")
-    , @NamedQuery(name = "Autista.findByMedo", query = "SELECT a FROM Autista a WHERE a.medo = :medo")
-    , @NamedQuery(name = "Autista.findByLer", query = "SELECT a FROM Autista a WHERE a.ler = :ler")
-    , @NamedQuery(name = "Autista.findByEscrever", query = "SELECT a FROM Autista a WHERE a.escrever = :escrever")
-    , @NamedQuery(name = "Autista.findByComunicacao", query = "SELECT a FROM Autista a WHERE a.comunicacao = :comunicacao")
-    , @NamedQuery(name = "Autista.findByTerapia", query = "SELECT a FROM Autista a WHERE a.terapia = :terapia")})
 public class Autista implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -19,17 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_configuracao")
-@NamedQueries({
-    @NamedQuery(name = "Configuracao.findAll", query = "SELECT c FROM Configuracao c")
-    , @NamedQuery(name = "Configuracao.findById", query = "SELECT c FROM Configuracao c WHERE c.id = :id")
-    , @NamedQuery(name = "Configuracao.findBySom", query = "SELECT c FROM Configuracao c WHERE c.som = :som")
-    , @NamedQuery(name = "Configuracao.findByMusica", query = "SELECT c FROM Configuracao c WHERE c.musica = :musica")
-    , @NamedQuery(name = "Configuracao.findByDicatempo", query = "SELECT c FROM Configuracao c WHERE c.dicatempo = :dicatempo")
-    , @NamedQuery(name = "Configuracao.findByDicacaminho", query = "SELECT c FROM Configuracao c WHERE c.dicacaminho = :dicacaminho")
-    , @NamedQuery(name = "Configuracao.findByTipodica", query = "SELECT c FROM Configuracao c WHERE c.tipodica = :tipodica")
-    , @NamedQuery(name = "Configuracao.findByComemoracao", query = "SELECT c FROM Configuracao c WHERE c.comemoracao = :comemoracao")
-    , @NamedQuery(name = "Configuracao.findByTempodica", query = "SELECT c FROM Configuracao c WHERE c.tempodica = :tempodica")
-    , @NamedQuery(name = "Configuracao.findByMenu", query = "SELECT c FROM Configuracao c WHERE c.menu = :menu")})
 public class Configuracao implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -23,14 +23,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_resultado")
-@NamedQueries({
-    @NamedQuery(name = "Resultado.findAll", query = "SELECT r FROM Resultado r")
-    , @NamedQuery(name = "Resultado.findById", query = "SELECT r FROM Resultado r WHERE r.id = :id")
-    , @NamedQuery(name = "Resultado.findByDicas", query = "SELECT r FROM Resultado r WHERE r.dicas = :dicas")
-    , @NamedQuery(name = "Resultado.findByCliquecerto", query = "SELECT r FROM Resultado r WHERE r.cliquecerto = :cliquecerto")
-    , @NamedQuery(name = "Resultado.findByCliqueerrado", query = "SELECT r FROM Resultado r WHERE r.cliqueerrado = :cliqueerrado")
-    , @NamedQuery(name = "Resultado.findByHorainicio", query = "SELECT r FROM Resultado r WHERE r.horainicio = :horainicio")
-    , @NamedQuery(name = "Resultado.findByHorafim", query = "SELECT r FROM Resultado r WHERE r.horafim = :horafim")})
 public class Resultado implements Serializable {
 
     private static final long serialVersionUID = 1L;

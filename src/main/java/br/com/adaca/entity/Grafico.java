@@ -23,11 +23,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_grafico")
-@NamedQueries({
-    @NamedQuery(name = "Grafico.findAll", query = "SELECT g FROM Grafico g")
-    , @NamedQuery(name = "Grafico.findById", query = "SELECT g FROM Grafico g WHERE g.id = :id")
-    , @NamedQuery(name = "Grafico.findByTipografico", query = "SELECT g FROM Grafico g WHERE g.tipografico = :tipografico")
-    , @NamedQuery(name = "Grafico.findByDatagerado", query = "SELECT g FROM Grafico g WHERE g.datagerado = :datagerado")})
 public class Grafico implements Serializable {
 
     private static final long serialVersionUID = 1L;

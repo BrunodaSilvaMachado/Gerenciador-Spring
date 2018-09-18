@@ -19,18 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_responsavel")
-@NamedQueries({
-    @NamedQuery(name = "Responsavel.findAll", query = "SELECT r FROM Responsavel r")
-    , @NamedQuery(name = "Responsavel.findById", query = "SELECT r FROM Responsavel r WHERE r.id = :id")
-    , @NamedQuery(name = "Responsavel.findByCpf", query = "SELECT r FROM Responsavel r WHERE r.cpf = :cpf")
-    , @NamedQuery(name = "Responsavel.findByNome", query = "SELECT r FROM Responsavel r WHERE r.nome = :nome")
-    , @NamedQuery(name = "Responsavel.findBySexo", query = "SELECT r FROM Responsavel r WHERE r.sexo = :sexo")
-    , @NamedQuery(name = "Responsavel.findByEmail", query = "SELECT r FROM Responsavel r WHERE r.email = :email")
-    , @NamedQuery(name = "Responsavel.findByTelefone", query = "SELECT r FROM Responsavel r WHERE r.telefone = :telefone")
-    , @NamedQuery(name = "Responsavel.findByCelular", query = "SELECT r FROM Responsavel r WHERE r.celular = :celular")
-    , @NamedQuery(name = "Responsavel.findByEndereco", query = "SELECT r FROM Responsavel r WHERE r.endereco = :endereco")
-    , @NamedQuery(name = "Responsavel.findByCidade", query = "SELECT r FROM Responsavel r WHERE r.cidade = :cidade")
-    , @NamedQuery(name = "Responsavel.findByEstado", query = "SELECT r FROM Responsavel r WHERE r.estado = :estado")})
 public class Responsavel implements Serializable {
 
     private static final long serialVersionUID = 1L;

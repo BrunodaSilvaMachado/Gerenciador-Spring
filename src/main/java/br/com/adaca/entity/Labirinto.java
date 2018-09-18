@@ -22,17 +22,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_labirinto")
-@NamedQueries({
-    @NamedQuery(name = "Labirinto.findAll", query = "SELECT l FROM Labirinto l")
-    , @NamedQuery(name = "Labirinto.findById", query = "SELECT l FROM Labirinto l WHERE l.id = :id")
-    , @NamedQuery(name = "Labirinto.findByQuanterro", query = "SELECT l FROM Labirinto l WHERE l.quanterro = :quanterro")
-    , @NamedQuery(name = "Labirinto.findByParedes", query = "SELECT l FROM Labirinto l WHERE l.paredes = :paredes")
-    , @NamedQuery(name = "Labirinto.findByQuantdicas", query = "SELECT l FROM Labirinto l WHERE l.quantdicas = :quantdicas")
-    , @NamedQuery(name = "Labirinto.findByPosicaoerro", query = "SELECT l FROM Labirinto l WHERE l.posicaoerro = :posicaoerro")
-    , @NamedQuery(name = "Labirinto.findByTeclaerrada", query = "SELECT l FROM Labirinto l WHERE l.teclaerrada = :teclaerrada")
-    , @NamedQuery(name = "Labirinto.findByQuantbotoes", query = "SELECT l FROM Labirinto l WHERE l.quantbotoes = :quantbotoes")
-    , @NamedQuery(name = "Labirinto.findByHorainicio", query = "SELECT l FROM Labirinto l WHERE l.horainicio = :horainicio")
-    , @NamedQuery(name = "Labirinto.findByHorafim", query = "SELECT l FROM Labirinto l WHERE l.horafim = :horafim")})
 public class Labirinto implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -23,11 +23,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_relatorio")
-@NamedQueries({
-    @NamedQuery(name = "Relatorio.findAll", query = "SELECT r FROM Relatorio r")
-    , @NamedQuery(name = "Relatorio.findById", query = "SELECT r FROM Relatorio r WHERE r.id = :id")
-    , @NamedQuery(name = "Relatorio.findByTiporelatorio", query = "SELECT r FROM Relatorio r WHERE r.tiporelatorio = :tiporelatorio")
-    , @NamedQuery(name = "Relatorio.findByDatagerado", query = "SELECT r FROM Relatorio r WHERE r.datagerado = :datagerado")})
 public class Relatorio implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -20,12 +20,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_atividade")
-@NamedQueries({
-    @NamedQuery(name = "Atividade.findAll", query = "SELECT a FROM Atividade a")
-    , @NamedQuery(name = "Atividade.findById", query = "SELECT a FROM Atividade a WHERE a.id = :id")
-    , @NamedQuery(name = "Atividade.findByNome", query = "SELECT a FROM Atividade a WHERE a.nome = :nome")
-    , @NamedQuery(name = "Atividade.findByClassificacao", query = "SELECT a FROM Atividade a WHERE a.classificacao = :classificacao")
-    , @NamedQuery(name = "Atividade.findByNivel", query = "SELECT a FROM Atividade a WHERE a.nivel = :nivel")})
 public class Atividade implements Serializable {
 
     private static final long serialVersionUID = 1L;

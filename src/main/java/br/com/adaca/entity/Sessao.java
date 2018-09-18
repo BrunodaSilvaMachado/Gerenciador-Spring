@@ -25,11 +25,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_sessao")
-@NamedQueries({
-    @NamedQuery(name = "Sessao.findAll", query = "SELECT s FROM Sessao s")
-    , @NamedQuery(name = "Sessao.findById", query = "SELECT s FROM Sessao s WHERE s.id = :id")
-    , @NamedQuery(name = "Sessao.findByDatalogin", query = "SELECT s FROM Sessao s WHERE s.datalogin = :datalogin")
-    , @NamedQuery(name = "Sessao.findByDatalogout", query = "SELECT s FROM Sessao s WHERE s.datalogout = :datalogout")})
 public class Sessao implements Serializable {
 
     private static final long serialVersionUID = 1L;

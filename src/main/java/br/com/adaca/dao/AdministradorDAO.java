@@ -1,14 +1,15 @@
 package br.com.adaca.dao;
 
+import br.com.adaca.entity.Administrador;
+import br.com.adaca.repository.AdministradorRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-
-import br.com.adaca.entity.Administrador;
-import br.com.adaca.repository.AdministradorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AdministradorDAO {

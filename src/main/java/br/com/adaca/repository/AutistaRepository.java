@@ -12,4 +12,7 @@ public interface AutistaRepository extends CrudRepository<Autista, Serializable>
 
     @Query("SELECT a.id, a.nome FROM Autista a")
     public List<Autista> listNamesId();
+
+    @Query("SELECT a FROM Autista a WHERE a.medicamentos = 1")
+    public  List<Autista> listAutistaMedicamentos();
 }

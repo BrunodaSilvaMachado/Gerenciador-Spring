@@ -99,12 +99,12 @@ public class ConfiguracaoDAO {
      * Lista todas as configurações gravadas no banco de dados filtradas por
      * autista e tutor
      *
-     * @param idautista ID da criança logada no jogo
-     * @param idtutor ID do tutor logado no jogo
+     * @param autistaId ID da criança logada no jogo
+     * @param tutorId ID do tutor logado no jogo
      * @return Lista com todas as configurações gravadas para aquela criança e
      * aquele tutor
      */
-    public List<Configuracao> listar(Integer idautista, Integer idtutor) {
-        return configuracaoRepository.listIdAutistaTutor(idautista,idtutor);
+    public List<Configuracao> listar(Integer autistaId, Integer tutorId) {
+        return configuracaoRepository.listIdAutistaTutor(autistaId,tutorId);
     }
 }

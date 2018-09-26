@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface GraficoRepository extends CrudRepository<Grafico, Serializable> {
 
-    @Query("SELECT g FROM Graficos g WHERE g.idautista = :autistaId")
+    @Query("SELECT g FROM Grafico g WHERE g.idautista = :autistaId")
     public List<Grafico> listByAutista(@Param("autistaId") Integer autistaId);
 }

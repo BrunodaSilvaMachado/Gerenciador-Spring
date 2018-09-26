@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface RelatorioRepository extends CrudRepository<Relatorio, Serializable> {
 
-    @Query("SELECT r FROM Relatorios r WHERE r.idautista = :autistaId")
+    @Query("SELECT r FROM Relatorio r WHERE r.idautista = :autistaId")
     public List<Relatorio> listByAutista(@Param("autistaId") Integer autistaId);
 }

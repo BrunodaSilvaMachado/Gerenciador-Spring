@@ -1,6 +1,7 @@
 package br.com.adaca.repository;
 
-import br.com.adaca.model.Grafico;
+import br.com.adaca.entity.Grafico;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

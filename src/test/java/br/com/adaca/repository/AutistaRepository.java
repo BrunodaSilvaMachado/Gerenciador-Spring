@@ -1,8 +1,9 @@
 package br.com.adaca.repository;
 
-import br.com.adaca.model.Autista;
-import org.springframework.data.jpa.repository.Query;
+import br.com.adaca.entity.Autista;
+
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.io.Serializable;
 import java.util.List;

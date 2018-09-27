@@ -1,6 +1,7 @@
 package br.com.adaca.repository;
 
-import br.com.adaca.model.Configuracao;
+import br.com.adaca.entity.Configuracao;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

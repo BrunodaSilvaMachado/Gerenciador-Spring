@@ -28,18 +28,6 @@ public class AtividadeDAO {
     }
 
     /**
-     * Remove o cadastro da atividade do banco de dados
-     *
-     * @param atividade Objeto preenchido do cadastro já existente no banco de
-     * dados
-     * @return Erro ou sucesso ao remover
-     */
-    public Boolean remover(Atividade atividade) {
-        atividadeRepository.delete(atividade);
-        return true;
-    }
-
-    /**
      * Efetua uma busca por ID de atividade cadastrada e remove-a do banco de
      * dados
      *
@@ -54,6 +42,18 @@ public class AtividadeDAO {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Remove o cadastro da atividade do banco de dados
+     *
+     * @param atividade Objeto preenchido do cadastro já existente no banco de
+     * dados
+     * @return Erro ou sucesso ao remover
+     */
+    public Boolean remover(Atividade atividade) {
+        atividadeRepository.delete(atividade);
+        return true;
     }
 
     /**

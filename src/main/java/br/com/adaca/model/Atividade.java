@@ -15,10 +15,8 @@ public class Atividade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false, length = 80)
     private String nome;
     @Column(length = 80)

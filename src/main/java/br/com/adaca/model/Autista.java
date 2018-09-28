@@ -16,28 +16,21 @@ public class Autista implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String nome;
-    @Basic(optional = false)
     @Column(nullable = false, length = 15)
     private String sexo;
-    @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dtnasc;
-    @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String classificacao;
     @Column(length = 30)
     private String escola;
-    @Basic(optional = false)
     @Column(nullable = false, length = 3)
     private String mediador;
-    @Basic(optional = false)
     @Column(nullable = false)
     private boolean medicamentos;
     @Column(length = 80)
@@ -50,16 +43,12 @@ public class Autista implements Serializable {
     private String atividade;
     @Column(length = 80)
     private String medo;
-    @Basic(optional = false)
     @Column(nullable = false)
     private boolean ler;
-    @Basic(optional = false)
     @Column(nullable = false)
     private boolean escrever;
-    @Basic(optional = false)
     @Column(nullable = false, length = 80)
     private String comunicacao;
-    @Basic(optional = false)
     @Column(nullable = false, length = 200)
     private String terapia;
     @Lob

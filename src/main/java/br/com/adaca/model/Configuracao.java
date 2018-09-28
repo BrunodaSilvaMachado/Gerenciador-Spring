@@ -14,29 +14,21 @@ public class Configuracao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false, length = 80)
     private String som;
-    @Basic(optional = false)
     @Column(nullable = false, length = 80)
     private String musica;
-    @Basic(optional = false)
     @Column(nullable = false)
     private boolean dicatempo;
-    @Basic(optional = false)
     @Column(nullable = false)
     private boolean dicacaminho;
-    @Basic(optional = false)
     @Column(nullable = false, length = 50)
     private String tipodica;
-    @Basic(optional = false)
     @Column(nullable = false, length = 50)
     private String comemoracao;
     private Integer tempodica;
-    @Basic(optional = false)
     @Column(nullable = false, length = 1000)
     private String menu;
     @JoinColumn(name = "IDAUTISTA", referencedColumnName = "ID", nullable = false)

@@ -14,32 +14,24 @@ public class Responsavel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false, length = 14)
     private String cpf;
-    @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String nome;
-    @Basic(optional = false)
     @Column(nullable = false, length = 15)
     private String sexo;
     @Column(length = 45)
     private String email;
-    @Basic(optional = false)
     @Column(nullable = false, length = 13)
     private String telefone;
     @Column(length = 14)
     private String celular;
-    @Basic(optional = false)
     @Column(nullable = false, length = 60)
     private String endereco;
-    @Basic(optional = false)
     @Column(nullable = false, length = 30)
     private String cidade;
-    @Basic(optional = false)
     @Column(nullable = false, length = 30)
     private String estado;
     @JoinColumn(name = "IDAUTISTA", referencedColumnName = "ID", nullable = false)

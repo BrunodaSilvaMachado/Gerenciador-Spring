@@ -15,14 +15,11 @@ public class Relatorio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Lob
     @Column(nullable = false)
     private byte[] relatorio;
-    @Basic(optional = false)
     @Column(nullable = false, length = 30)
     private String tiporelatorio;
     @Temporal(TemporalType.TIMESTAMP)

@@ -14,25 +14,20 @@ public class Medicamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String nome;
     @Column(length = 50)
     private String tipo;
     @Column(length = 70)
     private String composicao;
-    @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String laboratorio;
-    @Basic(optional = false)
     @Column(nullable = false, length = 50)
     private String posologia;
     @Column(length = 100)
     private String observacao;
-    @Basic(optional = false)
     @Column(nullable = false, length = 10)
     private String stats;
     @JoinColumn(name = "IDAUTISTA", referencedColumnName = "ID", nullable = false)

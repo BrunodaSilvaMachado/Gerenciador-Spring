@@ -15,19 +15,14 @@ public class Administrador implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String nome;
-    @Basic(optional = false)
     @Column(nullable = false, length = 50)
     private String usuario;
-    @Basic(optional = false)
     @Column(nullable = false, length = 100)
     private String senha;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int nivelacesso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador")

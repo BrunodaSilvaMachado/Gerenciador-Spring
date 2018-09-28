@@ -15,30 +15,23 @@ public class Labirinto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int quanterro;
-    @Basic(optional = false)
     @Column(nullable = false, length = 300)
     private String paredes;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int quantdicas;
     @Column(length = 500)
     private String posicaoerro;
     @Column(length = 500)
     private String teclaerrada;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int quantbotoes;
-    @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date horainicio;
-    @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date horafim;

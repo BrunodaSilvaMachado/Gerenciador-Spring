@@ -15,39 +15,29 @@ public class Resultado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int dicas;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int cliquecerto;
-    @Basic(optional = false)
     @Column(nullable = false)
     private int cliqueerrado;
-    @Basic(optional = false)
     @Lob
     @Column(nullable = false, length = 65535)
     private String mouseclique;
-    @Basic(optional = false)
     @Lob
     @Column(nullable = false, length = 65535)
     private String mousedrag;
-    @Basic(optional = false)
     @Lob
     @Column(nullable = false, length = 16777215)
     private String mousepos;
-    @Basic(optional = false)
     @Lob
     @Column(nullable = false, length = 65535)
     private String poserrado;
-    @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date horainicio;
-    @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date horafim;

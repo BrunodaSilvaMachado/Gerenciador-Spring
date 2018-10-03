@@ -3,11 +3,13 @@ package br.com.adaca.controller;
 import br.com.adaca.model.Administrador;
 import br.com.adaca.repository.AdministradorRepository;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,14 +21,55 @@ public class AdministradorController {
     private AdministradorRepository administradorRepository;
 
     /**
+     * Lista todos os administradores cadastrados no banco de dados
+     *
+     * @return Lista com todos os administradores cadastrados
+     */
+    @RequestMapping(value = "/listarAdministradores", method = RequestMethod.GET)
+    public ResponseEntity<List<Administrador>> listar() {
+        List<Administrador> administradores = administradorRepository.listAdministradores();
+        if (administradores.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null/* Objeto com o erro */);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(administradores);
+    }
+
+    /**
+     * Efetua uma busca por ID de administrador cadastrado
+     *
+     * @param administradorId ID de administrador já existente no banco de dados
+     * @return Objeto do administrador encontrado
+     */
+    @RequestMapping(value = "/selecionarAdministrador/{administradorId}", method = RequestMethod.GET)
+    public ResponseEntity<Administrador> selecionar(@PathVariable("administradorId") Integer administradorId) {
+        Optional<Administrador> administrador = administradorRepository.findById(administradorId);
+        if (administrador.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(administrador.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null/* Objeto com o erro */);
+        }
+    }
+
+    /**
      * Salva o cadastro do administrador no banco de dados
      *
      * @param administrador Objeto preenchido do cadastro a ser gravado
-     * @return Objeto salvo
+     * @return Erro ou Sucesso ao salvar
      */
     @RequestMapping(value = "/salvarAdministrador", method = RequestMethod.POST)
-    public Administrador salvar(@RequestBody Administrador administrador) {
-        return administradorRepository.save(administrador);
+    public ResponseEntity<Void> salvar(@RequestBody @Valid Administrador administrador) {
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorRepository.save(administrador).getId()).toUri()).build();
+    }
+
+    /**
+     * Altera o cadastro do administrador no bando de dados
+     *
+     * @param administrador Objeto preenchido com os dados já alterados
+     * @return Objeto alterado
+     */
+    @RequestMapping(value = "/alterarAdministrador", method = RequestMethod.POST)
+    public ResponseEntity<Administrador> alterar(@RequestBody @Valid Administrador administrador) {
+        return ResponseEntity.status(HttpStatus.OK).body(administradorRepository.save(administrador));
     }
 
     /**
@@ -37,13 +80,13 @@ public class AdministradorController {
      * @return Erro ou sucesso ao remover
      */
     @RequestMapping(value = "/removerAdministrador/{administradorId}", method = RequestMethod.GET)
-    public Boolean remover(@PathVariable("administradorId") Integer administradorId) {
+    public ResponseEntity<Administrador> remover(@PathVariable("administradorId") Integer administradorId) {
         Optional<Administrador> administrador = administradorRepository.findById(administradorId);
         if (administrador.isPresent()) {
             administradorRepository.delete(administrador.get());
-            return true;
+            return ResponseEntity.status(HttpStatus.OK).body(administrador.get());
         } else {
-            return false;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null/* Objeto com o erro */);
         }
     }
 
@@ -55,46 +98,9 @@ public class AdministradorController {
      * @return Erro ou sucesso ao remover
      */
     @RequestMapping(value = "/removerAdministrador", method = RequestMethod.POST)
-    public Boolean remover(@RequestBody Administrador administrador) {
+    public ResponseEntity<Administrador> remover(@RequestBody @Valid Administrador administrador) {
         administradorRepository.delete(administrador);
-        return true;
-    }
-
-    /**
-     * Altera o cadastro do administrador no bando de dados
-     *
-     * @param administrador Objeto preenchido com os dados já alterados
-     * @return Objeto alterado
-     */
-    @RequestMapping(value = "/alterarAdministrador", method = RequestMethod.POST)
-    public Administrador alterar(@RequestBody Administrador administrador) {
-        return administradorRepository.save(administrador);
-    }
-
-    /**
-     * Efetua uma busca por ID de administrador cadastrado
-     *
-     * @param administradorId ID de administrador já existente no banco de dados
-     * @return Objeto do administrador encontrado
-     */
-    @RequestMapping(value = "/selecionarAdministrador/{administradorId}", method = RequestMethod.GET)
-    public Administrador selecionar(@PathVariable("administradorId") Integer administradorId) {
-        Optional<Administrador> administrador = administradorRepository.findById(administradorId);
-        if (administrador.isPresent()) {
-            return administrador.get();
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Lista todos os administradores cadastrados no banco de dados
-     *
-     * @return Lista com todos os administradores cadastrados
-     */
-    @RequestMapping(value = "/listarAdministradores", method = RequestMethod.GET)
-    public List<Administrador> listar() {
-        return administradorRepository.listAdministradores();
+        return ResponseEntity.status(HttpStatus.OK).body(administrador);
     }
 
     @RequestMapping(value = "/login/{usuario}/{senha}", method = RequestMethod.GET)
@@ -102,3 +108,5 @@ public class AdministradorController {
         return administradorRepository.login(usuario,senha);
     }
 }
+
+/* https://lh3.googleusercontent.com/-cpYCrP36Nc8/VsWO7emBMRI/AAAAAAAAAyU/0rv7Lnl0aNI/s1600-h/image%25255B5%25255D.png */

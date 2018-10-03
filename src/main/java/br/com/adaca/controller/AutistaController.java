@@ -3,9 +3,13 @@ package br.com.adaca.controller;
 import br.com.adaca.model.Autista;
 import br.com.adaca.repository.AutistaRepository;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -93,13 +97,13 @@ public class AutistaController {
      * @return Lista com todas as crianças cadastradas
      */
     @RequestMapping(value = "/listarAutistas", method = RequestMethod.GET)
-    public List<Autista> listar() {
+    public ResponseEntity<List<Autista>> listar() {
         List<Autista> autistas = new ArrayList<>();
         Iterator<Autista> iterator = autistaRepository.findAll().iterator();
         while (iterator.hasNext()) {
             autistas.add(iterator.next());
         }
-        return autistas;
+        return ResponseEntity.status(HttpStatus.OK).body(autistas);
     }
 
     /**

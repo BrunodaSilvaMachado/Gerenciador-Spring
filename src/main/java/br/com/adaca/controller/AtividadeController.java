@@ -1,22 +1,42 @@
 package br.com.adaca.controller;
 
 import br.com.adaca.model.Atividade;
-import br.com.adaca.repository.AtividadeRepository;
+import br.com.adaca.service.AtividadeService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/Gerenciador/Atividades")
 public class AtividadeController {
 
-    @Autowired
-    private AtividadeRepository atividadeRepository;
+    private AtividadeService atividadeService;
+
+    /**
+     * Lista todas as atividades cadastradas no banco de dados
+     *
+     * @return Lista com todos as atividades cadastradas
+     */
+    @GetMapping(value = "/listarAtividades")
+    public ResponseEntity<List<Atividade>> listar() {
+        return ResponseEntity.status(HttpStatus.OK).body(atividadeService.listar());
+    }
+
+    /**
+     * Efetua uma busca por ID de atividade cadastrada
+     *
+     * @param atividadeId ID de atividade já existente no banco de dados
+     * @return Objeto da atividade encontrada
+     */
+    @GetMapping(value = "/selecionarAdministrador/{atividadeId}")
+    public ResponseEntity<Atividade> selecionar(@PathVariable("atividadeId") Integer atividadeId) {
+        return ResponseEntity.status(HttpStatus.OK).body(atividadeService.selecionar(atividadeId));
+    }
 
     /**
      * Salva o cadastro da atividade no banco de dados
@@ -24,9 +44,20 @@ public class AtividadeController {
      * @param atividade Objeto preenchido do cadastro a ser gravado
      * @return Objeto salvo
      */
-    @RequestMapping(value = "/salvarAtividade", method = RequestMethod.POST)
-    public Atividade salvar(@RequestBody Atividade atividade) {
-        return atividadeRepository.save(atividade);
+    @PostMapping(value = "/salvarAtividade")
+    public ResponseEntity<Void> salvar(@RequestBody @Valid Atividade atividade) {
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(atividadeService.salvar(atividade).getId()).toUri()).build();
+    }
+
+    /**
+     * Altera o cadastro da atividade no bando de dados
+     *
+     * @param atividade Objeto preenchido com os dados já alterados
+     * @return Objeto alterado
+     */
+    @PutMapping(value = "/alterarAtividade")
+    public ResponseEntity<Atividade> alterar(@RequestBody @Valid Atividade atividade) {
+        return  ResponseEntity.status(HttpStatus.OK).body(atividadeService.alterar(atividade));
     }
 
     /**
@@ -36,15 +67,10 @@ public class AtividadeController {
      * @param atividadeId ID de atividade já existente no banco de dados
      * @return Erro ou sucesso ao remover
      */
-    @RequestMapping(value = "/removerAtividade/{atividadeId}", method = RequestMethod.GET)
-    public Boolean remover(Integer atividadeId) {
-        Optional<Atividade> atividade = atividadeRepository.findById(atividadeId);
-        if (atividade.isPresent()) {
-            atividadeRepository.delete(atividade.get());
-            return true;
-        } else {
-            return false;
-        }
+    @DeleteMapping(value = "/removerAtividade/{atividadeId}")
+    public ResponseEntity<Void> remover(Integer atividadeId) {
+        atividadeService.remover(atividadeId);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     /**
@@ -54,51 +80,9 @@ public class AtividadeController {
      * dados
      * @return Erro ou sucesso ao remover
      */
-    @RequestMapping(value = "/removerAtividade", method = RequestMethod.POST)
-    public Boolean remover(@RequestBody Atividade atividade) {
-        atividadeRepository.delete(atividade);
-        return true;
-    }
-
-    /**
-     * Altera o cadastro da atividade no bando de dados
-     *
-     * @param atividade Objeto preenchido com os dados já alterados
-     * @return Objeto alterado
-     */
-    @RequestMapping(value = "/alterarAtividade", method = RequestMethod.POST)
-    public Atividade alterar(@RequestBody Atividade atividade) {
-        return atividadeRepository.save(atividade);
-    }
-
-    /**
-     * Efetua uma busca por ID de atividade cadastrada
-     *
-     * @param atividadeId ID de atividade já existente no banco de dados
-     * @return Objeto da atividade encontrada
-     */
-    @RequestMapping(value = "/selecionarAdministrador/{atividadeId}", method = RequestMethod.GET)
-    public Atividade selecionar(@PathVariable("atividadeId") Integer atividadeId) {
-        Optional<Atividade> atividade = atividadeRepository.findById(atividadeId);
-        if (atividade.isPresent()) {
-            return atividade.get();
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Lista todas as atividades cadastradas no banco de dados
-     *
-     * @return Lista com todos as atividades cadastradas
-     */
-    @RequestMapping(value = "/listarAtividades", method = RequestMethod.GET)
-    public List<Atividade> listar() {
-        List<Atividade> atividades = new ArrayList<>();
-        Iterator<Atividade> iterator = atividadeRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            atividades.add(iterator.next());
-        }
-        return atividades;
+    @DeleteMapping(value = "/removerAtividade")
+    public ResponseEntity<Void> remover(@RequestBody @Valid Atividade atividade) {
+        atividadeService.remover(atividade);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

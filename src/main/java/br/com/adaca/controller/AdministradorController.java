@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 @RequestMapping("/Gerenciador/Administradores")
 public class AdministradorController {
 
-    @Autowired
     private AdministradorService administradorService;
 
     /**
@@ -70,7 +68,7 @@ public class AdministradorController {
      * @return Erro ou sucesso ao remover
      */
     @DeleteMapping(value = "/removerAdministrador/{administradorId}")
-    public ResponseEntity<Administrador> remover(@PathVariable("administradorId") Integer administradorId) {
+    public ResponseEntity<Void> remover(@PathVariable("administradorId") Integer administradorId) {
         administradorService.remover(administradorId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
@@ -83,7 +81,7 @@ public class AdministradorController {
      * @return Erro ou sucesso ao remover
      */
     @DeleteMapping(value = "/removerAdministrador")
-    public ResponseEntity<Administrador> remover(@RequestBody @Valid Administrador administrador) {
+    public ResponseEntity<Void> remover(@RequestBody @Valid Administrador administrador) {
         administradorService.remover(administrador);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

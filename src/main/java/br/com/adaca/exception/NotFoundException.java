@@ -1,4 +1,4 @@
-package br.com.adaca.exceptions;
+package br.com.adaca.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

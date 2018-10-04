@@ -1,8 +1,8 @@
 package br.com.adaca.handler;
 
-import br.com.adaca.exceptions.ErrorDetails;
-import br.com.adaca.exceptions.ConflictException;
-import br.com.adaca.exceptions.NotFoundException;
+import br.com.adaca.util.ErrorDetails;
+import br.com.adaca.exception.ConflictException;
+import br.com.adaca.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

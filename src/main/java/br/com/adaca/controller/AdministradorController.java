@@ -1,7 +1,7 @@
 package br.com.adaca.controller;
 
 import br.com.adaca.model.Administrador;
-import br.com.adaca.repository.AdministradorRepository;
+import br.com.adaca.service.AdministradorService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,27 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/Gerenciador/Administradores")
 public class AdministradorController {
 
     @Autowired
-    private AdministradorRepository administradorRepository;
+    private AdministradorService administradorService;
 
     /**
      * Lista todos os administradores cadastrados no banco de dados
      *
      * @return Lista com todos os administradores cadastrados
      */
-    @RequestMapping(value = "/listarAdministradores", method = RequestMethod.GET)
+    @GetMapping(value = "/listarAdministradores")
     public ResponseEntity<List<Administrador>> listar() {
-        List<Administrador> administradores = administradorRepository.listAdministradores();
-        if (administradores.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null/* Objeto com o erro */);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(administradores);
+        return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
     }
 
     /**
@@ -40,14 +35,9 @@ public class AdministradorController {
      * @param administradorId ID de administrador já existente no banco de dados
      * @return Objeto do administrador encontrado
      */
-    @RequestMapping(value = "/selecionarAdministrador/{administradorId}", method = RequestMethod.GET)
+    @GetMapping(value = "/selecionarAdministrador/{administradorId}")
     public ResponseEntity<Administrador> selecionar(@PathVariable("administradorId") Integer administradorId) {
-        Optional<Administrador> administrador = administradorRepository.findById(administradorId);
-        if (administrador.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(administrador.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null/* Objeto com o erro */);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
     }
 
     /**
@@ -56,9 +46,9 @@ public class AdministradorController {
      * @param administrador Objeto preenchido do cadastro a ser gravado
      * @return Erro ou Sucesso ao salvar
      */
-    @RequestMapping(value = "/salvarAdministrador", method = RequestMethod.POST)
+    @PostMapping(value = "/salvarAdministrador")
     public ResponseEntity<Void> salvar(@RequestBody @Valid Administrador administrador) {
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorRepository.save(administrador).getId()).toUri()).build();
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
     }
 
     /**
@@ -67,9 +57,9 @@ public class AdministradorController {
      * @param administrador Objeto preenchido com os dados já alterados
      * @return Objeto alterado
      */
-    @RequestMapping(value = "/alterarAdministrador", method = RequestMethod.POST)
+    @PutMapping(value = "/alterarAdministrador")
     public ResponseEntity<Administrador> alterar(@RequestBody @Valid Administrador administrador) {
-        return ResponseEntity.status(HttpStatus.OK).body(administradorRepository.save(administrador));
+        return ResponseEntity.status(HttpStatus.OK).body(administradorService.alterar(administrador));
     }
 
     /**
@@ -79,15 +69,10 @@ public class AdministradorController {
      * @param administradorId ID de administrador já existente no banco de dados
      * @return Erro ou sucesso ao remover
      */
-    @RequestMapping(value = "/removerAdministrador/{administradorId}", method = RequestMethod.GET)
+    @DeleteMapping(value = "/removerAdministrador/{administradorId}")
     public ResponseEntity<Administrador> remover(@PathVariable("administradorId") Integer administradorId) {
-        Optional<Administrador> administrador = administradorRepository.findById(administradorId);
-        if (administrador.isPresent()) {
-            administradorRepository.delete(administrador.get());
-            return ResponseEntity.status(HttpStatus.OK).body(administrador.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null/* Objeto com o erro */);
-        }
+        administradorService.remover(administradorId);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     /**
@@ -97,16 +82,18 @@ public class AdministradorController {
      * de dados
      * @return Erro ou sucesso ao remover
      */
-    @RequestMapping(value = "/removerAdministrador", method = RequestMethod.POST)
+    @DeleteMapping(value = "/removerAdministrador")
     public ResponseEntity<Administrador> remover(@RequestBody @Valid Administrador administrador) {
-        administradorRepository.delete(administrador);
-        return ResponseEntity.status(HttpStatus.OK).body(administrador);
+        administradorService.remover(administrador);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @RequestMapping(value = "/login/{usuario}/{senha}", method = RequestMethod.GET)
+    /*
+    @GetMapping(value = "/login/{usuario}/{senha}")
     public Administrador login(@PathVariable("usuario") String usuario,@PathVariable("senha") String senha) {
-        return administradorRepository.login(usuario,senha);
+        return administradorService.login(usuario,senha);
     }
+    */
 }
 
 /* https://lh3.googleusercontent.com/-cpYCrP36Nc8/VsWO7emBMRI/AAAAAAAAAyU/0rv7Lnl0aNI/s1600-h/image%25255B5%25255D.png */

@@ -1,4 +1,4 @@
-package br.com.adaca.exceptions;
+package br.com.adaca.util;
 
 public class ErrorDetails {
 

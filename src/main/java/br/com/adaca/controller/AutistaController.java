@@ -1,8 +1,8 @@
 package br.com.adaca.controller;
 
 import br.com.adaca.model.Autista;
-
 import br.com.adaca.service.AutistaService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,7 +22,7 @@ public class AutistaController {
      *
      * @return Lista com todas as crianças cadastradas
      */
-    @GetMapping(value = "/listarAutistas")
+    @GetMapping("/listarAutistas")
     public ResponseEntity<List<Autista>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.listar());
     }
@@ -32,7 +32,7 @@ public class AutistaController {
      *
      * @return Lista de ids e nomes de todas as crianças cadastradas
      */
-    @GetMapping(value = "/listarNomesIdAutistas")
+    @GetMapping("/listarNomesIdAutistas")
     public  ResponseEntity<List<Autista>> listarNomesId() {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.listarNomesId());
     }
@@ -43,7 +43,7 @@ public class AutistaController {
      * @param autistaId ID da criança já existente no banco de dados
      * @return Objeto da criança encontrada
      */
-    @GetMapping(value = "/selecionarAutista/{autistaId}")
+    @GetMapping("/selecionarAutista/{autistaId}")
     public ResponseEntity<Autista> selecionar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.selecionar(autistaId));
     }
@@ -54,7 +54,7 @@ public class AutistaController {
      * @param autista Objeto preenchido do cadastro a ser gravado
      * @return Erro ou sucesso ao salvar
      */
-    @PostMapping(value = "/salvarAutista")
+    @PostMapping("/salvarAutista")
     public ResponseEntity<Void> salvar(@RequestBody @Valid Autista autista) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autistaService.salvar(autista).getId()).toUri()).build();
     }
@@ -65,9 +65,9 @@ public class AutistaController {
      * @param autista Objeto preenchido com os dados já alterados
      * @return Erro ou sucesso ao alterar
      */
-    @PutMapping(value = "/alterarAutista")
+    @PutMapping("/alterarAutista")
     public ResponseEntity<Autista> alterar(@RequestBody @Valid Autista autista) {
-        return  ResponseEntity.status(HttpStatus.OK).body(autistaService.alterar(autista));
+        return ResponseEntity.status(HttpStatus.OK).body(autistaService.alterar(autista));
     }
 
     /**
@@ -77,7 +77,7 @@ public class AutistaController {
      * @param autistaId ID da criança já existente no banco de dados
      * @return Erro ou sucesso ao remover
      */
-    @DeleteMapping(value = "/removerAutista/{autistaId}")
+    @DeleteMapping("/removerAutista/{autistaId}")
     public ResponseEntity<Void> remover(@PathVariable("autistaId") Integer autistaId) {
         autistaService.remover(autistaId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -90,7 +90,7 @@ public class AutistaController {
      * dados
      * @return Erro ou sucesso ao remover
      */
-    @DeleteMapping(value = "/removerAutista")
+    @DeleteMapping("/removerAutista")
     public ResponseEntity<Void> remover(@RequestBody @Valid Autista autista) {
         autistaService.remover(autista);
         return ResponseEntity.status(HttpStatus.OK).body(null);

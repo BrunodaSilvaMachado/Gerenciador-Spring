@@ -22,7 +22,7 @@ public class AdministradorController {
      *
      * @return Lista com todos os administradores cadastrados
      */
-    @GetMapping(value = "/listarAdministradores")
+    @GetMapping("/listarAdministradores")
     public ResponseEntity<List<Administrador>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
     }
@@ -33,7 +33,7 @@ public class AdministradorController {
      * @param administradorId ID de administrador já existente no banco de dados
      * @return Objeto do administrador encontrado
      */
-    @GetMapping(value = "/selecionarAdministrador/{administradorId}")
+    @GetMapping("/selecionarAdministrador/{administradorId}")
     public ResponseEntity<Administrador> selecionar(@PathVariable("administradorId") Integer administradorId) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
     }
@@ -44,7 +44,7 @@ public class AdministradorController {
      * @param administrador Objeto preenchido do cadastro a ser gravado
      * @return Erro ou Sucesso ao salvar
      */
-    @PostMapping(value = "/salvarAdministrador")
+    @PostMapping("/salvarAdministrador")
     public ResponseEntity<Void> salvar(@RequestBody @Valid Administrador administrador) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
     }
@@ -55,7 +55,7 @@ public class AdministradorController {
      * @param administrador Objeto preenchido com os dados já alterados
      * @return Objeto alterado
      */
-    @PutMapping(value = "/alterarAdministrador")
+    @PutMapping("/alterarAdministrador")
     public ResponseEntity<Administrador> alterar(@RequestBody @Valid Administrador administrador) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.alterar(administrador));
     }
@@ -67,7 +67,7 @@ public class AdministradorController {
      * @param administradorId ID de administrador já existente no banco de dados
      * @return Erro ou sucesso ao remover
      */
-    @DeleteMapping(value = "/removerAdministrador/{administradorId}")
+    @DeleteMapping("/removerAdministrador/{administradorId}")
     public ResponseEntity<Void> remover(@PathVariable("administradorId") Integer administradorId) {
         administradorService.remover(administradorId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -80,14 +80,14 @@ public class AdministradorController {
      * de dados
      * @return Erro ou sucesso ao remover
      */
-    @DeleteMapping(value = "/removerAdministrador")
+    @DeleteMapping("/removerAdministrador")
     public ResponseEntity<Void> remover(@RequestBody @Valid Administrador administrador) {
         administradorService.remover(administrador);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     /*
-    @GetMapping(value = "/login/{usuario}/{senha}")
+    @GetMapping("/login/{usuario}/{senha}")
     public Administrador login(@PathVariable("usuario") String usuario,@PathVariable("senha") String senha) {
         return administradorService.login(usuario,senha);
     }

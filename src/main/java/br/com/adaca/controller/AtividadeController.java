@@ -22,7 +22,7 @@ public class AtividadeController {
      *
      * @return Lista com todos as atividades cadastradas
      */
-    @GetMapping(value = "/listarAtividades")
+    @GetMapping("/listarAtividades")
     public ResponseEntity<List<Atividade>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(atividadeService.listar());
     }
@@ -33,7 +33,7 @@ public class AtividadeController {
      * @param atividadeId ID de atividade já existente no banco de dados
      * @return Objeto da atividade encontrada
      */
-    @GetMapping(value = "/selecionarAdministrador/{atividadeId}")
+    @GetMapping("/selecionarAdministrador/{atividadeId}")
     public ResponseEntity<Atividade> selecionar(@PathVariable("atividadeId") Integer atividadeId) {
         return ResponseEntity.status(HttpStatus.OK).body(atividadeService.selecionar(atividadeId));
     }
@@ -44,7 +44,7 @@ public class AtividadeController {
      * @param atividade Objeto preenchido do cadastro a ser gravado
      * @return Objeto salvo
      */
-    @PostMapping(value = "/salvarAtividade")
+    @PostMapping("/salvarAtividade")
     public ResponseEntity<Void> salvar(@RequestBody @Valid Atividade atividade) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(atividadeService.salvar(atividade).getId()).toUri()).build();
     }
@@ -55,7 +55,7 @@ public class AtividadeController {
      * @param atividade Objeto preenchido com os dados já alterados
      * @return Objeto alterado
      */
-    @PutMapping(value = "/alterarAtividade")
+    @PutMapping("/alterarAtividade")
     public ResponseEntity<Atividade> alterar(@RequestBody @Valid Atividade atividade) {
         return  ResponseEntity.status(HttpStatus.OK).body(atividadeService.alterar(atividade));
     }
@@ -67,7 +67,7 @@ public class AtividadeController {
      * @param atividadeId ID de atividade já existente no banco de dados
      * @return Erro ou sucesso ao remover
      */
-    @DeleteMapping(value = "/removerAtividade/{atividadeId}")
+    @DeleteMapping("/removerAtividade/{atividadeId}")
     public ResponseEntity<Void> remover(Integer atividadeId) {
         atividadeService.remover(atividadeId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -80,7 +80,7 @@ public class AtividadeController {
      * dados
      * @return Erro ou sucesso ao remover
      */
-    @DeleteMapping(value = "/removerAtividade")
+    @DeleteMapping("/removerAtividade")
     public ResponseEntity<Void> remover(@RequestBody @Valid Atividade atividade) {
         atividadeService.remover(atividade);
         return ResponseEntity.status(HttpStatus.OK).body(null);

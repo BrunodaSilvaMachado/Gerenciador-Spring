@@ -8,6 +8,8 @@ import br.com.adaca.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +20,11 @@ public class AdministradorService {
     private AdministradorRepository administradorRepository;
 
     public List<Administrador> listar() {
-        List administradores = administradorRepository.listAdministradores();
+        List<Administrador> administradores = new ArrayList<>();
+        Iterator<Administrador> iterator = administradorRepository.listAdministradores().iterator();
+        while (iterator.hasNext()) {
+            administradores.add(iterator.next());
+        }
         if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
         return administradores;
     }

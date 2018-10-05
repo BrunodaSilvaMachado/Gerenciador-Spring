@@ -30,7 +30,11 @@ public class AutistaService {
     }
 
     public List<Autista> listarNomesId() {
-        List<Autista> autistas = autistaRepository.listNamesId();
+        List<Autista> autistas = new ArrayList<>();
+        Iterator<Autista> iterator = autistaRepository.listNamesId().iterator();
+        while (iterator.hasNext()) {
+            autistas.add(iterator.next());
+        }
         if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
         return autistas;
     }

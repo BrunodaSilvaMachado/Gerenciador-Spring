@@ -110,6 +110,11 @@ public class RelatorioController {
      */
     @RequestMapping(value = "/listarRelatorios/{autistaId}", method = RequestMethod.GET)
     public List<Relatorio> listar(@PathVariable("autistaId") Integer autistaId) {
-        return relatorioRepository.listByAutista(autistaId);
+        List<Relatorio> relatorios = new ArrayList<>();
+        Iterator<Relatorio> iterator = relatorioRepository.listByAutista(autistaId).iterator();
+        while (iterator.hasNext()) {
+            relatorios.add(iterator.next());
+        }
+        return relatorios;
     }
 }

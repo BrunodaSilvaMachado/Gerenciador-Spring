@@ -92,7 +92,12 @@ public class TutorController {
      */
     @RequestMapping(value = "/listarTutores", method = RequestMethod.GET)
     public List<Tutor> listar() {
-        return tutorRepository.listTutores();
+        List<Tutor> tutores = new ArrayList<>();
+        Iterator<Tutor> iterator = tutorRepository.listTutores().iterator();
+        while (iterator.hasNext()) {
+            tutores.add(iterator.next());
+        }
+        return tutores;
     }
 
     /**

@@ -111,6 +111,11 @@ public class ResponsavelController {
      */
     @RequestMapping(value = "/listarResponsaveis/{autistaId}", method = RequestMethod.GET)
     public List<Responsavel> listar(@PathVariable("autistalId") Integer autistaId) {
-        return responsavelRepository.listByAutista(autistaId);
+        List<Responsavel> responsaveis = new ArrayList<>();
+        Iterator<Responsavel> iterator = responsavelRepository.listByAutista(autistaId).iterator();
+        while (iterator.hasNext()) {
+            responsaveis.add(iterator.next());
+        }
+        return responsaveis;
     }
 }

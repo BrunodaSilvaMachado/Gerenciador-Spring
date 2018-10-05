@@ -110,6 +110,11 @@ public class SessaoController {
      */
     @RequestMapping(value = "/listarSessoes/{autistaId}", method = RequestMethod.GET)
     public List<Sessao> listar(@PathVariable("autistaId") Integer autistaId) {
-        return sessaoRepository.listByAutista(autistaId);
+        List<Sessao> sessoes = new ArrayList<>();
+        Iterator<Sessao> iterator = sessaoRepository.listByAutista(autistaId).iterator();
+        while (iterator.hasNext()) {
+            sessoes.add(iterator.next());
+        }
+        return sessoes;
     }
 }

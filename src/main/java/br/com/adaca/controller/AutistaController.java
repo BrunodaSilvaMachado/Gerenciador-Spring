@@ -3,6 +3,7 @@ package br.com.adaca.controller;
 import br.com.adaca.model.Autista;
 import br.com.adaca.service.AutistaService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/Gerenciador/Autistas")
 public class AutistaController {
 
+    @Autowired
     private AutistaService autistaService;
 
     /**

@@ -4,6 +4,7 @@ import br.com.adaca.model.Medicamento;
 import br.com.adaca.model.Autista;
 import br.com.adaca.service.MedicamentoService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/Gerenciador/Medicamentos")
 public class MedicamentoController {
 
+    @Autowired
     private MedicamentoService medicamentoService;
 
     /**

@@ -1,104 +1,32 @@
 package br.com.adaca.controller;
 
 import br.com.adaca.model.Sessao;
-import br.com.adaca.repository.SessaoRepository;
+import br.com.adaca.service.SessaoService;
 
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/Gerenciador/Sessoes")
 public class SessaoController {
 
     @Autowired
-    private SessaoRepository sessaoRepository;
-
-    /**
-     * Salva a sessão da criança no banco de dados
-     *
-     * @param sessao Objeto preenchido do sessao a ser gravado
-     * @return Objeto salvo
-     */
-    @RequestMapping(value = "/salvarSessao", method = RequestMethod.POST)
-    public Sessao salvar(@RequestBody Sessao sessao) {
-        return sessaoRepository.save(sessao);
-    }
-
-    /**
-     * Efetua uma busca por ID da sessão cadastrada e remove-a do banco de dados
-     *
-     * @param sessaoId ID do sessao já existente no banco de dados
-     * @return Erro ou sucesso ao remover
-     */
-    @RequestMapping(value = "/removerSessao/{sessaoId}", method = RequestMethod.GET)
-    public Boolean remover(@PathVariable("sessaoId") Integer sessaoId) {
-        Optional<Sessao> sessao = sessaoRepository.findById(sessaoId);
-        if (sessao.isPresent()) {
-            sessaoRepository.delete(sessao.get());
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Remove a sessão do banco de dados
-     *
-     * @param sessao Objeto preenchido do cadastro já existente no banco de
-     * dados
-     * @return Erro ou sucesso ao remover
-     */
-    @RequestMapping(value = "/removerSessao", method = RequestMethod.POST)
-    public Boolean remover(@RequestBody Sessao sessao) {
-        sessaoRepository.delete(sessao);
-        return true;
-    }
-
-    /**
-     * Altera o cadastro da sessão no bando de dados
-     *
-     * @param sessao Objeto preenchido com os dados já alterados
-     * @return Objeto alterado
-     */
-    @RequestMapping(value = "/alterarSessao", method = RequestMethod.POST)
-    public Sessao alterar(@RequestBody Sessao sessao) {
-        return sessaoRepository.save(sessao);
-    }
-
-    /**
-     * Efetua uma busca por ID da sessao cadastrado
-     *
-     * @param sessaoId ID do sessao já existente no banco de dados
-     * @return Objeto do sessao encontrado
-     */
-    @RequestMapping(value = "/selecionarSessao/{sessaoId}", method = RequestMethod.GET)
-    public Sessao selecionar(@PathVariable("sessaoId") Integer sessaoId) {
-        Optional<Sessao> sessao = sessaoRepository.findById(sessaoId);
-        if (sessao.isPresent()) {
-            return sessao.get();
-        } else {
-            return null;
-        }
-    }
+    private SessaoService sessaoService;
 
     /**
      * Lista todos os sessões cadastradas no banco de dados
      *
      * @return Lista com todos os sessões cadastrados
      */
-    @RequestMapping(value = "/listarSessoes", method = RequestMethod.GET)
-    public List<Sessao> listar() {
-        List<Sessao> sessoes = new ArrayList<>();
-        Iterator<Sessao> iterator = sessaoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            sessoes.add(iterator.next());
-        }
-        return sessoes;
+    @GetMapping("/listarSessoes")
+    public ResponseEntity<List<Sessao>> listar() {
+        return ResponseEntity.status(HttpStatus.OK).body(sessaoService.listar());
     }
 
     /**
@@ -108,13 +36,66 @@ public class SessaoController {
      * @param autistaId ID da criança para o filtro
      * @return Lista com todos os sessões cadastrados
      */
-    @RequestMapping(value = "/listarSessoes/{autistaId}", method = RequestMethod.GET)
-    public List<Sessao> listar(@PathVariable("autistaId") Integer autistaId) {
-        List<Sessao> sessoes = new ArrayList<>();
-        Iterator<Sessao> iterator = sessaoRepository.listByAutista(autistaId).iterator();
-        while (iterator.hasNext()) {
-            sessoes.add(iterator.next());
-        }
-        return sessoes;
+    @GetMapping("/listarSessoes/{autistaId}")
+    public ResponseEntity<List<Sessao>> listar(@PathVariable("autistaId") Integer autistaId) {
+        return ResponseEntity.status(HttpStatus.OK).body(sessaoService.listar(autistaId));
+    }
+
+    /**
+     * Efetua uma busca por ID da sessao cadastrado
+     *
+     * @param sessaoId ID do sessao já existente no banco de dados
+     * @return Objeto da sessão encontrado
+     */
+    @GetMapping("/selecionarSessao/{sessaoId}")
+    public ResponseEntity<Sessao> selecionar(@PathVariable("sessaoId") Integer sessaoId) {
+        return ResponseEntity.status(HttpStatus.OK).body(sessaoService.selecionar(sessaoId));
+    }
+
+    /**
+     * Salva a sessão da criança no banco de dados
+     *
+     * @param sessao Objeto preenchido da sessão a ser gravado
+     * @return Objeto salvo
+     */
+    @PostMapping("/salvarSessao")
+    public ResponseEntity<Void> salvar(@RequestBody @Valid Sessao sessao) {
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(sessaoService.salvar(sessao).getId()).toUri()).build();
+    }
+
+    /**
+     * Altera o cadastro da sessão no bando de dados
+     *
+     * @param sessao Objeto preenchido com os dados já alterados
+     * @return Objeto alterado
+     */
+    @PutMapping("/alterarSessao")
+    public ResponseEntity<Sessao> alterar(@RequestBody @Valid Sessao sessao) {
+        return ResponseEntity.status(HttpStatus.OK).body(sessaoService.alterar(sessao));
+    }
+
+    /**
+     * Efetua uma busca por ID da sessão cadastrada e remove-a do banco de dados
+     *
+     * @param sessaoId ID do sessao já existente no banco de dados
+     * @return Erro ou sucesso ao remover
+     */
+    @DeleteMapping("/removerSessao/{sessaoId}")
+    public ResponseEntity<Void> remover(@PathVariable("sessaoId") Integer sessaoId) {
+        sessaoService.remover(sessaoId);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    /**
+     * Remove a sessão do banco de dados
+     *
+     * @param sessao Objeto preenchido do cadastro já existente no banco de
+     * dados
+     * @return Erro ou sucesso ao remover
+     */
+    @DeleteMapping(value = "/removerSessao")
+    public ResponseEntity<Void> remover(@RequestBody @Valid Sessao sessao) {
+        sessaoService.remover(sessao);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

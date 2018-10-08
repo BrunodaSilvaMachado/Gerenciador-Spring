@@ -35,21 +35,13 @@ public class MedicamentoService {
     }
 
     public List<Medicamento> listar(Integer autistaId) {
-        List<Medicamento> medicamentos = new ArrayList<>();
-        Iterator<Medicamento> iterator = medicamentoRepository.listByAutista(autistaId).iterator();
-        while (iterator.hasNext()) {
-            medicamentos.add(iterator.next());
-        }
+        List<Medicamento> medicamentos = medicamentoRepository.listByAutista(autistaId);
         if(medicamentos.isEmpty()) throw new NotFoundException("Nenhum medicamento encontrado!");
         return medicamentos;
     }
 
     public List<Autista> listarAutistas() {
-        List<Autista> autistas = new ArrayList<>();
-        Iterator<Autista> iterator  = autistaRepository.listAutistaMedicamentos().iterator();
-        while (iterator.hasNext()) {
-            autistas.add(iterator.next());
-        }
+        List<Autista> autistas = autistaRepository.listAutistaMedicamentos();
         if(autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
         return autistas;
     }

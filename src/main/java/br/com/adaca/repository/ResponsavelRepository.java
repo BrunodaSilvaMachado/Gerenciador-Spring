@@ -6,9 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface ResponsavelRepository extends CrudRepository<Responsavel, Serializable> {
 
     @Query("SELECT r FROM Responsavel r WHERE r.idautista = :autistaId")
-    public Iterable<Responsavel> listByAutista(@Param("autistaId") Integer autistaId);
+    public List<Responsavel> listByAutista(@Param("autistaId") Integer autistaId);
 }

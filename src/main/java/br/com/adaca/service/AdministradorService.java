@@ -20,11 +20,7 @@ public class AdministradorService {
     private AdministradorRepository administradorRepository;
 
     public List<Administrador> listar() {
-        List<Administrador> administradores = new ArrayList<>();
-        Iterator<Administrador> iterator = administradorRepository.listAdministradores().iterator();
-        while (iterator.hasNext()) {
-            administradores.add(iterator.next());
-        }
+        List<Administrador> administradores = administradorRepository.listAdministradores();
         if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
         return administradores;
     }

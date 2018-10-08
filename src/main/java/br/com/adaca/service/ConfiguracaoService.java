@@ -30,11 +30,7 @@ public class ConfiguracaoService {
     }
 
     public List<Configuracao> listarConfigAutistaTutor(Integer autistaId, Integer tutorId) {
-        List<Configuracao> configuracoes = new ArrayList<>();
-        Iterator<Configuracao> iterator = configuracaoRepository.listIdAutistaTutor(autistaId, tutorId).iterator();
-        while (iterator.hasNext()) {
-            configuracoes.add(iterator.next());
-        }
+        List<Configuracao> configuracoes = configuracaoRepository.listIdAutistaTutor(autistaId, tutorId);
         if (configuracoes.isEmpty()) throw new NotFoundException("Nenhuma configuração encontrada!");
         return configuracoes;
     }

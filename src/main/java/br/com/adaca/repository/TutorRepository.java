@@ -14,5 +14,5 @@ public interface TutorRepository extends CrudRepository<Tutor, Serializable>  {
     public Tutor login(@Param("usuario") String usuario, @Param("senha") String senha);
 
     @Query("SELECT t.id, t.nome, t.usuario, t.area FROM Tutor t")
-    public Iterable<Tutor> listTutores();
+    public List<Tutor> listTutores();
 }

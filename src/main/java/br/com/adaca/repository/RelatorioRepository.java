@@ -6,9 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface RelatorioRepository extends CrudRepository<Relatorio, Serializable> {
 
     @Query("SELECT r FROM Relatorio r WHERE r.idautista = :autistaId")
-    public Iterable<Relatorio> listByAutista(@Param("autistaId") Integer autistaId);
+    public List<Relatorio> listByAutista(@Param("autistaId") Integer autistaId);
 }

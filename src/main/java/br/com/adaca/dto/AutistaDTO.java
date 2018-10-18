@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -18,7 +18,6 @@ import java.util.List;
 public class AutistaDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private Integer id;
     @NotBlank
     @Size(max = 70, message = "Máximo 70 caracteres.")

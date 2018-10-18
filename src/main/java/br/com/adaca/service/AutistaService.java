@@ -84,7 +84,6 @@ public class AutistaService {
         }
         return aut;
     }
-
     /**
      * Efetua uma busca por ID da criança cadastrada e remove-a do banco de dados
      *

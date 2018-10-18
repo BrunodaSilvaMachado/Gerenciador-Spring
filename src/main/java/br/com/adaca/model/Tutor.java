@@ -1,13 +1,21 @@
 package br.com.adaca.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- *
- * @author Willian
- */
+*
+* @author Willian
+*/
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_tutor", uniqueConstraints = {@UniqueConstraint(columnNames = {"USUARIO"})})
 public class Tutor implements Serializable {
@@ -29,99 +37,4 @@ public class Tutor implements Serializable {
     private List<br.com.adaca.model.Sessao> sessaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtutor")
     private List<br.com.adaca.model.Configuracao> configuracaoList;
-
-    public Tutor() {
-    }
-
-    public Tutor(Integer id) {
-        this.id = id;
-    }
-
-    public Tutor(Integer id, String nome, String usuario, String senha, String area) {
-        this.id = id;
-        this.nome = nome;
-        this.usuario = usuario;
-        this.senha = senha;
-        this.area = area;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public List<br.com.adaca.model.Sessao> getSessaoList() {
-        return sessaoList;
-    }
-
-    public void setSessaoList(List<Sessao> sessaoList) {
-        this.sessaoList = sessaoList;
-    }
-
-    public List<br.com.adaca.model.Configuracao> getConfiguracaoList() {
-        return configuracaoList;
-    }
-
-    public void setConfiguracaoList(List<Configuracao> configuracaoList) {
-        this.configuracaoList = configuracaoList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Tutor)) {
-            return false;
-        }
-        Tutor other = (Tutor) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Tutor[ id=" + id + " ]";
-    }
 }

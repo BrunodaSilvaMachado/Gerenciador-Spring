@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.5.RELEASE'
+		springBootVersion = '2.0.6.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -25,18 +25,15 @@ repositories {
 
 
 dependencies {
-	//compile('org.springframework.boot:spring-boot-starter-data-rest')
-	//compile("org.springframework.boot:spring-boot-starter-security")
+	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-test')
 	compile('javax.xml.bind:jaxb-api:2.3.0')
+	compile('org.projectlombok:lombok:1.18.2')
+	compile('org.mapstruct:mapstruct-jdk8:1.2.0.Final')
+	compile('org.mapstruct:mapstruct-processor:1.2.0.Final')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-
-/*
-	jar {
-		enabled=true
-	}
-*/

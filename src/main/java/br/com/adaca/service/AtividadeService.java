@@ -19,6 +19,11 @@ public class AtividadeService {
     @Autowired
     private AtividadeRepository atividadeRepository;
 
+    /**
+    * Lista todas as atividades cadastradas no banco de dados
+    *
+    * @return Lista com todas as atividades cadastradas
+    */
     public List<Atividade> listar() {
         List<Atividade> atividades = new ArrayList<>();
         Iterator<Atividade> iterator = atividadeRepository.findAll().iterator();
@@ -29,12 +34,24 @@ public class AtividadeService {
         return atividades;
     }
 
+    /**
+    * Efetua uma busca por ID de atividade cadastrada
+    *
+    * @param id ID de atividade já existente no banco de dados
+    * @return Objeto da atividade encontrada
+    */
     public Atividade selecionar(Integer id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
         if (!atividade.isPresent()) throw new NotFoundException("Atividade não encontrada! Id: " + id);
         return atividade.get();
     }
 
+    /**
+    * Salva o cadastro da atividade no banco de dados
+    *
+    * @param atividade Objeto preenchido do cadastro a ser gravado
+    * @return Objeto da atividade salva
+    */
     public Atividade salvar(Atividade atividade) {
         if (atividade.getId() != null) {
             Optional<Atividade> op = atividadeRepository.findById(atividade.getId());
@@ -43,6 +60,12 @@ public class AtividadeService {
         return atividadeRepository.save(atividade);
     }
 
+    /**
+    * Altera o cadastro da atividade no bando de dados
+    *
+    * @param atividade Objeto preenchido com os dados já alterados
+    * @return Objeto alterado
+    */
     public Atividade alterar(Atividade atividade) {
         Atividade ati = null;
         if(atividade.getId() != null) {
@@ -51,9 +74,15 @@ public class AtividadeService {
         return ati;
     }
 
+    /**
+    * Efetua uma busca por ID de atividade cadastrada e remove-a do banco de dados
+    *
+    * @param id ID de atividade já existente no banco de dados
+    * @return
+    */
     public void remover(Integer id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
-        if (!atividade.isPresent()){
+        if (!atividade.isPresent()) {
             throw new NotFoundException("id: " + id);
         }
         else {
@@ -61,6 +90,12 @@ public class AtividadeService {
         }
     }
 
+    /**
+    * Remove o cadastro da atividade do banco de dados
+    *
+    * @param atividade Objeto preenchido do cadastro já existente no banco de dados
+    * @return
+    */
     public void remover(Atividade atividade) {
         atividadeRepository.delete(atividade);
     }

@@ -20,7 +20,7 @@ import java.util.Date;
 @Table(name = "tb_relatorio")
 public class Relatorio implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4426172165503849970L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -34,8 +34,8 @@ public class Relatorio implements Serializable {
     private Date datagerado;
     @JoinColumn(name = "IDAUTISTA", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
-    private br.com.adaca.model.Autista idautista;
+    private Autista idautista;
     @JoinColumn(name = "IDADMINISTRADOR", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
-    private br.com.adaca.model.Administrador idadministrador;
+    private Administrador idadministrador;
 }

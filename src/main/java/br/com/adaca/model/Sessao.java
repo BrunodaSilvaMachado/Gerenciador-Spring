@@ -21,7 +21,7 @@ import java.util.List;
 @Table(name = "tb_sessao")
 public class Sessao implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1755709092642701098L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

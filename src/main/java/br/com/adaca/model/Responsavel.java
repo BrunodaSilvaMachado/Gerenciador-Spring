@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Table(name = "tb_responsavel")
 public class Responsavel implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8213342763966035009L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

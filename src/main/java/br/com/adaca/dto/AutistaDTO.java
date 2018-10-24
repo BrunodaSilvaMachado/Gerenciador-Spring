@@ -1,10 +1,10 @@
 package br.com.adaca.dto;
 
-import br.com.adaca.model.*;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class AutistaDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1225683427726537000L;
     private Integer id;
     @NotBlank
     @Size(max = 70, message = "Máximo 70 caracteres.")
@@ -26,6 +26,7 @@ public class AutistaDTO implements Serializable {
     @Size(max = 15, message = "Máximo 15 caracteres.")
     private String sexo;
     @NotBlank
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dtnasc;
     @NotBlank
     @Size(max = 70, message = "Máximo 70 caracteres.")
@@ -61,10 +62,10 @@ public class AutistaDTO implements Serializable {
     @Size(max  = 65535, message = "Máximo 65535 caracteres.")
     private String observacao;
     private byte[] foto;
-    private List<Medicamento> medicamentoList;
-    private List<Sessao> sessaoList;
-    private List<Configuracao> configuracaoList;
-    private List<Responsavel> responsavelList;
-    private List<Grafico> graficoList;
-    private List<Relatorio> relatorioList;
+    private List<MedicamentoDTO> medicamentoList;
+    private List<SessaoDTO> sessaoList;
+    private List<ConfiguracaoDTO> configuracaoList;
+    private List<ResponsavelDTO> responsavelList;
+    private List<GraficoDTO> graficoList;
+    private List<RelatorioDTO> relatorioList;
 }

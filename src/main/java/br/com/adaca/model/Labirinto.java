@@ -20,7 +20,7 @@ import java.util.Date;
 @Table(name = "tb_labirinto")
 public class Labirinto implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -6620816762368360136L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -45,7 +45,7 @@ public class Labirinto implements Serializable {
     private Date horafim;
     @JoinColumn(name = "IDSESSAO", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
-    private br.com.adaca.model.Sessao idsessao;
+    private Sessao idsessao;
     @JoinColumn(name = "IDATIVIDADE", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Atividade idatividade;

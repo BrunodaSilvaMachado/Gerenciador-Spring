@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Table(name = "tb_configuracao")
 public class Configuracao implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -3313463492061416282L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -48,5 +48,5 @@ public class Configuracao implements Serializable {
     private Tutor idtutor;
     @JoinColumn(name = "IDSESSAO", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
-    private br.com.adaca.model.Sessao idsessao;
+    private Sessao idsessao;
 }

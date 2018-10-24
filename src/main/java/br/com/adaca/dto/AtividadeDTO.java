@@ -1,10 +1,10 @@
 package br.com.adaca.dto;
 
-import br.com.adaca.model.*;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class AtividadeDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7183909989218865946L;
     private Integer id;
     @NotBlank
     @Size(max = 80, message = "Máximo 80 caracteres.")
@@ -25,7 +25,8 @@ public class AtividadeDTO implements Serializable {
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String classificacao;
     @Max(99)
+    @NumberFormat
     private Integer nivel;
-    private List<Labirinto> labirintoList;
-    private List<Resultado> resultadoList;
+    private List<LabirintoDTO> labirintoList;
+    private List<ResultadoDTO> resultadoList;
 }

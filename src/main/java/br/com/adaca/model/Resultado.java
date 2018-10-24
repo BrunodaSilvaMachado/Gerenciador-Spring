@@ -20,7 +20,7 @@ import java.util.Date;
 @Table(name = "tb_resultado")
 public class Resultado implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 222131767936780065L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -51,7 +51,7 @@ public class Resultado implements Serializable {
     private Date horafim;
     @JoinColumn(name = "IDSESSAO", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
-    private br.com.adaca.model.Sessao idsessao;
+    private Sessao idsessao;
     @JoinColumn(name = "IDATIVIDADE", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Atividade idatividade;

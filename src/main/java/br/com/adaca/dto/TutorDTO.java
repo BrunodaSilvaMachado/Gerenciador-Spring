@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -16,9 +14,9 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class AdministradorDTO implements Serializable {
+public class TutorDTO implements Serializable {
 
-    private static final long serialVersionUID = 2323330918806645621L;
+    private static final long serialVersionUID = 8652908057329090714L;
     private Integer id;
     @NotBlank
     @Size(max = 70, message = "Máximo 70 caracteres.")
@@ -31,8 +29,8 @@ public class AdministradorDTO implements Serializable {
     @Size(max = 100, message = "Máximo 100 caracteres.")
     private String senha;
     @NotBlank
-    @NumberFormat
-    private int nivelacesso;
-    private List<GraficoDTO> graficoList;
-    private List<RelatorioDTO> relatorioList;
+    @Size(max = 50, message = "Máximo 50 caracteres.")
+    private String area;
+    private List<SessaoDTO> sessaoList;
+    private List<ConfiguracaoDTO> configuracaoList;
 }

@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "tb_tutor", uniqueConstraints = {@UniqueConstraint(columnNames = {"USUARIO"})})
 public class Tutor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2220472004366236193L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -34,7 +34,7 @@ public class Tutor implements Serializable {
     @Column(nullable = false, length = 50)
     private String area;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtutor")
-    private List<br.com.adaca.model.Sessao> sessaoList;
+    private List<Sessao> sessaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtutor")
-    private List<br.com.adaca.model.Configuracao> configuracaoList;
+    private List<Configuracao> configuracaoList;
 }

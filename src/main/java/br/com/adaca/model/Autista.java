@@ -21,7 +21,7 @@ import java.util.List;
 @Table(name = "tb_autista")
 public class Autista implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -5583032942195618707L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -65,13 +65,13 @@ public class Autista implements Serializable {
     @Lob
     private byte[] foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
-    private List<br.com.adaca.model.Medicamento> medicamentoList;
+    private List<Medicamento> medicamentoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
-    private List<br.com.adaca.model.Sessao> sessaoList;
+    private List<Sessao> sessaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
-    private List<br.com.adaca.model.Configuracao> configuracaoList;
+    private List<Configuracao> configuracaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
-    private List<br.com.adaca.model.Responsavel> responsavelList;
+    private List<Responsavel> responsavelList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
     private List<Grafico> graficoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")

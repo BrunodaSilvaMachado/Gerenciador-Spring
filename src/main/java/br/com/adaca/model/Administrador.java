@@ -21,7 +21,7 @@ import java.util.List;
 @Table(name = "tb_administrador")
 public class Administrador implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -6899009903855069451L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "tb_atividade")
 public class Atividade implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4836465931631553059L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -31,7 +31,7 @@ public class Atividade implements Serializable {
     private String classificacao;
     private Integer nivel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idatividade")
-    private List<br.com.adaca.model.Labirinto> labirintoList;
+    private List<Labirinto> labirintoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idatividade")
-    private List<br.com.adaca.model.Resultado> resultadoList;
+    private List<Resultado> resultadoList;
 }

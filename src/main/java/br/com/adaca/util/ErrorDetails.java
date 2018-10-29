@@ -1,48 +1,34 @@
 package br.com.adaca.util;
 
-public class ErrorDetails {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ErrorDetails implements Serializable {
+
+    private static final long serialVersionUID = 854590932388853627L;
 
     private Long timestamp;
-    private Long status;
-    private String title;
-    private String message;
+    private int status;
+    private String titulo;
+    private String mensagem;
 
-    public ErrorDetails(Long timestamp, Long status, String title, String message) {
+    @NonNull
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<String> errors;
+
+    public ErrorDetails(Long timestamp, int status, String titulo, String mensagem) {
         this.timestamp = timestamp;
         this.status = status;
-        this.title = title;
-        this.message = message;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public Long getStatus() {
-        return status;
-    }
-
-    public void setStatus(Long status) {
-        this.status = status;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+        this.titulo = titulo;
+        this.mensagem = mensagem;
     }
 }

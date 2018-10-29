@@ -1,6 +1,8 @@
 package br.com.adaca.controller;
 
+import br.com.adaca.mapper.AdministradorMapper;
 import br.com.adaca.model.Administrador;
+import br.com.adaca.dto.AdministradorDTO;
 import br.com.adaca.service.AdministradorService;
 
 import org.springframework.beans.factory.annotation.Autowired;

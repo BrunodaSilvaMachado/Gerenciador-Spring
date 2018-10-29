@@ -1,6 +1,8 @@
 package br.com.adaca.service;
 
+import br.com.adaca.mapper.AdministradorMapper;
 import br.com.adaca.model.Administrador;
+import br.com.adaca.dto.AdministradorDTO;
 import br.com.adaca.repository.AdministradorRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
@@ -16,6 +18,8 @@ public class AdministradorService {
 
     @Autowired
     private AdministradorRepository administradorRepository;
+    @Autowired
+    private AdministradorMapper administradorMapper;
 
     /**
     * Lista todos os administradores cadastrados no banco de dados

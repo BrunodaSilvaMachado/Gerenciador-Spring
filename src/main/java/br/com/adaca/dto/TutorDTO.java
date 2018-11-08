@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -24,8 +24,7 @@ public class TutorDTO implements Serializable {
     @NotBlank
     @Size(max = 50, message = "Máximo 50 caracteres.")
     private String usuario;
-    @JsonIgnore
-    @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(max = 100, message = "Máximo 100 caracteres.")
     private String senha;
     @NotBlank

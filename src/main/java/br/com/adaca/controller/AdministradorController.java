@@ -22,22 +22,22 @@ public class AdministradorController {
     private AdministradorService administradorService;
 
     @GetMapping("/listarAdministradores")
-    public ResponseEntity<List<Administrador>> listar() {
+    public ResponseEntity<List<AdministradorDTO>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
     }
 
     @GetMapping("/selecionarAdministrador/{administradorId}")
-    public ResponseEntity<Administrador> selecionar(@PathVariable("administradorId") Integer administradorId) {
+    public ResponseEntity<AdministradorDTO> selecionar(@PathVariable("administradorId") Integer administradorId) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
     }
 
     @PostMapping("/salvarAdministrador")
-    public ResponseEntity<Void> salvar(@RequestBody @Valid Administrador administrador) {
+    public ResponseEntity<Void> salvar(@RequestBody @Valid AdministradorDTO administrador) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
     }
 
     @PutMapping("/alterarAdministrador")
-    public ResponseEntity<Administrador> alterar(@RequestBody @Valid Administrador administrador) {
+    public ResponseEntity<AdministradorDTO> alterar(@RequestBody @Valid AdministradorDTO administrador) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.alterar(administrador));
     }
     @DeleteMapping("/removerAdministrador/{administradorId}")
@@ -47,7 +47,7 @@ public class AdministradorController {
     }
 
     @DeleteMapping("/removerAdministrador")
-    public ResponseEntity<Void> remover(@RequestBody @Valid Administrador administrador) {
+    public ResponseEntity<Void> remover(@RequestBody @Valid AdministradorDTO administrador) {
         administradorService.remover(administrador);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

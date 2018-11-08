@@ -10,6 +10,8 @@ import br.com.adaca.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,10 +28,19 @@ public class AdministradorService {
     *
     * @return Lista com todos os administradores cadastrados
     */
-    public List<Administrador> listar() {
+    public List<AdministradorDTO> listar() {
+        /*
         List<Administrador> administradores = administradorRepository.listAdministradores();
         if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
         return administradores;
+        */
+        List<Administrador> administradores = new ArrayList<>();
+        Iterator<Administrador> iterator = administradorRepository.findAll().iterator();
+        while (iterator.hasNext()) {
+            administradores.add(iterator.next());
+        }
+        if (administradores.isEmpty()) throw new NotFoundException("Nenhuma atividade encontrada!");
+        return administradorMapper.toDto(administradores);
     }
 
     /**
@@ -38,10 +49,10 @@ public class AdministradorService {
     * @param id ID de administrador já existente no banco de dados
     * @return Objeto do administrador encontrado
     */
-    public Administrador selecionar(Integer id) {
+    public AdministradorDTO selecionar(Integer id) {
         Optional<Administrador> administrador = administradorRepository.findById(id);
         if (!administrador.isPresent()) throw new NotFoundException("Administrador não encontrado! Id: " + id);
-        return administrador.get();
+        return administradorMapper.toDto(administrador.get());
     }
 
     /**
@@ -50,12 +61,12 @@ public class AdministradorService {
     * @param administrador Objeto preenchido do cadastro a ser gravado
     * @return Objeto do administador salvo
     */
-    public Administrador salvar(Administrador administrador) {
+    public Administrador salvar(AdministradorDTO administrador) {
         if (administrador.getId() != null) {
             Optional<Administrador> op = administradorRepository.findById(administrador.getId());
             if (op.isPresent()) throw new ConflictException("O administrador já existe!");
         }
-        return administradorRepository.save(administrador);
+        return administradorRepository.save(administradorMapper.toEntity(administrador));
     }
 
     /**
@@ -64,12 +75,12 @@ public class AdministradorService {
     * @param administrador Objeto preenchido com os dados já alterados
     * @return Objeto do administrador alterado
     */
-    public Administrador alterar(Administrador administrador) {
+    public AdministradorDTO alterar(AdministradorDTO administrador) {
         Administrador adm = null;
         if(administrador.getId() != null) {
-            adm = administradorRepository.save(administrador);
+            adm = administradorRepository.save(administradorMapper.toEntity(administrador));
         }
-        return adm;
+        return administradorMapper.toDto(adm);
     }
 
 
@@ -96,7 +107,7 @@ public class AdministradorService {
     * @param administrador Objeto preenchido do cadastro já existente no banco de dados
     * @return
     */
-    public void remover(Administrador administrador) {
-        administradorRepository.delete(administrador);
+    public void remover(AdministradorDTO administrador) {
+        administradorRepository.delete(administradorMapper.toEntity(administrador));
     }
 }

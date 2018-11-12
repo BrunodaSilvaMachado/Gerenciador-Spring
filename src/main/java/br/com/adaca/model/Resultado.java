@@ -20,17 +20,17 @@ import java.util.Date;
 @Table(name = "tb_resultado")
 public class Resultado implements Serializable {
 
-    private static final long serialVersionUID = 222131767936780065L;
+    private static final long serialVersionUID = -4156796095161566727L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
     @Column(nullable = false)
-    private int dicas;
+    private Integer dicas;
     @Column(nullable = false)
-    private int cliquecerto;
+    private Integer cliquecerto;
     @Column(nullable = false)
-    private int cliqueerrado;
+    private Integer cliqueerrado;
     @Lob
     @Column(nullable = false, length = 65535)
     private String mouseclique;

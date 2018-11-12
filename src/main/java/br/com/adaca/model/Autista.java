@@ -21,7 +21,7 @@ import java.util.List;
 @Table(name = "tb_autista")
 public class Autista implements Serializable {
 
-    private static final long serialVersionUID = -5583032942195618707L;
+    private static final long serialVersionUID = -2206202474289214951L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -40,7 +40,7 @@ public class Autista implements Serializable {
     @Column(nullable = false, length = 3)
     private String mediador;
     @Column(nullable = false)
-    private boolean medicamentos;
+    private Boolean medicamentos;
     @Column(length = 80)
     private String brinquedo;
     @Column(length = 80)
@@ -52,9 +52,9 @@ public class Autista implements Serializable {
     @Column(length = 80)
     private String medo;
     @Column(nullable = false)
-    private boolean ler;
+    private Boolean ler;
     @Column(nullable = false)
-    private boolean escrever;
+    private Boolean escrever;
     @Column(nullable = false, length = 80)
     private String comunicacao;
     @Column(nullable = false, length = 200)
@@ -63,7 +63,7 @@ public class Autista implements Serializable {
     @Column(length = 65535)
     private String observacao;
     @Lob
-    private byte[] foto;
+    private Byte[] foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
     private List<Medicamento> medicamentoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")

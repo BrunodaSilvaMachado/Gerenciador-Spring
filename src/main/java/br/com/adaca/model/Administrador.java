@@ -21,7 +21,7 @@ import java.util.List;
 @Table(name = "tb_administrador")
 public class Administrador implements Serializable {
 
-    private static final long serialVersionUID = -6899009903855069451L;
+    private static final long serialVersionUID = 3176372843594139191L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -33,7 +33,7 @@ public class Administrador implements Serializable {
     @Column(nullable = false, length = 100)
     private String senha;
     @Column(nullable = false)
-    private int nivelacesso;
+    private Integer nivelacesso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador")
     private List<Grafico> graficoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador")

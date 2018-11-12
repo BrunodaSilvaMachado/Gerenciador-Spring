@@ -1,6 +1,8 @@
 package br.com.adaca.service;
 
+import br.com.adaca.mapper.AtividadeMapper;
 import br.com.adaca.model.Atividade;
+import br.com.adaca.dto.AtividadeDTO;
 import br.com.adaca.repository.AtividadeRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
@@ -18,20 +20,22 @@ public class AtividadeService {
 
     @Autowired
     private AtividadeRepository atividadeRepository;
+    @Autowired
+    private AtividadeMapper atividadeMapper;
 
     /**
     * Lista todas as atividades cadastradas no banco de dados
     *
     * @return Lista com todas as atividades cadastradas
     */
-    public List<Atividade> listar() {
+    public List<AtividadeDTO> listar() {
         List<Atividade> atividades = new ArrayList<>();
         Iterator<Atividade> iterator = atividadeRepository.findAll().iterator();
         while (iterator.hasNext()) {
             atividades.add(iterator.next());
         }
         if (atividades.isEmpty()) throw new NotFoundException("Nenhuma atividade encontrada!");
-        return atividades;
+        return atividadeMapper.toDto(atividades);
     }
 
     /**
@@ -40,10 +44,10 @@ public class AtividadeService {
     * @param id ID de atividade já existente no banco de dados
     * @return Objeto da atividade encontrada
     */
-    public Atividade selecionar(Integer id) {
+    public AtividadeDTO selecionar(Integer id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
         if (!atividade.isPresent()) throw new NotFoundException("Atividade não encontrada! Id: " + id);
-        return atividade.get();
+        return atividadeMapper.toDto(atividade.get());
     }
 
     /**
@@ -52,12 +56,12 @@ public class AtividadeService {
     * @param atividade Objeto preenchido do cadastro a ser gravado
     * @return Objeto da atividade salva
     */
-    public Atividade salvar(Atividade atividade) {
+    public AtividadeDTO salvar(AtividadeDTO atividade) {
         if (atividade.getId() != null) {
             Optional<Atividade> op = atividadeRepository.findById(atividade.getId());
             if (op.isPresent()) throw new ConflictException("A atividade já existe!");
         }
-        return atividadeRepository.save(atividade);
+        return atividadeMapper.toDto(atividadeRepository.save(atividadeMapper.toEntity(atividade)));
     }
 
     /**
@@ -66,12 +70,12 @@ public class AtividadeService {
     * @param atividade Objeto preenchido com os dados já alterados
     * @return Objeto alterado
     */
-    public Atividade alterar(Atividade atividade) {
+    public AtividadeDTO alterar(AtividadeDTO atividade) {
         Atividade ati = null;
         if(atividade.getId() != null) {
-            ati = atividadeRepository.save(atividade);
+            ati = atividadeRepository.save(atividadeMapper.toEntity(atividade));
         }
-        return ati;
+        return atividadeMapper.toDto(ati);
     }
 
     /**
@@ -96,7 +100,7 @@ public class AtividadeService {
     * @param atividade Objeto preenchido do cadastro já existente no banco de dados
     * @return
     */
-    public void remover(Atividade atividade) {
-        atividadeRepository.delete(atividade);
+    public void remover(AtividadeDTO atividade) {
+        atividadeRepository.delete(atividadeMapper.toEntity(atividade));
     }
 }

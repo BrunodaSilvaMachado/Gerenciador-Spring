@@ -16,10 +16,10 @@ import java.util.Date;
 @EqualsAndHashCode
 public class RelatorioDTO implements Serializable {
 
-    private static final long serialVersionUID = 3453327770983384345L;
+    private static final long serialVersionUID = 8563421460349745653L;
     private Integer id;
     @NotBlank
-    private byte[] relatorio;
+    private Byte[] relatorio;
     @NotBlank
     @Size(max = 30, message = "Máximo 30 caracteres.")
     private String tiporelatorio;

@@ -1,6 +1,8 @@
 package br.com.adaca.service;
 
+import br.com.adaca.mapper.AutistaMapper;
 import br.com.adaca.model.Autista;
+import br.com.adaca.dto.AutistaDTO;
 import br.com.adaca.repository.AutistaRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
@@ -18,20 +20,22 @@ public class AutistaService {
 
     @Autowired
     private AutistaRepository autistaRepository;
+    @Autowired
+    private AutistaMapper autistaMapper;
 
     /**
     * Lista todas as crianças cadastradas no banco de dados
     *
     * @return Lista com todas as crianças cadastradas
     */
-    public List<Autista> listar() {
+    public List<AutistaDTO> listar() {
         List<Autista> autistas = new ArrayList<>();
         Iterator<Autista> iterator = autistaRepository.findAll().iterator();
         while (iterator.hasNext()) {
             autistas.add(iterator.next());
         }
         if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
-        return autistas;
+        return autistaMapper.toDto(autistas);
     }
 
     /**
@@ -39,10 +43,10 @@ public class AutistaService {
     *
     * @return Lista de ids e nomes de todas as crianças cadastradas
     */
-    public List<Autista> listarNomesId() {
+    public List<AutistaDTO> listarNomesId() {
         List<Autista> autistas = autistaRepository.listNamesId();
         if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
-        return autistas;
+        return autistaMapper.toDto(autistas);
     }
 
     /**
@@ -51,10 +55,10 @@ public class AutistaService {
     * @param id ID da criança já existente no banco de dados
     * @return Objeto da criança encontrada
     */
-    public Autista selecionar(Integer id) {
+    public AutistaDTO selecionar(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
         if (!autista.isPresent()) throw new NotFoundException("Criança não encontrada! Id: " + id);
-        return autista.get();
+        return autistaMapper.toDto(autista.get());
     }
 
     /**
@@ -63,12 +67,12 @@ public class AutistaService {
     * @param autista Objeto preenchido do cadastro a ser gravado
     * @return Objeto da criança salva
     */
-    public Autista salvar(Autista autista) {
+    public AutistaDTO salvar(AutistaDTO autista) {
         if (autista.getId() != null) {
             Optional<Autista> op = autistaRepository.findById(autista.getId());
             if (op.isPresent()) throw new ConflictException("A criança já existe!");
         }
-        return autistaRepository.save(autista);
+        return autistaMapper.toDto(autistaRepository.save(autistaMapper.toEntity(autista)));
     }
 
     /**
@@ -77,12 +81,12 @@ public class AutistaService {
      * @param autista Objeto preenchido com os dados já alterados
      * @return Objeto alterado
      */
-    public Autista alterar(Autista autista) {
+    public AutistaDTO alterar(AutistaDTO autista) {
         Autista aut = null;
         if(autista.getId() != null) {
-            aut = autistaRepository.save(autista);
+            aut = autistaRepository.save(autistaMapper.toEntity(autista));
         }
-        return aut;
+        return autistaMapper.toDto(aut);
     }
     /**
      * Efetua uma busca por ID da criança cadastrada e remove-a do banco de dados
@@ -106,7 +110,7 @@ public class AutistaService {
      * @param autista Objeto preenchido do cadastro já existente no banco de dados
      * @return
      */
-    public void remover(Autista autista) {
-        autistaRepository.delete(autista);
+    public void remover(AutistaDTO autista) {
+        autistaRepository.delete(autistaMapper.toEntity(autista));
     }
 }

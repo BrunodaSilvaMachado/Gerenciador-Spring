@@ -17,26 +17,26 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_labirinto")
+@Table(name = "tb_labirIntegero")
 public class Labirinto implements Serializable {
 
-    private static final long serialVersionUID = -6620816762368360136L;
+    private static final long serialVersionUID = -446045572152666482L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
     @Column(nullable = false)
-    private int quanterro;
+    private Integer quanterro;
     @Column(nullable = false, length = 300)
     private String paredes;
     @Column(nullable = false)
-    private int quantdicas;
+    private Integer quantdicas;
     @Column(length = 500)
     private String posicaoerro;
     @Column(length = 500)
     private String teclaerrada;
     @Column(nullable = false)
-    private int quantbotoes;
+    private Integer quantbotoes;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date horainicio;

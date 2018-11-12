@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Table(name = "tb_configuracao")
 public class Configuracao implements Serializable {
 
-    private static final long serialVersionUID = -3313463492061416282L;
+    private static final long serialVersionUID = 2433741048536212977L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -30,9 +30,9 @@ public class Configuracao implements Serializable {
     @Column(nullable = false, length = 80)
     private String musica;
     @Column(nullable = false)
-    private boolean dicatempo;
+    private Boolean dicatempo;
     @Column(nullable = false)
-    private boolean dicacaminho;
+    private Boolean dicacaminho;
     @Column(nullable = false, length = 50)
     private String tipodica;
     @Column(nullable = false, length = 50)

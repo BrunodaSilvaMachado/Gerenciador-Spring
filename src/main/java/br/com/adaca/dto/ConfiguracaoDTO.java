@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class ConfiguracaoDTO implements Serializable {
 
-    private static final long serialVersionUID = -4114643862429315630L;
+    private static final long serialVersionUID = 2451058415073638749L;
     private Integer id;
     @NotBlank
     @Size(max = 80, message = "Máximo 80 caracteres.")
@@ -22,9 +22,9 @@ public class ConfiguracaoDTO implements Serializable {
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String musica;
     @NotBlank
-    private boolean dicatempo;
+    private Boolean dicatempo;
     @NotBlank
-    private boolean dicacaminho;
+    private Boolean dicacaminho;
     @NotBlank
     @Size(max = 50, message = "Máximo 50 caracteres.")
     private String tipodica;

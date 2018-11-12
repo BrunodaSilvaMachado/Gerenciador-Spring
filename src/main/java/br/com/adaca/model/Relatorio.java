@@ -20,14 +20,14 @@ import java.util.Date;
 @Table(name = "tb_relatorio")
 public class Relatorio implements Serializable {
 
-    private static final long serialVersionUID = -4426172165503849970L;
+    private static final long serialVersionUID = 9122449637418259108L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
     @Lob
     @Column(nullable = false)
-    private byte[] relatorio;
+    private Byte[] relatorio;
     @Column(nullable = false, length = 30)
     private String tiporelatorio;
     @Temporal(TemporalType.TIMESTAMP)

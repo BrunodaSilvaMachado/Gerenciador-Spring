@@ -17,22 +17,22 @@ import java.util.Date;
 @EqualsAndHashCode
 public class LabirintoDTO implements Serializable  {
 
-    private static final long serialVersionUID = 6992597439968186280L;
+    private static final long serialVersionUID = -5204466311220667434L;
     private Integer id;
     @NotBlank
     @NumberFormat
-    private int quanterro;
+    private Integer quanterro;
     @NotBlank
     @Size(max = 300, message = "Máximo 300 caracteres.")
     private String paredes;
     @NotBlank
-    private int quantdicas;
+    private Integer quantdicas;
     @Size(max = 500, message = "Máximo 500 caracteres.")
     private String posicaoerro;
     @Size(max = 500, message = "Máximo 500 caracteres.")
     private String teclaerrada;
     @NotBlank
-    private int quantbotoes;
+    private Integer quantbotoes;
     @NotBlank
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date horainicio;

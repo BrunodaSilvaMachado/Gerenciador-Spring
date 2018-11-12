@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class AutistaDTO implements Serializable {
 
-    private static final long serialVersionUID = -1225683427726537000L;
+    private static final long serialVersionUID = -6244209586857135633L;
     private Integer id;
     @NotBlank
     @Size(max = 70, message = "Máximo 70 caracteres.")
@@ -38,7 +38,7 @@ public class AutistaDTO implements Serializable {
     @Size(max = 3, message = "Máximo 3 caracteres.")
     private String mediador;
     @NotBlank
-    private boolean medicamentos;
+    private Boolean medicamentos;
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String brinquedo;
     @Size(max = 80, message = "Máximo 80 caracteres.")
@@ -50,9 +50,9 @@ public class AutistaDTO implements Serializable {
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String medo;
     @NotBlank
-    private boolean ler;
+    private Boolean ler;
     @NotBlank
-    private boolean escrever;
+    private Boolean escrever;
     @NotBlank
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String comunicacao;
@@ -61,7 +61,7 @@ public class AutistaDTO implements Serializable {
     private String terapia;
     @Size(max  = 65535, message = "Máximo 65535 caracteres.")
     private String observacao;
-    private byte[] foto;
+    private Byte[] foto;
     private List<MedicamentoDTO> medicamentoList;
     private List<SessaoDTO> sessaoList;
     private List<ConfiguracaoDTO> configuracaoList;

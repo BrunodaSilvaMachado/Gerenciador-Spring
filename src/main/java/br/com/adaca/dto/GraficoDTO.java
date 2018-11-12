@@ -16,10 +16,10 @@ import java.util.Date;
 @EqualsAndHashCode
 public class GraficoDTO implements Serializable {
 
-    private static final long serialVersionUID = -8751183709315498555L;
+    private static final long serialVersionUID = 8774284091240509371L;
     private Integer id;
     @NotBlank
-    private byte[] grafico;
+    private Byte[] grafico;
     @NotBlank
     @Size(max = 30, message = "Máximo 30 caracteres.")
     private String tipografico;

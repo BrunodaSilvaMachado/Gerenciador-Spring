@@ -1,6 +1,7 @@
 package br.com.adaca.controller;
 
 import br.com.adaca.model.Autista;
+import br.com.adaca.dto.AutistaDTO;
 import br.com.adaca.service.AutistaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +21,27 @@ public class AutistaController {
     private AutistaService autistaService;
 
     @GetMapping("/listarAutistas")
-    public ResponseEntity<List<Autista>> listar() {
+    public ResponseEntity<List<AutistaDTO>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.listar());
     }
 
     @GetMapping("/listarNomesIdAutistas")
-    public  ResponseEntity<List<Autista>> listarNomesId() {
+    public  ResponseEntity<List<AutistaDTO>> listarNomesId() {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.listarNomesId());
     }
 
     @GetMapping("/selecionarAutista/{autistaId}")
-    public ResponseEntity<Autista> selecionar(@PathVariable("autistaId") Integer autistaId) {
+    public ResponseEntity<AutistaDTO> selecionar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.selecionar(autistaId));
     }
 
     @PostMapping("/salvarAutista")
-    public ResponseEntity<Void> salvar(@RequestBody @Valid Autista autista) {
+    public ResponseEntity<Void> salvar(@RequestBody @Valid AutistaDTO autista) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autistaService.salvar(autista).getId()).toUri()).build();
     }
 
     @PutMapping("/alterarAutista")
-    public ResponseEntity<Autista> alterar(@RequestBody @Valid Autista autista) {
+    public ResponseEntity<AutistaDTO> alterar(@RequestBody @Valid AutistaDTO autista) {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.alterar(autista));
     }
 
@@ -51,7 +52,7 @@ public class AutistaController {
     }
 
     @DeleteMapping("/removerAutista")
-    public ResponseEntity<Void> remover(@RequestBody @Valid Autista autista) {
+    public ResponseEntity<Void> remover(@RequestBody @Valid AutistaDTO autista) {
         autistaService.remover(autista);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

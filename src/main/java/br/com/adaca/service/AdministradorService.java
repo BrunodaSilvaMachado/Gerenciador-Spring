@@ -29,17 +29,12 @@ public class AdministradorService {
     * @return Lista com todos os administradores cadastrados
     */
     public List<AdministradorDTO> listar() {
-        /*
-        List<Administrador> administradores = administradorRepository.listAdministradores();
-        if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
-        return administradores;
-        */
         List<Administrador> administradores = new ArrayList<>();
         Iterator<Administrador> iterator = administradorRepository.findAll().iterator();
         while (iterator.hasNext()) {
             administradores.add(iterator.next());
         }
-        if (administradores.isEmpty()) throw new NotFoundException("Nenhuma atividade encontrada!");
+        if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
         return administradorMapper.toDto(administradores);
     }
 
@@ -61,12 +56,12 @@ public class AdministradorService {
     * @param administrador Objeto preenchido do cadastro a ser gravado
     * @return Objeto do administador salvo
     */
-    public Administrador salvar(AdministradorDTO administrador) {
+    public AdministradorDTO salvar(AdministradorDTO administrador) {
         if (administrador.getId() != null) {
             Optional<Administrador> op = administradorRepository.findById(administrador.getId());
             if (op.isPresent()) throw new ConflictException("O administrador já existe!");
         }
-        return administradorRepository.save(administradorMapper.toEntity(administrador));
+        return administradorMapper.toDto(administradorRepository.save(administradorMapper.toEntity(administrador)));
     }
 
     /**

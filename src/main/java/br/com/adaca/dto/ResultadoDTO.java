@@ -17,17 +17,17 @@ import java.util.Date;
 @EqualsAndHashCode
 public class ResultadoDTO implements Serializable {
 
-    private static final long serialVersionUID = -2294693544297932051L;
+    private static final long serialVersionUID = -7506303934528967139L;
     private Integer id;
     @NotBlank
     @NumberFormat
-    private int dicas;
+    private Integer dicas;
     @NotBlank
     @NumberFormat
-    private int cliquecerto;
+    private Integer cliquecerto;
     @NotBlank
     @NumberFormat
-    private int cliqueerrado;
+    private Integer cliqueerrado;
     @NotBlank
     @Size(max = 65535, message = "Máximo 65535 caracteres.")
     private String mouseclique;

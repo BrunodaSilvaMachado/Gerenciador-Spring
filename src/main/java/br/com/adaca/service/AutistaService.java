@@ -43,11 +43,13 @@ public class AutistaService {
     *
     * @return Lista de ids e nomes de todas as crianças cadastradas
     */
-    public List<AutistaDTO> listarNomesId() {
-        List<Autista> autistas = autistaRepository.listNamesId();
-        if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
-        return autistaMapper.toDto(autistas);
-    }
+    /*
+        public List<AutistaDTO> listarNomesId() {
+            List<Autista> autistas = autistaRepository.listNamesId();
+            if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
+            return autistaMapper.toDto(autistas);
+        }
+    */
 
     /**
     * Efetua uma busca por ID da criança cadastrada

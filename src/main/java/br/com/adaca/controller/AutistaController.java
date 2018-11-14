@@ -1,6 +1,5 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.model.Autista;
 import br.com.adaca.dto.AutistaDTO;
 import br.com.adaca.service.AutistaService;
 
@@ -25,10 +24,12 @@ public class AutistaController {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.listar());
     }
 
-    @GetMapping("/listarNomesIdAutistas")
-    public  ResponseEntity<List<AutistaDTO>> listarNomesId() {
-        return ResponseEntity.status(HttpStatus.OK).body(autistaService.listarNomesId());
-    }
+    /*
+        @GetMapping("/listarNomesIdAutistas")
+        public  ResponseEntity<List<AutistaDTO>> listarNomesId() {
+            return ResponseEntity.status(HttpStatus.OK).body(autistaService.listarNomesId());
+        }
+    */
 
     @GetMapping("/selecionarAutista/{autistaId}")
     public ResponseEntity<AutistaDTO> selecionar(@PathVariable("autistaId") Integer autistaId) {

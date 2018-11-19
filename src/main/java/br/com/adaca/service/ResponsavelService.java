@@ -19,6 +19,11 @@ public class ResponsavelService {
     @Autowired
     private ResponsavelRepository responsavelRepository;
 
+    /**
+    * Lista todos os responsáveis cadastrados no banco de dados
+    *
+    * @return Lista com todos os responsáveis cadastrados
+    */
     public List<Responsavel> listar() {
         List<Responsavel> responsaveis = new ArrayList<>();
         Iterator<Responsavel> iterator = responsavelRepository.findAll().iterator();
@@ -29,18 +34,37 @@ public class ResponsavelService {
         return responsaveis;
     }
 
-    public List<Responsavel> listar(Integer autistaId) {
-        List<Responsavel> responsaveis = responsavelRepository.listByAutista(autistaId);
+    /**
+    * Lista todos os responsáveis cadastrados no banco de dados filtrados pela
+    * criança
+    *
+    * @param id ID da criança para filtro da pesquisa
+    * @return Lista com todos os responsáveis cadastrados
+    */
+    public List<Responsavel> listar(Integer id) {
+        List<Responsavel> responsaveis = responsavelRepository.listByAutista(id);
         if(responsaveis.isEmpty()) throw new NotFoundException("Nenhum responsável encontrado!");
         return responsaveis;
     }
 
+    /**
+    * Efetua uma busca por ID do responsável cadastrado
+    *
+    * @param id ID do responsável já existente no banco de dados
+    * @return Objeto do responsável encontrado
+    */
     public Responsavel selecionar(Integer id) {
         Optional<Responsavel> responsavel = responsavelRepository.findById(id);
         if (!responsavel.isPresent()) throw new NotFoundException("Responsável não encontrado! Id: " + id);
         return responsavel.get();
     }
 
+    /**
+    * Salva o responsável da criança no banco de dados
+    *
+    * @param responsavel Objeto preenchido do responsável a ser gravado
+    * @return Objeto salvo
+    */
     public Responsavel salvar(Responsavel responsavel) {
         if (responsavel.getId() != null) {
             Optional<Responsavel> op = responsavelRepository.findById(responsavel.getId());
@@ -49,6 +73,12 @@ public class ResponsavelService {
         return responsavelRepository.save(responsavel);
     }
 
+    /**
+    * Altera o cadastro do responsável no bando de dados
+    *
+    * @param responsavel Objeto preenchido com os dados já alterados
+    * @return Objeto alterado
+    */
     public Responsavel alterar(Responsavel responsavel) {
         Responsavel res = null;
         if(responsavel.getId() != null) {
@@ -57,9 +87,15 @@ public class ResponsavelService {
         return res;
     }
 
+    /**
+    * Efetua uma busca por ID do responsável cadastrado e remove-o do banco de dados
+    *
+    * @param id ID do responsável já existente no banco de dados
+    * @return
+    */
     public void remover(Integer id) {
         Optional<Responsavel> responsavel = responsavelRepository.findById(id);
-        if (!responsavel.isPresent()){
+        if (!responsavel.isPresent()) {
             throw new NotFoundException("Id: " + id);
         }
         else {
@@ -67,6 +103,12 @@ public class ResponsavelService {
         }
     }
 
+    /**
+    * Remove o cadastro do responsável do banco de dados
+    *
+    * @param responsavel Objeto preenchido do cadastro já existente no banco de dados
+    * @return
+    */
     public void remover(Responsavel responsavel) {
         responsavelRepository.delete(responsavel);
     }

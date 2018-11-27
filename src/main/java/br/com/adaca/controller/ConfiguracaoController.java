@@ -1,6 +1,6 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.model.Configuracao;
+import br.com.adaca.dto.ConfiguracaoDTO;
 import br.com.adaca.service.ConfiguracaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +20,27 @@ public class ConfiguracaoController {
     private ConfiguracaoService configuracaoService;
 
     @GetMapping("/listarConfiguracoes")
-    public ResponseEntity<List<Configuracao>> listar() {
+    public ResponseEntity<List<ConfiguracaoDTO>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.listar());
     }
 
     @GetMapping("/listarConfiguracoesAutistaTutor/{autistaId}/{tutorId}")
-    public ResponseEntity<List<Configuracao>> listar(@PathVariable("autistaId") Integer autistaId,@PathVariable("tutorId") Integer tutorId) {
+    public ResponseEntity<List<ConfiguracaoDTO>> listar(@PathVariable("autistaId") Integer autistaId,@PathVariable("tutorId") Integer tutorId) {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.listarConfigAutistaTutor(autistaId,tutorId));
     }
 
     @GetMapping("/selecionarConfiguracao/{configuracaoId}")
-    public ResponseEntity<Configuracao> selecionar(@PathVariable("configuracaoId") Integer configuracaoId) {
+    public ResponseEntity<ConfiguracaoDTO> selecionar(@PathVariable("configuracaoId") Integer configuracaoId) {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.selecionar(configuracaoId));
     }
 
     @PostMapping("/salvarConfiguracao")
-    public ResponseEntity<Void> salvar(@RequestBody @Valid Configuracao configuracao) {
+    public ResponseEntity<Void> salvar(@RequestBody @Valid ConfiguracaoDTO configuracao) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(configuracaoService.salvar(configuracao).getId()).toUri()).build();
     }
 
     @PutMapping("/alterarConfiguracao")
-    public ResponseEntity<Configuracao> alterar(@RequestBody @Valid Configuracao configuracao) {
+    public ResponseEntity<ConfiguracaoDTO> alterar(@RequestBody @Valid ConfiguracaoDTO configuracao) {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.alterar(configuracao));
     }
 
@@ -51,7 +51,7 @@ public class ConfiguracaoController {
     }
 
     @DeleteMapping("/removerConfiguracao")
-    public ResponseEntity<Void> remover(@RequestBody @Valid Configuracao configuracao) {
+    public ResponseEntity<Void> remover(@RequestBody @Valid ConfiguracaoDTO configuracao) {
         configuracaoService.remover(configuracao);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

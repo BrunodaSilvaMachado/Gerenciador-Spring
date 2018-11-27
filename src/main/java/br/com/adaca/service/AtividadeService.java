@@ -71,11 +71,11 @@ public class AtividadeService {
     * @return Objeto alterado
     */
     public AtividadeDTO alterar(AtividadeDTO atividade) {
-        Atividade ati = null;
+        AtividadeDTO ati = null;
         if(atividade.getId() != null) {
-            ati = atividadeRepository.save(atividadeMapper.toEntity(atividade));
+            ati = atividadeMapper.toDto(atividadeRepository.save(atividadeMapper.toEntity(atividade)));
         }
-        return atividadeMapper.toDto(ati);
+        return ati;
     }
 
     /**

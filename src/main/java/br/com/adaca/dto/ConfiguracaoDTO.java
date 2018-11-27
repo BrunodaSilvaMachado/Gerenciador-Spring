@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -21,9 +22,9 @@ public class ConfiguracaoDTO implements Serializable {
     @NotBlank
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String musica;
-    @NotBlank
+    @NotNull
     private Boolean dicatempo;
-    @NotBlank
+    @NotNull
     private Boolean dicacaminho;
     @NotBlank
     @Size(max = 50, message = "Máximo 50 caracteres.")
@@ -35,10 +36,10 @@ public class ConfiguracaoDTO implements Serializable {
     @NotBlank
     @Size(max = 1000, message = "Máximo 1000 caracteres.")
     private String menu;
-    @NotBlank
+    @NotNull
     private AutistaDTO idautista;
-    @NotBlank
+    @NotNull
     private TutorDTO idtutor;
-    @NotBlank
+    @NotNull
     private SessaoDTO idsessao;
 }

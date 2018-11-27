@@ -84,11 +84,11 @@ public class AutistaService {
      * @return Objeto alterado
      */
     public AutistaDTO alterar(AutistaDTO autista) {
-        Autista aut = null;
+        AutistaDTO aut = null;
         if(autista.getId() != null) {
-            aut = autistaRepository.save(autistaMapper.toEntity(autista));
+            aut = autistaMapper.toDto(autistaRepository.save(autistaMapper.toEntity(autista)));
         }
-        return autistaMapper.toDto(aut);
+        return aut;
     }
     /**
      * Efetua uma busca por ID da criança cadastrada e remove-a do banco de dados

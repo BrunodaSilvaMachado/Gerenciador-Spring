@@ -24,13 +24,6 @@ public class AutistaController {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.listar());
     }
 
-    /*
-        @GetMapping("/listarNomesIdAutistas")
-        public  ResponseEntity<List<AutistaDTO>> listarNomesId() {
-            return ResponseEntity.status(HttpStatus.OK).body(autistaService.listarNomesId());
-        }
-    */
-
     @GetMapping("/selecionarAutista/{autistaId}")
     public ResponseEntity<AutistaDTO> selecionar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(autistaService.selecionar(autistaId));
@@ -57,4 +50,11 @@ public class AutistaController {
         autistaService.remover(autista);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
+
+    /*
+        @GetMapping("/listarNomesIdAutistas")
+        public  ResponseEntity<List<AutistaDTO>> listarNomesId() {
+            return ResponseEntity.status(HttpStatus.OK).body(autistaService.listarNomesId());
+        }
+    */
 }

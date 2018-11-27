@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class AutistaDTO implements Serializable {
     @NotBlank
     @Size(max = 15, message = "Máximo 15 caracteres.")
     private String sexo;
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dtnasc;
     @NotBlank
@@ -37,7 +38,7 @@ public class AutistaDTO implements Serializable {
     @NotBlank
     @Size(max = 3, message = "Máximo 3 caracteres.")
     private String mediador;
-    @NotBlank
+    @NotNull
     private Boolean medicamentos;
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String brinquedo;
@@ -49,9 +50,9 @@ public class AutistaDTO implements Serializable {
     private String atividade;
     @Size(max = 80, message = "Máximo 80 caracteres.")
     private String medo;
-    @NotBlank
+    @NotNull
     private Boolean ler;
-    @NotBlank
+    @NotNull
     private Boolean escrever;
     @NotBlank
     @Size(max = 80, message = "Máximo 80 caracteres.")

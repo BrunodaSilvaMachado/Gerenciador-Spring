@@ -1,6 +1,8 @@
 package br.com.adaca.service;
 
+import br.com.adaca.mapper.ConfiguracaoMapper;
 import br.com.adaca.model.Configuracao;
+import br.com.adaca.dto.ConfiguracaoDTO;
 import br.com.adaca.repository.ConfiguracaoRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
@@ -18,20 +20,22 @@ public class ConfiguracaoService {
     
     @Autowired
     private ConfiguracaoRepository configuracaoRepository;
+    @Autowired
+    private ConfiguracaoMapper configuracaoMapper;
 
     /**
     * Lista todas as configurações gravadas no banco de dados
     *
     * @return Lista com todas as configurações gravadas
     */
-    public List<Configuracao> listar() {
+    public List<ConfiguracaoDTO> listar() {
         List<Configuracao> configuracoes = new ArrayList<>();
         Iterator<Configuracao> iterator = configuracaoRepository.findAll().iterator();
         while (iterator.hasNext()) {
             configuracoes.add(iterator.next());
         }
         if (configuracoes.isEmpty()) throw new NotFoundException("Nenhuma configuração encontrada!");
-        return configuracoes;
+        return configuracaoMapper.toDto(configuracoes);
     }
 
     /**
@@ -41,10 +45,10 @@ public class ConfiguracaoService {
     * @param tutorId ID do tutor logado no jogo
     * @return Lista com todas as configurações gravadas para aquela criança e aquele tutor
     */
-    public List<Configuracao> listarConfigAutistaTutor(Integer autistaId, Integer tutorId) {
+    public List<ConfiguracaoDTO> listarConfigAutistaTutor(Integer autistaId, Integer tutorId) {
         List<Configuracao> configuracoes = configuracaoRepository.listIdAutistaTutor(autistaId, tutorId);
         if (configuracoes.isEmpty()) throw new NotFoundException("Nenhuma configuração encontrada!");
-        return configuracoes;
+        return configuracaoMapper.toDto(configuracoes);
     }
     /**
     * Efetua uma busca por ID da configuração dos jogos salva
@@ -52,10 +56,10 @@ public class ConfiguracaoService {
     * @param id ID da configuração já existente no banco de dados
     * @return Objeto da configuração encontrada
     */
-    public Configuracao selecionar(Integer id) {
+    public ConfiguracaoDTO selecionar(Integer id) {
         Optional<Configuracao> configuracao = configuracaoRepository.findById(id);
         if (!configuracao.isPresent()) throw new NotFoundException("Configuração não encontrada! Id: " + id);
-        return configuracao.get();
+        return configuracaoMapper.toDto(configuracao.get());
     }
 
     /**
@@ -64,12 +68,12 @@ public class ConfiguracaoService {
     * @param configuracao Objeto preenchido da configuração a ser gravada
     * @return Objeto salvo
     */
-    public Configuracao salvar(Configuracao configuracao) {
+    public ConfiguracaoDTO salvar(ConfiguracaoDTO configuracao) {
         if (configuracao.getId() != null) {
             Optional<Configuracao> op = configuracaoRepository.findById(configuracao.getId());
             if (op.isPresent()) throw new ConflictException("A configuração já existe!");
         }
-        return configuracaoRepository.save(configuracao);
+        return configuracaoMapper.toDto(configuracaoRepository.save(configuracaoMapper.toEntity(configuracao)));
     }
 
     /**
@@ -78,12 +82,12 @@ public class ConfiguracaoService {
     * @param configuracao Objeto preenchido com a configuração já alterada
     * @return Objeto alterado
     */
-    public Configuracao alterar(Configuracao configuracao) {
-        Configuracao aut = null;
+    public ConfiguracaoDTO alterar(ConfiguracaoDTO configuracao) {
+        ConfiguracaoDTO conf = null;
         if(configuracao.getId() != null) {
-            aut = configuracaoRepository.save(configuracao);
+            conf = configuracaoMapper.toDto(configuracaoRepository.save(configuracaoMapper.toEntity(configuracao)));
         }
-        return aut;
+        return conf;
     }
 
     /**
@@ -108,7 +112,7 @@ public class ConfiguracaoService {
     * @param configuracao Objeto preenchido da configuração já existente no banco de dados
     * @return
     */
-    public void remover(Configuracao configuracao) {
-        configuracaoRepository.delete(configuracao);
+    public void remover(ConfiguracaoDTO configuracao) {
+        configuracaoRepository.delete(configuracaoMapper.toEntity(configuracao));
     }
 }

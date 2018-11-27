@@ -71,11 +71,11 @@ public class AdministradorService {
     * @return Objeto do administrador alterado
     */
     public AdministradorDTO alterar(AdministradorDTO administrador) {
-        Administrador adm = null;
+        AdministradorDTO adm = null;
         if(administrador.getId() != null) {
-            adm = administradorRepository.save(administradorMapper.toEntity(administrador));
+            adm = administradorMapper.toDto(administradorRepository.save(administradorMapper.toEntity(administrador)));
         }
-        return administradorMapper.toDto(adm);
+        return adm;
     }
 
 

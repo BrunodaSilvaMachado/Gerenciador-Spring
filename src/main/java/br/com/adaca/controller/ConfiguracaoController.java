@@ -19,38 +19,38 @@ public class ConfiguracaoController {
     @Autowired
     private ConfiguracaoService configuracaoService;
 
-    @GetMapping("/listarConfiguracoes")
+    @GetMapping()
     public ResponseEntity<List<ConfiguracaoDTO>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.listar());
     }
 
-    @GetMapping("/listarConfiguracoesAutistaTutor/{autistaId}/{tutorId}")
+    @GetMapping("/{autistaId}/{tutorId}")
     public ResponseEntity<List<ConfiguracaoDTO>> listar(@PathVariable("autistaId") Integer autistaId,@PathVariable("tutorId") Integer tutorId) {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.listarConfigAutistaTutor(autistaId,tutorId));
     }
 
-    @GetMapping("/selecionarConfiguracao/{configuracaoId}")
+    @GetMapping("/{configuracaoId}")
     public ResponseEntity<ConfiguracaoDTO> selecionar(@PathVariable("configuracaoId") Integer configuracaoId) {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.selecionar(configuracaoId));
     }
 
-    @PostMapping("/salvarConfiguracao")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid ConfiguracaoDTO configuracao) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(configuracaoService.salvar(configuracao).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarConfiguracao")
+    @PutMapping()
     public ResponseEntity<ConfiguracaoDTO> alterar(@RequestBody @Valid ConfiguracaoDTO configuracao) {
         return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.alterar(configuracao));
     }
 
-    @DeleteMapping("/removerConfiguracao/{configuracaoId}")
+    @DeleteMapping("/{configuracaoId}")
     public ResponseEntity<Void> remover(@PathVariable("configuracaoId") Integer configuracaoId) {
         configuracaoService.remover(configuracaoId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerConfiguracao")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid ConfiguracaoDTO configuracao) {
         configuracaoService.remover(configuracao);
         return ResponseEntity.status(HttpStatus.OK).body(null);

@@ -19,32 +19,32 @@ public class AdministradorController {
     @Autowired
     private AdministradorService administradorService;
 
-    @GetMapping("/listarAdministradores")
+    @GetMapping()
     public ResponseEntity<List<AdministradorDTO>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
     }
 
-    @GetMapping("/selecionarAdministrador/{administradorId}")
+    @GetMapping("/{administradorId}")
     public ResponseEntity<AdministradorDTO> selecionar(@PathVariable("administradorId") Integer administradorId) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
     }
 
-    @PostMapping("/salvarAdministrador")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid AdministradorDTO administrador) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarAdministrador")
+    @PutMapping()
     public ResponseEntity<AdministradorDTO> alterar(@RequestBody @Valid AdministradorDTO administrador) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.alterar(administrador));
     }
-    @DeleteMapping("/removerAdministrador/{administradorId}")
+    @DeleteMapping("/{administradorId}")
     public ResponseEntity<Void> remover(@PathVariable("administradorId") Integer administradorId) {
         administradorService.remover(administradorId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerAdministrador")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid AdministradorDTO administrador) {
         administradorService.remover(administrador);
         return ResponseEntity.status(HttpStatus.OK).body(null);

@@ -19,33 +19,33 @@ public class AtividadeController {
     @Autowired
     private AtividadeService atividadeService;
 
-    @GetMapping("/listarAtividades")
+    @GetMapping()
     public ResponseEntity<List<AtividadeDTO>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(atividadeService.listar());
     }
 
-    @GetMapping("/selecionarAtividade/{atividadeId}")
+    @GetMapping("/{atividadeId}")
     public ResponseEntity<AtividadeDTO> selecionar(@PathVariable("atividadeId") Integer atividadeId) {
         return ResponseEntity.status(HttpStatus.OK).body(atividadeService.selecionar(atividadeId));
     }
 
-    @PostMapping("/salvarAtividade")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid AtividadeDTO atividade) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(atividadeService.salvar(atividade).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarAtividade")
+    @PutMapping()
     public ResponseEntity<AtividadeDTO> alterar(@RequestBody @Valid AtividadeDTO atividade) {
         return  ResponseEntity.status(HttpStatus.OK).body(atividadeService.alterar(atividade));
     }
 
-    @DeleteMapping("/removerAtividade/{atividadeId}")
+    @DeleteMapping("/{atividadeId}")
     public ResponseEntity<Void> remover(@PathVariable("atividadeId")Integer atividadeId) {
         atividadeService.remover(atividadeId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerAtividade")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid AtividadeDTO atividade) {
         atividadeService.remover(atividade);
         return ResponseEntity.status(HttpStatus.OK).body(null);

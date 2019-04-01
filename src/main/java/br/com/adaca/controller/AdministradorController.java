@@ -1,37 +1,59 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.dto.AdministradorDTO;
+import br.com.adaca.exception.NotFoundException;
 import br.com.adaca.service.AdministradorService;
 
+import br.com.adaca.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import br.com.adaca.dto.AdministradorDTO;
+import br.com.adaca.controller.DefaultAbstractController;
+
+
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Administradores")
-public class AdministradorController {
+public class AdministradorController extends DefaultAbstractController<AdministradorDTO>{
 
-    @Autowired
-    private AdministradorService administradorService;
-
+/*
     @GetMapping()
     public ResponseEntity<List<AdministradorDTO>> listar() {
-        return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
+        try
+        {
+            return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
+        }
+        catch(NotFoundException e)
+        {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     @GetMapping("/{administradorId}")
     public ResponseEntity<AdministradorDTO> selecionar(@PathVariable("administradorId") Integer administradorId) {
-        return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
+        }
+        catch(NotFoundException e)
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid AdministradorDTO administrador) {
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
+        try{
+            return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
+        }
+        catch(NotFoundException e)
+        {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping()
@@ -49,7 +71,7 @@ public class AdministradorController {
         administradorService.remover(administrador);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
-
+*/
     /*
     @GetMapping("/login/{usuario}/{senha}")
     public Administrador login(@PathVariable("usuario") String usuario,@PathVariable("senha") String senha) {
@@ -58,4 +80,5 @@ public class AdministradorController {
     */
 }
 
-/* https://lh3.googleusercontent.com/-cpYCrP36Nc8/VsWO7emBMRI/AAAAAAAAAyU/0rv7Lnl0aNI/s1600-h/image%25255B5%25255D.png */
+/* https://lh3.googleusercontent.com/-cpYCrP36Nc8/VsWO7emBMRI/AAAAAAAAAyU/0rv7Lnl0aNI/s1600-h/image%25255B5%25255D.png
+* http://shengwangi.blogspot.com/2016/02/response-for-get-post-put-delete-in-rest.html*/

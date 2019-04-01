@@ -19,6 +19,11 @@ group = 'br.com.adaca'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+bootJar {
+	baseName = 'gerenciador-adaca'
+	version =  '0.1.0'
+}
+
 repositories {
 	mavenCentral()
 }

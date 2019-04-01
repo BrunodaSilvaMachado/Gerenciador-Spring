@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class AdministradorDTO implements Serializable {
+public class AdministradorDTO implements Serializable, InterfaceDTO {
 
     private static final long serialVersionUID = 3509815006591019802L;
     private Integer id;

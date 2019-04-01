@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdministradorService {
+public class AdministradorService implements BaseService<AdministradorDTO> {
 
     @Autowired
     private AdministradorRepository administradorRepository;

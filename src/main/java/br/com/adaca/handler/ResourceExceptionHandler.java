@@ -1,5 +1,6 @@
 package br.com.adaca.handler;
 
+import br.com.adaca.exception.EmptyException;
 import br.com.adaca.util.ErrorDetails;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
@@ -12,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -23,37 +22,46 @@ import java.util.List;
 import java.util.Locale;
 
 
+//@RestController
 @ControllerAdvice
-@RestController
 public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
-
+    @Autowired
     private MessageSource messageSource;
 
-    @Autowired
     public ResourceExceptionHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    protected ResponseEntity<Object> resourceNotFound(NotFoundException ex, HttpStatus status, WebRequest request) {
-        ErrorDetails msg = new ErrorDetails(
-                System.currentTimeMillis(),
-                status.value(),
-                status.getReasonPhrase(),
-                "http://errors.adaca.com.br/404: "
-        );
-        return new ResponseEntity(msg, HttpStatus.NOT_FOUND);
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @ExceptionHandler(EmptyException.class)
+    @ResponseBody
+    public void resourceEmpty(EmptyException ex, WebRequest request) {
     }
 
-    @ExceptionHandler(ConflictException.class)
-    protected ResponseEntity<Object> resourceConflict(ConflictException ex, HttpStatus status, WebRequest request) {
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseBody
+    protected ErrorDetails resourceNotFound(NotFoundException ex, WebRequest request) {
         ErrorDetails msg = new ErrorDetails(
                 System.currentTimeMillis(),
-                status.value(),
-                status.getReasonPhrase(),
-                "http://errors.adaca.com.br/409"
+                HttpStatus.NOT_FOUND.value(),
+                "Recurso não encontrado.",
+                ex.getMessage()
         );
-        return new ResponseEntity(msg, HttpStatus.CONFLICT);
+        return msg;
+    }
+
+    @ResponseStatus(code = HttpStatus.CONFLICT)
+    @ExceptionHandler(ConflictException.class)
+    @ResponseBody
+    protected ErrorDetails resourceConflict(ConflictException ex, HttpStatus status, WebRequest request) {
+        ErrorDetails msg = new ErrorDetails(
+                System.currentTimeMillis(),
+                HttpStatus.CONFLICT.value(),
+                "Recurso conflitante.",
+                ex.getMessage()
+        );
+        return msg;
     }
 
     @Override
@@ -77,4 +85,5 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
         msg.setErrors(mensagens);
         return new ResponseEntity(msg, HttpStatus.BAD_REQUEST);
     }
+
 }

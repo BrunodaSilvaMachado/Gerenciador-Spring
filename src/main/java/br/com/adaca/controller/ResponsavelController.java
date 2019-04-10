@@ -19,38 +19,39 @@ public class ResponsavelController {
     @Autowired
     private ResponsavelService responsavelService;
 
-    @GetMapping("/listarResponsaveis")
+    @GetMapping()
     public ResponseEntity<List<Responsavel>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(responsavelService.listar());
     }
 
-    @GetMapping("/listarResponsaveis/{autistaId}")
+    // ta no padrão REST ?
+    @GetMapping("/autista/{autistaId}")
     public ResponseEntity<List<Responsavel>> listar(@PathVariable("autistalId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(responsavelService.listar(autistaId));
     }
 
-    @GetMapping("/selecionarResponsavel/{responsavelId}")
+    @GetMapping("/{responsavelId}")
     public ResponseEntity<Responsavel> selecionar(@PathVariable("responsavelId") Integer responsavelId) {
         return ResponseEntity.status(HttpStatus.OK).body(responsavelService.selecionar(responsavelId));
     }
 
-    @PostMapping("/salvarResponsavel")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Responsavel responsavel) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responsavelService.salvar(responsavel).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarResponsavel")
+    @PutMapping()
     public ResponseEntity<Responsavel> alterar(@RequestBody @Valid Responsavel responsavel) {
         return ResponseEntity.status(HttpStatus.OK).body(responsavelService.alterar(responsavel));
     }
 
-    @DeleteMapping("/removerResponsavel/{responsavelId}")
+    @DeleteMapping("/{responsavelId}")
     public ResponseEntity<Void> remover(@PathVariable("responsavelId") Integer responsavelId) {
         responsavelService.remover(responsavelId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerResponsavel")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Responsavel responsavel) {
         responsavelService.remover(responsavel);
         return ResponseEntity.status(HttpStatus.OK).body(null);

@@ -19,38 +19,39 @@ public class RelatorioController {
     @Autowired
     private RelatorioService relatorioService;
 
-    @GetMapping("/listarRelatorios")
+    @GetMapping()
     public ResponseEntity<List<Relatorio>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(relatorioService.listar());
     }
 
-    @GetMapping("/listarRelatorios/{autistaId}")
+    // ta no padrão REST ?
+    @GetMapping("/autista/{autistaId}")
     public ResponseEntity<List<Relatorio>> listar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(relatorioService.listar(autistaId));
     }
 
-    @GetMapping("/selecionarRelatorio/{relatorioId}")
+    @GetMapping("/{relatorioId}")
     public ResponseEntity<Relatorio> selecionar(@PathVariable("relatorioId") Integer relatorioId) {
         return ResponseEntity.status(HttpStatus.OK).body(relatorioService.selecionar(relatorioId));
     }
 
-    @PostMapping("/salvarRelatorio")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Relatorio relatorio) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(relatorioService.salvar(relatorio).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarRelatorio")
+    @PutMapping()
     public ResponseEntity<Relatorio> alterar(@RequestBody @Valid Relatorio relatorio) {
         return ResponseEntity.status(HttpStatus.OK).body(relatorioService.alterar(relatorio));
     }
 
-    @DeleteMapping("/removerRelatorio/{relatorioId}")
+    @DeleteMapping("/{relatorioId}")
     public ResponseEntity<Void> remover(@PathVariable("relatorioId") Integer relatorioId) {
         relatorioService.remover(relatorioId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerRelatorio")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Relatorio relatorio) {
         relatorioService.remover(relatorio);
         return ResponseEntity.status(HttpStatus.OK).body(null);

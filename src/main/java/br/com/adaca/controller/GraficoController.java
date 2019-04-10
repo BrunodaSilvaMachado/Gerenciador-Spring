@@ -19,38 +19,39 @@ public class GraficoController {
     @Autowired
     private GraficoService graficoService;
 
-    @GetMapping("/listarGraficos")
+    @GetMapping()
     public ResponseEntity<List<Grafico>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(graficoService.listar());
     }
 
-    @GetMapping("/listarGraficos/autistaId")
+    // ta no padrão REST ?
+    @GetMapping("/autista/{autistaId}")
     public ResponseEntity<List<Grafico>> listar(@PathVariable("autistaId")Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(graficoService.listar(autistaId));
     }
 
-    @GetMapping("/selecionarGrafico/{graficoId}")
+    @GetMapping("/{graficoId}")
     public ResponseEntity<Grafico> selecionar(@PathVariable("graficoId") Integer graficoId) {
         return ResponseEntity.status(HttpStatus.OK).body(graficoService.selecionar(graficoId));
     }
 
-    @PostMapping("/salvarGrafico")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Grafico grafico) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(graficoService.salvar(grafico).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarGrafico")
+    @PutMapping()
     public ResponseEntity<Grafico> alterar(@RequestBody @Valid Grafico grafico) {
         return ResponseEntity.status(HttpStatus.OK).body(graficoService.alterar(grafico));
     }
 
-    @DeleteMapping("/removerGrafico/{graficoId}")
+    @DeleteMapping("/{graficoId}")
     public ResponseEntity<Void> remover(@PathVariable("graficoId") Integer graficoId) {
         graficoService.remover(graficoId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerGrafico")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Grafico grafico) {
         graficoService.remover(grafico);
         return ResponseEntity.status(HttpStatus.OK).body(null);

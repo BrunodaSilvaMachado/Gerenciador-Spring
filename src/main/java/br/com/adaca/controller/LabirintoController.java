@@ -19,33 +19,33 @@ public class LabirintoController {
     @Autowired
     private LabirintoService labirintoService;
 
-    @GetMapping("/listarLabirintos")
+    @GetMapping()
     public ResponseEntity<List<Labirinto>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(labirintoService.listar());
     }
 
-    @GetMapping("/selecionarLabirinto/{labirintoId}")
+    @GetMapping("/{labirintoId}")
     public ResponseEntity<Labirinto> selecionar(@PathVariable("labirintoId") Integer labirintoId) {
         return ResponseEntity.status(HttpStatus.OK).body(labirintoService.selecionar(labirintoId));
     }
 
-    @PostMapping("/salvarLabirinto")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Labirinto labirinto) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(labirintoService.salvar(labirinto).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarLabirinto")
+    @PutMapping()
     public ResponseEntity<Labirinto> alterar(@RequestBody @Valid Labirinto labirinto) {
         return ResponseEntity.status(HttpStatus.OK).body(labirintoService.alterar(labirinto));
     }
 
-    @DeleteMapping("/removerLabirinto/{labirintoId}")
+    @DeleteMapping("/{labirintoId}")
     public ResponseEntity<Void> remover(@PathVariable("labirintoId") Integer labirintoId) {
         labirintoService.remover(labirintoId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerLabirinto")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody Labirinto labirinto) {
         labirintoService.remover(labirinto);
         return ResponseEntity.status(HttpStatus.OK).body(null);

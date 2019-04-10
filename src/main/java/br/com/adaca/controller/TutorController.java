@@ -19,42 +19,36 @@ public class TutorController {
     @Autowired
     private TutorService tutorService;
 
-    @GetMapping("/listarTutores")
+    @GetMapping()
     public ResponseEntity<List<Tutor>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(tutorService.listar());
     }
 
-    @GetMapping("/selecionarTutor/{tutorId}")
+    @GetMapping("/{tutorId}")
     public ResponseEntity<Tutor> selecionar(@PathVariable("tutorId") Integer tutorId) {
         return ResponseEntity.status(HttpStatus.OK).body(tutorService.selecionar(tutorId));
     }
 
-    @PostMapping("/salvarTutor")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Tutor tutor) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tutorService.salvar(tutor).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarTutor")
+    @PutMapping()
     public ResponseEntity<Tutor> alterar(@RequestBody @Valid Tutor tutor) {
         return ResponseEntity.status(HttpStatus.OK).body(tutorService.alterar(tutor));
     }
 
-    @DeleteMapping("/removerTutor/{tutorId}")
+    @DeleteMapping("/{tutorId}")
     public ResponseEntity<Void> remover(@PathVariable("tutorId") Integer tutorId) {
         tutorService.remover(tutorId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerTutor")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Tutor tutor) {
         tutorService.remover(tutor);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    /*
-    @RequestMapping(value = "/login/{usuario}/{senha}", method = RequestMethod.GET)
-    public Tutor login(@PathVariable("usuario") String usuario,@PathVariable("senha")  String senha) {
-        return tutorRepository.login(usuario,senha);
-    }
-    */
 }

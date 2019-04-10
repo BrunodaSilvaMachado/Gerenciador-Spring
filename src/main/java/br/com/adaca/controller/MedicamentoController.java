@@ -20,27 +20,28 @@ public class MedicamentoController {
     @Autowired
     private MedicamentoService medicamentoService;
 
-    @GetMapping("/listarMedicamentos")
+    @GetMapping()
     public ResponseEntity<List<Medicamento>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(medicamentoService.listar());
     }
 
-    @GetMapping("/listarMedicamentos/{autistaId}")
+    // ta no padrão REST ?
+    @GetMapping("/autista/{autistaId}")
     public ResponseEntity<List<Medicamento>> listar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(medicamentoService.listar(autistaId));
     }
 
-    @GetMapping("/listarAutistas")
+    @GetMapping("/autista")
     public ResponseEntity<List<Autista>> listarAutistas() {
         return ResponseEntity.status(HttpStatus.OK).body(medicamentoService.listarAutistas());
     }
 
-    @GetMapping("/selecionarMedicamento/{medicamentoId}")
+    @GetMapping("/{medicamentoId}")
     public ResponseEntity<Medicamento> selecionar(@PathVariable("medicamentoId") Integer medicamentoId) {
         return ResponseEntity.status(HttpStatus.OK).body(medicamentoService.selecionar(medicamentoId));
     }
 
-    @PostMapping("/salvarMedicamento")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Medicamento medicamento) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(medicamentoService.salvar(medicamento).getId()).toUri()).build();
     }
@@ -50,20 +51,20 @@ public class MedicamentoController {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(medicamentoService.salvar(medicamentos)).toUri()).build();
     }
 
-    //Conferir salvar lista
+    //Conferir salvar lista,
 
-    @PutMapping("/alterarMedicamento")
+    @PutMapping()
     public ResponseEntity<Medicamento> alterar(@RequestBody @Valid Medicamento medicamento) {
         return ResponseEntity.status(HttpStatus.OK).body(medicamentoService.alterar(medicamento));
     }
 
-    @DeleteMapping("/removerMedicamento/{medicamentoId}")
+    @DeleteMapping("/{medicamentoId}")
     public ResponseEntity<Void> remover(@PathVariable("medicamentoId") Integer medicamentoId) {
         medicamentoService.remover(medicamentoId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerMedicamento")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Medicamento medicamento) {
         medicamentoService.remover(medicamento);
         return ResponseEntity.status(HttpStatus.OK).body(null);

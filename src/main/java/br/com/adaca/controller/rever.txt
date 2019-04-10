@@ -1,0 +1,18 @@
+Grafico:
+public ResponseEntity<List<Grafico>> listar(@PathVariable("autistaId")Integer autistaId)
+
+Medicamento:
+public ResponseEntity<List<Medicamento>> listar(@PathVariable("autistaId") Integer autistaId)
+public ResponseEntity<Void> salvar(@RequestBody @Valid List medicamentos)
+
+Relatorio:
+public ResponseEntity<List<Relatorio>> listar(@PathVariable("autistaId") Integer autistaId)
+
+Responsavel:
+public ResponseEntity<List<Responsavel>> listar(@PathVariable("autistalId") Integer autistaId)
+
+Resultado:
+public ResponseEntity<List<Resultado>> listar(@PathVariable("autistalId") Integer sessaoId)
+
+Sessão:
+public ResponseEntity<List<Sessao>> listar(@PathVariable("autistaId") Integer autistaId)

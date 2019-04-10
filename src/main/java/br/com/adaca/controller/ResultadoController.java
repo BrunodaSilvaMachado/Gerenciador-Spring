@@ -19,38 +19,39 @@ public class ResultadoController {
     @Autowired
     private ResultadoService resultadoService;
 
-    @GetMapping("/listarResultados")
+    @GetMapping("")
     public ResponseEntity<List<Resultado>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(resultadoService.listar());
     }
 
-    @GetMapping("/listarResultados/{sessaoId}")
+    // ta no padrão REST ?
+    @GetMapping("/sessao/{sessaoId}")
     public ResponseEntity<List<Resultado>> listar(@PathVariable("autistalId") Integer sessaoId) {
         return ResponseEntity.status(HttpStatus.OK).body(resultadoService.listar(sessaoId));
     }
 
-    @GetMapping("/selecionarResultado/{resultadoId}")
+    @GetMapping("/{resultadoId}")
     public ResponseEntity<Resultado> selecionar(@PathVariable("resultadoId") Integer resultadoId) {
         return ResponseEntity.status(HttpStatus.OK).body(resultadoService.selecionar(resultadoId));
     }
 
-    @PostMapping("/salvarResultado")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Resultado resultado) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(resultadoService.salvar(resultado).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarResultado")
+    @PutMapping()
     public ResponseEntity<Resultado> alterar(@RequestBody @Valid Resultado resultado) {
         return ResponseEntity.status(HttpStatus.OK).body(resultadoService.alterar(resultado));
     }
 
-    @DeleteMapping("/removerResultado/{resultadoId}")
+    @DeleteMapping("/{resultadoId}")
     public ResponseEntity<Void> remover(@PathVariable("resultadoId") Integer resultadoId) {
         resultadoService.remover(resultadoId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping("/removerResultado")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Resultado resultado) {
         resultadoService.remover(resultado);
         return ResponseEntity.status(HttpStatus.OK).body(null);

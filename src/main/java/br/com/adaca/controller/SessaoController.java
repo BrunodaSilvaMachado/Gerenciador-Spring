@@ -19,38 +19,38 @@ public class SessaoController {
     @Autowired
     private SessaoService sessaoService;
 
-    @GetMapping("/listarSessoes")
+    @GetMapping()
     public ResponseEntity<List<Sessao>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(sessaoService.listar());
     }
 
-    @GetMapping("/listarSessoes/{autistaId}")
+    @GetMapping("/autista/{autistaId}")
     public ResponseEntity<List<Sessao>> listar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(sessaoService.listar(autistaId));
     }
 
-    @GetMapping("/selecionarSessao/{sessaoId}")
+    @GetMapping("/{sessaoId}")
     public ResponseEntity<Sessao> selecionar(@PathVariable("sessaoId") Integer sessaoId) {
         return ResponseEntity.status(HttpStatus.OK).body(sessaoService.selecionar(sessaoId));
     }
 
-    @PostMapping("/salvarSessao")
+    @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid Sessao sessao) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(sessaoService.salvar(sessao).getId()).toUri()).build();
     }
 
-    @PutMapping("/alterarSessao")
+    @PutMapping()
     public ResponseEntity<Sessao> alterar(@RequestBody @Valid Sessao sessao) {
         return ResponseEntity.status(HttpStatus.OK).body(sessaoService.alterar(sessao));
     }
 
-    @DeleteMapping("/removerSessao/{sessaoId}")
+    @DeleteMapping("/{sessaoId}")
     public ResponseEntity<Void> remover(@PathVariable("sessaoId") Integer sessaoId) {
         sessaoService.remover(sessaoId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @DeleteMapping(value = "/removerSessao")
+    @DeleteMapping()
     public ResponseEntity<Void> remover(@RequestBody @Valid Sessao sessao) {
         sessaoService.remover(sessao);
         return ResponseEntity.status(HttpStatus.OK).body(null);

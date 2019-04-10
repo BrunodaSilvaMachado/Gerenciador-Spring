@@ -24,36 +24,17 @@ public class AdministradorController {
 
     @GetMapping()
     public ResponseEntity<List<AdministradorDTO>> listar() {
-        try
-        {
-            return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
-        }
-        catch(NotFoundException e)
-        {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(administradorService.listar());
     }
 
     @GetMapping("/{administradorId}")
     public ResponseEntity<AdministradorDTO> selecionar(@PathVariable("administradorId") Integer administradorId) {
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
-        }
-        catch(NotFoundException e)
-        {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(administradorService.selecionar(administradorId));
     }
 
     @PostMapping()
     public ResponseEntity<Void> salvar(@RequestBody @Valid AdministradorDTO administrador) {
-        try{
-            return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
-        }
-        catch(NotFoundException e)
-        {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(administradorService.salvar(administrador).getId()).toUri()).build();
     }
 
     @PutMapping()

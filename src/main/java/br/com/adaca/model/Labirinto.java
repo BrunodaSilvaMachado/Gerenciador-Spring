@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_labirIntegero")
+@Table(name = "tb_labirinto")
 public class Labirinto implements Serializable {
 
     private static final long serialVersionUID = -446045572152666482L;
@@ -49,4 +49,8 @@ public class Labirinto implements Serializable {
     @JoinColumn(name = "IDATIVIDADE", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Atividade idatividade;
+
+    public Integer getId() {
+        return id;
+    }
 }

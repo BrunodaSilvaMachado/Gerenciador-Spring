@@ -38,4 +38,8 @@ public class Grafico implements Serializable {
     @JoinColumn(name = "IDADMINISTRADOR", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Administrador idadministrador;
+
+    public Integer getId() {
+        return id;
+    }
 }

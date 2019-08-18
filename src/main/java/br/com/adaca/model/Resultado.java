@@ -55,4 +55,8 @@ public class Resultado implements Serializable {
     @JoinColumn(name = "IDATIVIDADE", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Atividade idatividade;
+
+    public Integer getId() {
+        return id;
+    }
 }

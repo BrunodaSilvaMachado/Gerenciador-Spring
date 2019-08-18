@@ -43,4 +43,8 @@ public class Sessao implements Serializable {
     private Tutor idtutor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsessao")
     private List<Configuracao> configuracaoList;
+
+    public Integer getId() {
+        return id;
+    }
 }

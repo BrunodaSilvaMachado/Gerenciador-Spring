@@ -38,4 +38,52 @@ public class Relatorio implements Serializable {
     @JoinColumn(name = "IDADMINISTRADOR", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Administrador idadministrador;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Byte[] getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Byte[] relatorio) {
+        this.relatorio = relatorio;
+    }
+
+    public String getTiporelatorio() {
+        return tiporelatorio;
+    }
+
+    public void setTiporelatorio(String tiporelatorio) {
+        this.tiporelatorio = tiporelatorio;
+    }
+
+    public Date getDatagerado() {
+        return datagerado;
+    }
+
+    public void setDatagerado(Date datagerado) {
+        this.datagerado = datagerado;
+    }
+
+    public Autista getIdautista() {
+        return idautista;
+    }
+
+    public void setIdautista(Autista idautista) {
+        this.idautista = idautista;
+    }
+
+    public Administrador getIdadministrador() {
+        return idadministrador;
+    }
+
+    public void setIdadministrador(Administrador idadministrador) {
+        this.idadministrador = idadministrador;
+    }
 }

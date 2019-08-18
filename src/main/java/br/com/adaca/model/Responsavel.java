@@ -45,4 +45,8 @@ public class Responsavel implements Serializable {
     @JoinColumn(name = "IDAUTISTA", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false)
     private Autista idautista;
+
+    public Integer getId() {
+        return id;
+    }
 }

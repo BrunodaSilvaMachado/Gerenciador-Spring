@@ -31,4 +31,8 @@ public class ErrorDetails implements Serializable {
         this.titulo = titulo;
         this.mensagem = mensagem;
     }
+
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
+    }
 }

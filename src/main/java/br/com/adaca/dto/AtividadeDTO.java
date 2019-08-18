@@ -29,4 +29,8 @@ public class AtividadeDTO implements Serializable {
     private Integer nivel;
     private List<LabirintoDTO> labirintoList;
     private List<ResultadoDTO> resultadoList;
+
+    public Integer getId() {
+        return id;
+    }
 }

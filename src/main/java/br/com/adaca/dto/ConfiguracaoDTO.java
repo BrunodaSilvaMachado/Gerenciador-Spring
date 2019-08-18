@@ -42,4 +42,8 @@ public class ConfiguracaoDTO implements Serializable {
     private TutorDTO idtutor;
     @NotNull
     private SessaoDTO idsessao;
+
+    public Integer getId() {
+        return id;
+    }
 }

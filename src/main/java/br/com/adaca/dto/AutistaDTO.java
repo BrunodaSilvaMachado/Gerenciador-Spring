@@ -69,4 +69,8 @@ public class AutistaDTO implements Serializable {
     private List<ResponsavelDTO> responsavelList;
     private List<GraficoDTO> graficoList;
     private List<RelatorioDTO> relatorioList;
+
+    public Integer getId() {
+        return id;
+    }
 }

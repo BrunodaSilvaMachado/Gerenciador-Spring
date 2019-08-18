@@ -35,4 +35,8 @@ public class AdministradorDTO implements Serializable {
     private Integer nivelacesso;
     private List<GraficoDTO> graficoList;
     private List<RelatorioDTO> relatorioList;
+
+    public Integer getId() {
+        return id;
+    }
 }

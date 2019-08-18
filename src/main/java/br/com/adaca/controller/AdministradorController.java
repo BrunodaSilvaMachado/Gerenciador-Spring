@@ -1,6 +1,5 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.exception.NotFoundException;
 import br.com.adaca.service.AdministradorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.util.List;
 public class AdministradorController {
 
     @Autowired
-    AdministradorService administradorService;
+    private AdministradorService administradorService;
 
     @GetMapping()
     public ResponseEntity<List<AdministradorDTO>> listar() {

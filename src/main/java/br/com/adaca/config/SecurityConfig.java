@@ -1,3 +1,4 @@
+/*
 package br.com.adaca.config;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
@@ -17,9 +18,11 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
+*/
 /*bug do keycloak
  workaround: https://stackoverflow.com/questions/53318134/unable-to-use-keycloak-in-spring-boot-2-1-due-to-duplicated-bean-registration-ht
- */
+ *//*
+
 @Configuration
 @ComponentScan(
         basePackageClasses = KeycloakSecurityComponents.class,
@@ -59,4 +62,4 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .anyRequest()
                 .permitAll();
     }
-}
+}*/

@@ -26,7 +26,7 @@ public class ResultadoController {
 
     // ta no padrão REST ?
     @GetMapping("/sessao/{sessaoId}")
-    public ResponseEntity<List<Resultado>> listar(@PathVariable("autistalId") Integer sessaoId) {
+    public ResponseEntity<List<Resultado>> listar(@PathVariable("sessaoId") Integer sessaoId) {
         return ResponseEntity.status(HttpStatus.OK).body(resultadoService.listar(sessaoId));
     }
 

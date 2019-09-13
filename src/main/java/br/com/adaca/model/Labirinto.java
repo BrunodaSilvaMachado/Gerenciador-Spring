@@ -1,5 +1,7 @@
 package br.com.adaca.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +20,10 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_labirinto")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Labirinto implements Serializable {
 
     private static final long serialVersionUID = -446045572152666482L;

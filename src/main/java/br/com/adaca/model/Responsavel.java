@@ -1,5 +1,7 @@
 package br.com.adaca.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +19,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_responsavel")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Responsavel implements Serializable {
 
     private static final long serialVersionUID = -8213342763966035009L;

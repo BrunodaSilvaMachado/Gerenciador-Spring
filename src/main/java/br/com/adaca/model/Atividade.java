@@ -1,5 +1,7 @@
 package br.com.adaca.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +20,10 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_atividade")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Atividade implements Serializable {
 
     private static final long serialVersionUID = -4836465931631553059L;

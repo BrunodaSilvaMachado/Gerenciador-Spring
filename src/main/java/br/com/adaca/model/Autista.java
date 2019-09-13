@@ -1,5 +1,7 @@
 package br.com.adaca.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +21,10 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_autista")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Autista implements Serializable {
 
     private static final long serialVersionUID = -2206202474289214951L;

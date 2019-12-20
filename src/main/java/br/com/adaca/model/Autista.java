@@ -3,11 +3,13 @@ package br.com.adaca.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
 
 /**
 *
@@ -38,6 +40,8 @@ public class Autista implements Serializable {
     private String sexo;
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Data é uma informação obrigatória.")
     private Date dtnasc;
     @Column(nullable = false, length = 70)
     private String classificacao;

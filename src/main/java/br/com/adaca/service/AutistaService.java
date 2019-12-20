@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,19 +29,13 @@ public class AutistaService {
     */
     public List<AutistaDTO> listar() {
         List<Autista> autistas = new ArrayList<>();
-        Iterator<Autista> iterator = autistaRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            autistas.add(iterator.next());
+        for (Autista autista : autistaRepository.findAll()) {
+            autistas.add(autista);
         }
         if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
         return autistaMapper.toDto(autistas);
     }
 
-    /**
-    * Lista id e nome de todas as crianças cadastradas no banco de dados
-    *
-    * @return Lista de ids e nomes de todas as crianças cadastradas
-    */
     /*
         public List<AutistaDTO> listarNomesId() {
             List<Autista> autistas = autistaRepository.listNamesId();
@@ -59,7 +52,7 @@ public class AutistaService {
     */
     public AutistaDTO selecionar(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (!autista.isPresent()) throw new NotFoundException("Criança não encontrada! Id: " + id);
+        if (autista.isEmpty()) throw new NotFoundException("Criança não encontrada! Id: " + id);
         return autistaMapper.toDto(autista.get());
     }
 
@@ -94,11 +87,10 @@ public class AutistaService {
      * Efetua uma busca por ID da criança cadastrada e remove-a do banco de dados
      *
      * @param id ID da criança já existente no banco de dados
-     * @return
      */
     public void remover(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (!autista.isPresent()) {
+        if (autista.isEmpty()) {
             throw new NotFoundException("id: " + id);
         }
         else {
@@ -110,7 +102,6 @@ public class AutistaService {
      * Remove o cadastro da criança do banco de dados
      *
      * @param autista Objeto preenchido do cadastro já existente no banco de dados
-     * @return
      */
     public void remover(AutistaDTO autista) {
         autistaRepository.delete(autistaMapper.toEntity(autista));

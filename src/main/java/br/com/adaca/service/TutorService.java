@@ -6,6 +6,7 @@ import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class TutorService {
 
     @Autowired
     private TutorRepository tutorRepository;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     /**
     * Lista todos os tutores cadastrados no banco de dados
     *
@@ -54,6 +56,7 @@ public class TutorService {
             Optional<Tutor> op = tutorRepository.findById(tutor.getId());
             if (op.isPresent()) throw new ConflictException("O tutor já existe!");
         }
+        tutor.setSenha(passwordEncoder.encode(tutor.getSenha()));
         return tutorRepository.save(tutor);
     }
 

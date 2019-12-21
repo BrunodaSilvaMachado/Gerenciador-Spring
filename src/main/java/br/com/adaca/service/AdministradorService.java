@@ -8,6 +8,7 @@ import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class AdministradorService {
     private AdministradorRepository administradorRepository;
     @Autowired
     private AdministradorMapper administradorMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
     * Lista todos os administradores cadastrados no banco de dados
@@ -61,6 +64,7 @@ public class AdministradorService {
             Optional<Administrador> op = administradorRepository.findById(administrador.getId());
             if (op.isPresent()) throw new ConflictException("O administrador já existe!");
         }
+        administrador.setSenha(passwordEncoder.encode(administrador.getSenha()));
         return administradorMapper.toDto(administradorRepository.save(administradorMapper.toEntity(administrador)));
     }
 

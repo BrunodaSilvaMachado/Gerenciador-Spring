@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +29,8 @@ public class AtividadeService {
     */
     public List<AtividadeDTO> listar() {
         List<Atividade> atividades = new ArrayList<>();
-        Iterator<Atividade> iterator = atividadeRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            atividades.add(iterator.next());
+        for (Atividade atividade : atividadeRepository.findAll()) {
+            atividades.add(atividade);
         }
         if (atividades.isEmpty()) throw new NotFoundException("Nenhuma atividade encontrada!");
         return atividadeMapper.toDto(atividades);
@@ -82,7 +80,6 @@ public class AtividadeService {
     * Efetua uma busca por ID de atividade cadastrada e remove-a do banco de dados
     *
     * @param id ID de atividade já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
@@ -98,7 +95,6 @@ public class AtividadeService {
     * Remove o cadastro da atividade do banco de dados
     *
     * @param atividade Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(AtividadeDTO atividade) {
         atividadeRepository.delete(atividadeMapper.toEntity(atividade));

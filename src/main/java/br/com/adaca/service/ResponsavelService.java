@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,8 @@ public class ResponsavelService {
     */
     public List<Responsavel> listar() {
         List<Responsavel> responsaveis = new ArrayList<>();
-        Iterator<Responsavel> iterator = responsavelRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            responsaveis.add(iterator.next());
+        for (Responsavel responsavel : responsavelRepository.findAll()) {
+            responsaveis.add(responsavel);
         }
         if(responsaveis.isEmpty()) throw new NotFoundException("Nenhum responsável encontrado!");
         return responsaveis;
@@ -91,7 +89,6 @@ public class ResponsavelService {
     * Efetua uma busca por ID do responsável cadastrado e remove-o do banco de dados
     *
     * @param id ID do responsável já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Responsavel> responsavel = responsavelRepository.findById(id);
@@ -107,7 +104,6 @@ public class ResponsavelService {
     * Remove o cadastro do responsável do banco de dados
     *
     * @param responsavel Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(Responsavel responsavel) {
         responsavelRepository.delete(responsavel);

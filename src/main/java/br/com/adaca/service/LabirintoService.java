@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,8 @@ public class LabirintoService {
     */
     public List<Labirinto> listar() {
         List<Labirinto> labirintos = new ArrayList<>();
-        Iterator<Labirinto> iterator = labirintoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            labirintos.add(iterator.next());
+        for (Labirinto labirinto : labirintoRepository.findAll()) {
+            labirintos.add(labirinto);
         }
         if (labirintos.isEmpty()) throw new NotFoundException("Nenhum labirinto encontrado!");
         return labirintos;
@@ -78,7 +76,6 @@ public class LabirintoService {
     * Efetua uma busca por ID do labirinto cadastrado e remove-o do banco de dados
     *
     * @param id ID do labirinto já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Labirinto> labirinto = labirintoRepository.findById(id);
@@ -94,7 +91,6 @@ public class LabirintoService {
     * Remove o cadastro do labirinto do banco de dados
     *
     * @param labirinto Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(Labirinto labirinto) {
         labirintoRepository.delete(labirinto);

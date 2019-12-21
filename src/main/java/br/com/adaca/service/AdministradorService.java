@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +32,8 @@ public class AdministradorService {
     */
     public List<AdministradorDTO> listar() {
         List<Administrador> administradores = new ArrayList<>();
-        Iterator<Administrador> iterator = administradorRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            administradores.add(iterator.next());
+        for (Administrador administrador : administradorRepository.findAll()) {
+            administradores.add(administrador);
         }
         if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
         return administradorMapper.toDto(administradores);
@@ -88,7 +86,6 @@ public class AdministradorService {
     * de dados
     *
     * @param id ID de administrador já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Administrador> administrador = administradorRepository.findById(id);
@@ -104,7 +101,6 @@ public class AdministradorService {
     * Remove o cadastro do administrador do banco de dados
     *
     * @param administrador Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(AdministradorDTO administrador) {
         administradorRepository.delete(administradorMapper.toEntity(administrador));

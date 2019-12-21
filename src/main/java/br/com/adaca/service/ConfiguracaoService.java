@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +29,8 @@ public class ConfiguracaoService {
     */
     public List<ConfiguracaoDTO> listar() {
         List<Configuracao> configuracoes = new ArrayList<>();
-        Iterator<Configuracao> iterator = configuracaoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            configuracoes.add(iterator.next());
+        for (Configuracao configuracao : configuracaoRepository.findAll()) {
+            configuracoes.add(configuracao);
         }
         if (configuracoes.isEmpty()) throw new NotFoundException("Nenhuma configuração encontrada!");
         return configuracaoMapper.toDto(configuracoes);
@@ -94,7 +92,6 @@ public class ConfiguracaoService {
     * Efetua uma busca por ID da configuração gravada e remove-a do banco de dados
     *
     * @param id ID da configuração já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Configuracao> configuracao = configuracaoRepository.findById(id);
@@ -110,7 +107,6 @@ public class ConfiguracaoService {
     * Remove a configuração do jogo do banco de dados
     *
     * @param configuracao Objeto preenchido da configuração já existente no banco de dados
-    * @return
     */
     public void remover(ConfiguracaoDTO configuracao) {
         configuracaoRepository.delete(configuracaoMapper.toEntity(configuracao));

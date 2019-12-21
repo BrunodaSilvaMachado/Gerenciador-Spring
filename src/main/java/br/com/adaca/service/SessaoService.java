@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,8 @@ public class SessaoService {
     */
     public List<Sessao> listar() {
         List<Sessao> sessoes = new ArrayList<>();
-        Iterator<Sessao> iterator = sessaoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            sessoes.add(iterator.next());
+        for (Sessao sessao : sessaoRepository.findAll()) {
+            sessoes.add(sessao);
         }
         if(sessoes.isEmpty()) throw new NotFoundException("Nenhuma sessão encontrada!");
         return sessoes;
@@ -90,7 +88,6 @@ public class SessaoService {
     * Efetua uma busca por ID da sessão cadastrada e remove-a do banco de dados
     *
     * @param id ID do sessao já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Sessao> sessao = sessaoRepository.findById(id);
@@ -106,7 +103,6 @@ public class SessaoService {
     * Remove a sessão do banco de dados
     *
     * @param sessao Objeto preenchido da sessao já existente no banco de dados
-    * @return
     */
     public void remover(Sessao sessao) {
         sessaoRepository.delete(sessao);

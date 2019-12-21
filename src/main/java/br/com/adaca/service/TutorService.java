@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,7 +76,6 @@ public class TutorService {
     * Efetua uma busca por ID do tutor cadastrado e remove-o do banco de dados
     *
     * @param id ID do tutor já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Tutor> tutor = tutorRepository.findById(id);
@@ -94,7 +91,6 @@ public class TutorService {
     * Remove o cadastro do tutor do banco de dados
     *
     * @param tutor Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(Tutor tutor) {
         tutorRepository.delete(tutor);

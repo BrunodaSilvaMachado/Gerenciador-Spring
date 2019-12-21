@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +30,8 @@ public class MedicamentoService {
     */
     public List<Medicamento> listar() {
         List<Medicamento> medicamentos = new ArrayList<>();
-        Iterator<Medicamento> iterator = medicamentoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            medicamentos.add(iterator.next());
+        for (Medicamento medicamento : medicamentoRepository.findAll()) {
+            medicamentos.add(medicamento);
         }
         if(medicamentos.isEmpty()) throw new NotFoundException("Nenhum medicamento encontrado!");
         return medicamentos;
@@ -94,7 +92,7 @@ public class MedicamentoService {
     * @param medicamentos Lista com os objetos preenchidos a serem gravados
     * @return Erro ou sucesso ao salvar
     */
-    public Boolean salvar(List medicamentos) {
+    public Boolean salvar(List<Medicamento> medicamentos) {
         Iterable iterable = medicamentoRepository.saveAll(medicamentos);
         if (iterable.equals(null)) throw new ConflictException("Algum medicamento já existe!");
         return true;
@@ -120,7 +118,6 @@ public class MedicamentoService {
     * Efetua uma busca por ID do medicamento cadastrado e remove-o do banco de dados
     *
     * @param id ID do medicamento já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Medicamento> medicamento = medicamentoRepository.findById(id);
@@ -136,7 +133,6 @@ public class MedicamentoService {
     * Remove o cadastro do medicamento do banco de dados
     *
     * @param medicamento Objeto preenchido do medicamento já existente no banco de dados
-    * @return
     */
     public void remover(Medicamento medicamento) {
         medicamentoRepository.delete(medicamento);

@@ -37,6 +37,11 @@ public class AutistaService {
     }
 
     /*
+    * Lista id e nome de todas as crianças cadastradas no banco de dados
+    *
+    * @return Lista de ids e nomes de todas as crianças cadastradas
+    */
+    /*
         public List<AutistaDTO> listarNomesId() {
             List<Autista> autistas = autistaRepository.listNamesId();
             if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
@@ -52,7 +57,7 @@ public class AutistaService {
     */
     public AutistaDTO selecionar(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (autista.isEmpty()) throw new NotFoundException("Criança não encontrada! Id: " + id);
+        if (!autista.isPresent()) throw new NotFoundException("Criança não encontrada! Id: " + id);
         return autistaMapper.toDto(autista.get());
     }
 
@@ -90,7 +95,7 @@ public class AutistaService {
      */
     public void remover(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (autista.isEmpty()) {
+        if (!autista.isPresent()) {
             throw new NotFoundException("id: " + id);
         }
         else {

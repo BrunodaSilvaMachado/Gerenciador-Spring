@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,8 @@ public class GraficoService {
     */
     public List<Grafico> listar() {
         List<Grafico> graficos = new ArrayList<>();
-        Iterator<Grafico> iterator = graficoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            graficos.add(iterator.next());
+        for (Grafico grafico : graficoRepository.findAll()) {
+            graficos.add(grafico);
         }
         if (graficos.isEmpty()) throw new NotFoundException("Nenhum gráfico encontrado!");
         return graficos;
@@ -90,7 +88,6 @@ public class GraficoService {
     * Efetua uma busca por ID do gráfico cadastrado e remove-o do banco de dados
     *
     * @param id ID do reltório já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Grafico> grafico = graficoRepository.findById(id);
@@ -106,7 +103,6 @@ public class GraficoService {
     * Remove o gráfico do banco de dados
     *
     * @param grafico Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(Grafico grafico) {
         graficoRepository.delete(grafico);

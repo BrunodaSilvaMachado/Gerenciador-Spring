@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,8 @@ public class ResultadoService {
     */
     public List<Resultado> listar() {
         List<Resultado> resultados = new ArrayList<>();
-        Iterator<Resultado> iterator = resultadoRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            resultados.add(iterator.next());
+        for (Resultado resultado : resultadoRepository.findAll()) {
+            resultados.add(resultado);
         }
         if(resultados.isEmpty()) throw new NotFoundException("Nenhum resultado encontrado!");
         return resultados;
@@ -90,7 +88,6 @@ public class ResultadoService {
     * Efetua uma busca por ID do resultado cadastrado e remove-o do banco de dados
     *
     * @param id ID do resultado já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Resultado> resultado = resultadoRepository.findById(id);
@@ -106,7 +103,6 @@ public class ResultadoService {
     * Remove o cadastro do resultado do banco de dados
     *
     * @param resultado Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(Resultado resultado) {
         resultadoRepository.delete(resultado);

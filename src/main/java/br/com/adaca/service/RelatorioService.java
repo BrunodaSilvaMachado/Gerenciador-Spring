@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +25,8 @@ public class RelatorioService {
     */
     public List<Relatorio> listar() {
         List<Relatorio> relatorios = new ArrayList<>();
-        Iterator<Relatorio> iterator = relatorioRepository.findAll().iterator();
-        while (iterator.hasNext()) {
-            relatorios.add(iterator.next());
+        for (Relatorio relatorio : relatorioRepository.findAll()) {
+            relatorios.add(relatorio);
         }
         if(relatorios.isEmpty()) throw new NotFoundException("Nenhum relatório encontrado!");
         return relatorios;
@@ -90,7 +88,6 @@ public class RelatorioService {
     * Efetua uma busca por ID do relatorio cadastrada e remove-a do banco de dados
     *
     * @param id ID do relatorio já existente no banco de dados
-    * @return
     */
     public void remover(Integer id) {
         Optional<Relatorio> relatorio = relatorioRepository.findById(id);
@@ -106,7 +103,6 @@ public class RelatorioService {
     * Remove o relatório do banco de dados
     *
     * @param relatorio Objeto preenchido do cadastro já existente no banco de dados
-    * @return
     */
     public void remover(Relatorio relatorio) {
         relatorioRepository.delete(relatorio);

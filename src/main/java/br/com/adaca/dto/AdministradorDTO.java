@@ -1,11 +1,10 @@
 package br.com.adaca.dto;
 
+import br.com.adaca.util.BaseId;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -17,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class AdministradorDTO implements Serializable {
+public class AdministradorDTO implements Serializable, BaseId {
 
     private static final long serialVersionUID = 3509815006591019802L;
     private Integer id;

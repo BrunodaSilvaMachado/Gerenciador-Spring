@@ -1,9 +1,9 @@
 package br.com.adaca.dto;
 
+import br.com.adaca.util.BaseId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class AutistaDTO implements Serializable {
+public class AutistaDTO implements Serializable, BaseId {
 
     private static final long serialVersionUID = -6244209586857135633L;
     private Integer id;

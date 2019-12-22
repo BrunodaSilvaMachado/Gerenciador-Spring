@@ -1,5 +1,6 @@
 package br.com.adaca.dto;
 
+import br.com.adaca.util.BaseId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class ConfiguracaoDTO implements Serializable {
+public class ConfiguracaoDTO implements Serializable, BaseId {
 
     private static final long serialVersionUID = 2451058415073638749L;
     private Integer id;

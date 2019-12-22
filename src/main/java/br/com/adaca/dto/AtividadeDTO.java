@@ -1,9 +1,9 @@
 package br.com.adaca.dto;
 
+import br.com.adaca.util.BaseId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Max;
@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class AtividadeDTO implements Serializable {
+public class AtividadeDTO implements Serializable, BaseId {
 
     private static final long serialVersionUID = 7183909989218865946L;
     private Integer id;

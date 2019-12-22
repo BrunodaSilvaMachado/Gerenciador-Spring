@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de Resutados</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Cadastro de Resutados</strong>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${entitys}" th:action="@{/Gerenciador/Resutados/save}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+                            <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('dicas')}? 'has-error'">
+                            <label>Dicas</label>
+                            <input type="text" class="form-control input-sm" th:field="*{dicas}" autofocus="autofocus" required="true" placeholder="Informe o numero de dicas"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('cliquecerto')}? 'has-error'">
+                            <label>Cliques certo</label>
+                            <input type="text" class="form-control input-sm" th:field="*{cliquecerto}" required="true" placeholder="Informe o numero de cliques certos"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('cliqueerrado')}? 'has-error'">
+                            <label>Cliques errado</label>
+                            <input type="text" class="form-control input-sm" th:field="*{cliqueerrado}" required="true" placeholder="Informe o numero de cliques errados"/>
+                        </div>
+                    </div>
+                                        <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('mouseclique')}? 'has-error'">
+                            <label>Mouse cliques</label>
+                            <input type="text" class="form-control input-sm" th:field="*{mouseclique}" required="true" placeholder="Informe o numero de cliques do mouse"/>
+                        </div>
+                    </div>                   
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('mousedrag')}? 'has-error'">
+                            <label>Mouse drag</label>
+                            <input type="text" class="form-control input-sm" th:field="*{mousedrag}" required="true" placeholder="Informe as posições de Mouse drag"/>
+                        </div>
+                    </div>                    
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('mousepos')}? 'has-error'">
+                            <label>Mouse position</label>
+                            <input type="text" class="form-control input-sm" th:field="*{mousepos}" required="true" placeholder="Informe as posições do mouse"/>
+                        </div>
+                    </div>                    
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('poserrado')}? 'has-error'">
+                            <label>Posições erradas</label>
+                            <input type="text" class="form-control input-sm" th:field="*{poserrado}" required="true" placeholder="Informe as posições erradas"/>
+                        </div>
+                    </div>                    
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idsessao')}? 'has-error'">
+                            <label>Id Sessão</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idsessao}" required="true" placeholder="Informe o numero da seção"/>
+                        </div>
+                    </div> 
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idatividade')}? 'has-error'">
+                            <label>Id Atividade</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idatividade}" required="true" placeholder="Informe o numero da atividade"/>
+                        </div>
+                    </div>    
+					<div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('horainicio')}? 'has-error'">
+                            <label>Hora inicio</label>
+                            <input type="date" class="form-control input-sm" th:field="*{horainicio}" required="true"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('horafim')}? 'has-error'">
+                            <label>Hora fim</label>
+                            <input type="date" class="form-control input-sm" th:field="*{horafim}" required="true"/>
+                        </div>
+                    </div>					
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Resutados/list/}">Salvar</button>
+                <a th:href="@{/Gerenciador/Resutados/list/}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de configurações</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Cadastro de configurações</strong>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${entitys}" th:action="@{/Gerenciador/configuracoes/save}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+                            <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+                        </div>
+                    </div>					
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idautista')}? 'has-error'">
+                            <label>Id autista</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idautista}" required="true" placeholder="Id autista"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idsessao')}? 'has-error'">
+                            <label>Id Sessão</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idsessao}" required="true" placeholder="Informe o numero da seção"/>
+                        </div>
+                    </div> 
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idtutor')}? 'has-error'">
+                            <label>Id tutor</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idtutor}" required="true" placeholder="Informe o id do tutor"/>
+                        </div>
+                    </div>		
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('tempodica')}? 'has-error'">
+                            <label>Tempo em Segundos</label>
+                            <input type="number" min="0" step="1" class="form-control input-sm" th:field="*{tempodica}" autofocus="autofocus" required="true" placeholder="tempo de dica"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('som')}? 'has-error'">
+                            <label>Som de Comemoração</label>
+                            <select class="custom-select input-sm" th:field="*{som}" required="true" name="inNivelacesso" id="inputNivelacesso">
+								<option value="0">Sem Som</option>
+								<option value="1">Palmas</option>
+								<option value="2">Plim Plim Plim</option>									
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('musica')}? 'has-error'">
+                            <label>Musica</label>
+                            <select class="custom-select input-sm" th:field="*{musica}" required="true" name="inNivelacesso" id="inputNivelacesso">
+                                <option value="0">Sem Comemoração Sonora</option>                             
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('dicatempo')}? 'has-error'">
+                            <label>Dica por tempo</label>
+                            <select class="custom-select input-sm" th:field="*{dicatempo}" required="true" name="inSexo" id="inSexo">
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('dicacaminho')}? 'has-error'">
+                            <label>Dica por caminho</label>
+                            <select class="custom-select input-sm" th:field="*{dicacaminho}" required="true" name="inSexo" id="inSexo">
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('tipodica')}? 'has-error'">
+                            <label>Tipo de dica</label>
+                            <select class="custom-select input-sm" th:field="*{tipodica}" required="true" name="inNivelacesso" id="inputNivelacesso">
+                                <option value="seta">Seta</option>
+                                <option value="pisca">Pisca</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">						
+						<div class="col-md-4" th:classappend="${#fields.hasErrors('comemoracao')}? 'has-error'">	
+							<label>Configurações de Comemoração</label>	
+							<select class="custom-select input-sm" th:field="*{comemoracao}" required="true">								
+								<option value="0">Sem comemoração</option>
+								<option value="1">Parabéns Animado</option>
+								<option value="2">Parabéns Parado</option>
+								<option value="3">Estrelinha</option>
+								<option value="4">Fogos</option>
+							</select>
+						</div>
+					</div>
+                </fieldset>
+            </div>
+			<div th:insert="menu.html::menu"></div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary" th:href="@{/Gerenciador/configuracoes/list/}">Salvar</button>
+                <a th:href="@{/Gerenciador/configuracoes/list/}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

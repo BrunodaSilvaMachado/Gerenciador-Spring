@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro do Responsavel</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Cadastro do Responsavel</strong>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${entitys}" th:action="@{/Gerenciador/Responsaveis/save}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+                            <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+                            <label>CPF</label>
+                            <input type="mask" class="form-control input-sm" th:field="*{cpf}" mask="999.999.999-99" autofocus="autofocus" required="true" placeholder="Informe o seu cpf" maxlength="14"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+                            <label>Nome</label>
+                            <input type="text" class="form-control input-sm" th:field="*{nome}" required="true" maxlength="70" placeholder="Informe o nome"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('sexo')}? 'has-error'">
+                            <label>Sexo</label>
+                            <select class="custom-select input-sm" th:field="*{sexo}" required="true" name="inSexo" id="inSexo">
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                            <label>Email</label>
+                            <input type="email" class="form-control input-sm" th:field="*{email}" required="true" maxlength="45" placeholder="Informe o seu Email"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
+                            <label>Telefone</label>
+                            <input type="text" class="form-control input-sm" th:field="*{telefone}" mask="(99)9999-9999" required="true" maxlength="13" placeholder="Informe o seu numero de  telefone"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('celular')}? 'has-error'">
+                            <label>Celular</label>
+                            <input type="text" class="form-control input-sm" th:field="*{celular}" mask="(99)99999-9999" required="true" maxlength="14" placeholder="Informe o seu numero de celular"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('endereco')}? 'has-error'">
+                            <label>Endereco</label>
+                            <input type="text" class="form-control input-sm" th:field="*{endereco}" required="true" maxlength="60" placeholder="Informe o seu endereço"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('cidade')}? 'has-error'">
+                            <label>Cidade</label>
+                            <input type="text" class="form-control input-sm" th:field="*{cidade}" required="true" maxlength="30" placeholder="Informe o nome da sua cidade"/>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('estado')}? 'has-error'">
+                            <label>Estado</label>
+                            <select class="custom-select input-sm" th:field="*{estado}" required="true" name="inEstado" id="inEstado">
+                                <option value="Acre" >Acre</option>
+								<option value="Alagoas" >Alagoas</option>
+								<option value="Amapá" >Amapá</option>
+								<option value="Amazonas" >Amazonas</option>
+								<option value="Bahia" >Bahia</option>
+								<option value="Ceará" >Ceará</option>
+								<option value="Distrito Federal" >Distrito Federal</option>
+								<option value="Espírito Santo" >Espírito Santo</option>
+								<option value="Goiás" >Goiás</option>
+								<option value="Maranhão" >Maranhão</option>
+								<option value="Mato Grosso" >Mato Grosso</option>
+								<option value="Mato Grosso do Sul" >Mato Grosso do Sul</option>
+								<option value="Minas Gerais" >Minas Gerais</option>
+								<option value="Pará" >Pará</option>
+								<option value="Paraíba" >Paraíba</option>
+								<option value="Paraná" >Paraná</option>
+								<option value="Pernambuco" >Pernambuco</option>
+								<option value="Piauí" >Piauí</option>
+								<option value="Rio de Janeiro" >Rio de Janeiro</option>
+								<option value="Rio Grande do Norte" >Rio Grande do Norte</option>
+								<option value="Rio Grande do Sul" >Rio Grande do Sul</option>
+								<option value="Rondônia" >Rondônia</option>
+								<option value="Roraima" >Roraima</option>
+								<option value="Santa Catarina" >Santa Catarina</option>
+								<option value="São Paulo" >São Paulo</option>
+								<option value="Sergipe" >Sergipe</option>
+								<option value="Tocantins" >Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idautista')}? 'has-error'">
+                            <label>Id autista</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idautista}" required="true" placeholder="Id autista"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Responsaveis/list/}">Salvar</button>
+                <a th:href="@{/Gerenciador/Responsaveis/list/}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

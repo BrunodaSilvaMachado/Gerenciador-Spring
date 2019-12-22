@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,10 @@ public class TutorService {
     * @return Lista com todos os tutores cadastrados
     */
     public List<Tutor> listar() {
-        List<Tutor> tutores = tutorRepository.listTutores();
+        List<Tutor> tutores = new ArrayList<>();
+        for (Tutor tutor : tutorRepository.findAll()) {
+            tutores.add(tutor);
+        }
         if(tutores.isEmpty()) throw new NotFoundException("Nenhum tutor encontrado!");
         return tutores;
     }
@@ -67,6 +71,7 @@ public class TutorService {
     public Tutor alterar(Tutor tutor) {
         Tutor sess = null;
         if(tutor.getId() != null) {
+            tutor.setSenha(passwordEncoder.encode(tutor.getSenha()));
             sess = tutorRepository.save(tutor);
         }
         return sess;

@@ -75,6 +75,7 @@ public class AdministradorService {
     public AdministradorDTO alterar(AdministradorDTO administrador) {
         AdministradorDTO adm = null;
         if(administrador.getId() != null) {
+            administrador.setSenha(passwordEncoder.encode(administrador.getSenha()));
             adm = administradorMapper.toDto(administradorRepository.save(administradorMapper.toEntity(administrador)));
         }
         return adm;

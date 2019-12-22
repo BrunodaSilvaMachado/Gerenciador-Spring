@@ -1,5 +1,6 @@
 package br.com.adaca.model;
 
+import br.com.adaca.util.BaseId;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -8,13 +9,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 /**
-*
-* @author Willian
-*/
+ * @author Willian
+ */
 @Getter
 @Setter
 @ToString
@@ -27,7 +27,7 @@ import java.util.Date;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
-public class Autista implements Serializable {
+public class Autista implements Serializable, BaseId {
 
     private static final long serialVersionUID = -2206202474289214951L;
     @Id

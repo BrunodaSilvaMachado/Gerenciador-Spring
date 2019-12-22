@@ -1,5 +1,6 @@
 package br.com.adaca.model;
 
+import br.com.adaca.util.BaseId;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -8,9 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
-*
-* @author Willian
-*/
+ * @author Willian
+ */
 @Getter
 @Setter
 @ToString
@@ -24,7 +24,7 @@ import java.io.Serializable;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
-public class Configuracao implements Serializable {
+public class Configuracao implements Serializable, BaseId {
 
     private static final long serialVersionUID = 2433741048536212977L;
     @Id

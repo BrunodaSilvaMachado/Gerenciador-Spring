@@ -1,5 +1,6 @@
 package br.com.adaca.model;
 
+import br.com.adaca.util.BaseId;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -9,9 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
-*
-* @author Willian
-*/
+ * @author Willian
+ */
 @Getter
 @Setter
 @ToString
@@ -24,7 +24,7 @@ import java.util.Date;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
-public class Grafico implements Serializable {
+public class Grafico implements Serializable, BaseId {
 
     private static final long serialVersionUID = 2694299981341194613L;
     @Id

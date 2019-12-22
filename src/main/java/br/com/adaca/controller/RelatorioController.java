@@ -2,22 +2,26 @@ package br.com.adaca.controller;
 
 import br.com.adaca.model.Relatorio;
 import br.com.adaca.service.RelatorioService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Relatorios")
-public class RelatorioController {
+public class RelatorioController extends View<Relatorio> {
 
     @Autowired
     private RelatorioService relatorioService;
+
+    public RelatorioController() {
+        super("relatorios", "relatorioAdd");
+    }
 
     @GetMapping()
     public ResponseEntity<List<Relatorio>> listar() {

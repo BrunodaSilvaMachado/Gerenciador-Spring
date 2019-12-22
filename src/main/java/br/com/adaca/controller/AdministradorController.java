@@ -1,25 +1,27 @@
 package br.com.adaca.controller;
 
+import br.com.adaca.dto.AdministradorDTO;
 import br.com.adaca.service.AdministradorService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
-
-import br.com.adaca.dto.AdministradorDTO;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Administradores")
-public class AdministradorController {
+public class AdministradorController extends View<AdministradorDTO> {
 
     @Autowired
     private AdministradorService administradorService;
+
+    public AdministradorController() {
+        super("administradores", "administradorAdd");
+    }
 
     @GetMapping()
     public ResponseEntity<List<AdministradorDTO>> listar() {
@@ -51,7 +53,6 @@ public class AdministradorController {
         administradorService.remover(administrador);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
-
 }
 
 /* https://lh3.googleusercontent.com/-cpYCrP36Nc8/VsWO7emBMRI/AAAAAAAAAyU/0rv7Lnl0aNI/s1600-h/image%25255B5%25255D.png

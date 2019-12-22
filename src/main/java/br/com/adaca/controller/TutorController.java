@@ -2,22 +2,26 @@ package br.com.adaca.controller;
 
 import br.com.adaca.model.Tutor;
 import br.com.adaca.service.TutorService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Tutores")
-public class TutorController {
+public class TutorController extends View<Tutor> {
 
     @Autowired
     private TutorService tutorService;
+
+    public TutorController() {
+        super("tutores", "tutorAdd");
+    }
 
     @GetMapping()
     public ResponseEntity<List<Tutor>> listar() {
@@ -50,5 +54,4 @@ public class TutorController {
         tutorService.remover(tutor);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
-
 }

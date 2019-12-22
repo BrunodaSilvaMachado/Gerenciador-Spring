@@ -2,22 +2,26 @@ package br.com.adaca.controller;
 
 import br.com.adaca.model.Resultado;
 import br.com.adaca.service.ResultadoService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Resultados")
-public class ResultadoController {
+public class ResultadoController extends View<Resultado> {
 
     @Autowired
     private ResultadoService resultadoService;
+
+    public ResultadoController() {
+        super("resultados", "resultadosAdd");
+    }
 
     @GetMapping("")
     public ResponseEntity<List<Resultado>> listar() {

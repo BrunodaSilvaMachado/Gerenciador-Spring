@@ -2,22 +2,26 @@ package br.com.adaca.controller;
 
 import br.com.adaca.dto.AutistaDTO;
 import br.com.adaca.service.AutistaService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Autistas")
-public class AutistaController {
+public class AutistaController extends View<AutistaDTO> {
 
     @Autowired
     private AutistaService autistaService;
+
+    public AutistaController() {
+        super("autistas", "autistaAdd");
+    }
 
     @GetMapping()
     public ResponseEntity<List<AutistaDTO>> listar() {

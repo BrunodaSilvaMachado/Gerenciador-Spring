@@ -1,24 +1,28 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.model.Medicamento;
 import br.com.adaca.model.Autista;
+import br.com.adaca.model.Medicamento;
 import br.com.adaca.service.MedicamentoService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Medicamentos")
-public class MedicamentoController {
+public class MedicamentoController extends View<Medicamento> {
 
     @Autowired
     private MedicamentoService medicamentoService;
+
+    public MedicamentoController() {
+        super("medicamentos", "medicamentoAdd");
+    }
 
     @GetMapping()
     public ResponseEntity<List<Medicamento>> listar() {

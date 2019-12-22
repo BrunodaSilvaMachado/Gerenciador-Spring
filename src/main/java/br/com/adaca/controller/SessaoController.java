@@ -2,22 +2,26 @@ package br.com.adaca.controller;
 
 import br.com.adaca.model.Sessao;
 import br.com.adaca.service.SessaoService;
-
+import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Sessoes")
-public class SessaoController {
+public class SessaoController extends View<Sessao> {
 
     @Autowired
     private SessaoService sessaoService;
+
+    public SessaoController() {
+        super("sessoes", "sessaoAdd");
+    }
 
     @GetMapping()
     public ResponseEntity<List<Sessao>> listar() {

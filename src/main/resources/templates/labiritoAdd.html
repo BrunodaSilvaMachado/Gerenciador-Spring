@@ -30,6 +30,20 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="col-md-1" th:classappend="${#fields.hasErrors('idsessao')}? 'has-error'">
+                            <label>Id Sessão</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idsessao}"
+                                   readOnly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1" th:classappend="${#fields.hasErrors('idatividade')}? 'has-error'">
+                            <label>Id Atividade</label>
+                            <input type="text" class="form-control input-sm" th:field="*{idatividade}"
+                                   readOnly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('quantdicas')}? 'has-error'">
                             <label>Dicas</label>
                             <input type="text" class="form-control input-sm" th:field="*{quantdicas}" autofocus="autofocus" required="true" placeholder="Informe o numero de dicas"/>
@@ -82,19 +96,7 @@
                             <label>Hora fim</label>
                             <input type="date" class="form-control input-sm" th:field="*{horafim}" required="true"/>
                         </div>
-                    </div>	
-					<div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idsessao')}? 'has-error'">
-                            <label>Id Sessão</label>
-                            <input type="text" class="form-control input-sm" th:field="*{idsessao}" required="true" placeholder="Informe o numero da seção"/>
-                        </div>
-                    </div> 
-					<div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idatividade')}? 'has-error'">
-                            <label>Id Atividade</label>
-                            <input type="text" class="form-control input-sm" th:field="*{idatividade}" required="true" placeholder="Informe o numero da atividade"/>
-                        </div>
-                    </div>    
+                    </div>
 									
                 </fieldset>
             </div>

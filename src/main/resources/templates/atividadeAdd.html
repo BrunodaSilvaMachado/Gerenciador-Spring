@@ -42,9 +42,10 @@
                         </div>
                     </div>                    
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('nivelacesso')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('nivel')}? 'has-error'">
                             <label>Nivel</label>
-                            <select class="custom-select input-sm" th:field="*{nivelacesso}" required="true" name="inNivelacesso" id="inputNivelacesso">
+                            <select class="custom-select input-sm" th:field="*{nivel}" required="true" name="inNivel"
+                                    id="inputNivel">
                                 <option value="1">1</option>                             
                             </select>
                         </div>

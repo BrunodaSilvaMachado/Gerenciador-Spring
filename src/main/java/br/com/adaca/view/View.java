@@ -15,6 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * @author Bruno da Silva Machado
+ * @version 1
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,6 +41,9 @@ public abstract class View<O extends BaseId> {
 
     protected abstract ResponseEntity remover(O o);
 
+    /**
+     * @return uma lista de objetos do tipo <O>
+     */
     @GetMapping("/list")
     private ModelAndView mvListar(){
         ModelAndView mv = new ModelAndView(homeViewName);
@@ -45,6 +52,11 @@ public abstract class View<O extends BaseId> {
         return mv;
     }
 
+    /**
+     *
+     * @param id identidade
+     * @return o objeto do tipo <O> associado ao id
+     */
     @GetMapping("/list/{id}")
     public ModelAndView mvSelecionar(@PathVariable("id") Integer id){
         ModelAndView mv = new ModelAndView(homeViewName);
@@ -53,6 +65,11 @@ public abstract class View<O extends BaseId> {
         return mv;
     }
 
+    /**
+     *
+     * @param o uma objeto <O> a ser adicionado
+     * @return ModelAndView da pagina de adicao
+     */
     @GetMapping("/add")
     private ModelAndView mvAdd(O o) {
 
@@ -62,18 +79,34 @@ public abstract class View<O extends BaseId> {
         return mv;
     }
 
+    /**
+     * Modifica o objeto apartir do id
+     * @param id identificador
+     * @return ModelAndView de edicao
+     */
     @GetMapping("/edit/{id}")
     public ModelAndView mvAlterar(@PathVariable("id") Integer id) {
 
         return mvAdd(selecionar(id).getBody());
     }
 
+    /**
+     * Remove um objeto
+     * @param id identificador
+     * @return ModelAndView de listagem
+     */
     @GetMapping("/delete/{id}")
     public ModelAndView mvRemover(@PathVariable("id") Integer id) {
         remover(id);
         return mvListar();
     }
 
+    /**
+     * Salva um objeto
+     * @param o a valid model attribute
+     * @param bindingResult result
+     * @return ModelAndView home
+     */
     @PostMapping("/save")
     public ModelAndView mvSave(@ModelAttribute @Valid O o, BindingResult bindingResult) {
         List<O> oList;

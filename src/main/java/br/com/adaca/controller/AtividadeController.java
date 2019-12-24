@@ -1,6 +1,6 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.dto.AtividadeDTO;
+import br.com.adaca.model.Atividade;
 import br.com.adaca.service.AtividadeService;
 import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +14,31 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Atividades")
-public class AtividadeController extends View<AtividadeDTO> {
-
+public class AtividadeController extends View<Atividade> {
     @Autowired
     private AtividadeService atividadeService;
 
     public AtividadeController() {
-        super("atividades", "atividadesAdd");
+        super("atividades", "atividadeAdd");
     }
 
     @GetMapping()
-    public ResponseEntity<List<AtividadeDTO>> listar() {
+    public ResponseEntity<List<Atividade>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(atividadeService.listar());
     }
 
     @GetMapping("/{atividadeId}")
-    public ResponseEntity<AtividadeDTO> selecionar(@PathVariable("atividadeId") Integer atividadeId) {
+    public ResponseEntity<Atividade> selecionar(@PathVariable("atividadeId") Integer atividadeId) {
         return ResponseEntity.status(HttpStatus.OK).body(atividadeService.selecionar(atividadeId));
     }
 
     @PostMapping()
-    public ResponseEntity<Void> salvar(@RequestBody @Valid AtividadeDTO atividade) {
+    public ResponseEntity<Void> salvar(@RequestBody @Valid Atividade atividade) {
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(atividadeService.salvar(atividade).getId()).toUri()).build();
     }
 
     @PutMapping()
-    public ResponseEntity<AtividadeDTO> alterar(@RequestBody @Valid AtividadeDTO atividade) {
+    public ResponseEntity<Atividade> alterar(@RequestBody @Valid Atividade atividade) {
         return  ResponseEntity.status(HttpStatus.OK).body(atividadeService.alterar(atividade));
     }
 
@@ -50,7 +49,7 @@ public class AtividadeController extends View<AtividadeDTO> {
     }
 
     @DeleteMapping()
-    public ResponseEntity<Void> remover(@RequestBody @Valid AtividadeDTO atividade) {
+    public ResponseEntity<Void> remover(@RequestBody @Valid Atividade atividade) {
         atividadeService.remover(atividade);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

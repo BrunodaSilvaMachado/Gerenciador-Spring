@@ -36,9 +36,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('usuario')}? 'has-error'">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('classificacao')}? 'has-error'">
                             <label>Classificação</label>
-                            <input type="text" class="form-control input-sm" th:field="*{usuario}" required="true" maxlength="80" placeholder="Informe o nome da classificação"/>
+                            <input type="text" class="form-control input-sm" th:field="*{classificacao}" required="true"
+                                   maxlength="80" placeholder="Informe o nome da classificação"/>
                         </div>
                     </div>                    
                     <div class="form-group row">

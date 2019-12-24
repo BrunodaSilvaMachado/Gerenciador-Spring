@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Basic;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,7 +29,9 @@ public class AutistaDTO implements Serializable, BaseId {
     @NotBlank
     @Size(max = 15, message = "Máximo 15 caracteres.")
     private String sexo;
+    @Basic
     @NotNull
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dtnasc;
     @NotBlank

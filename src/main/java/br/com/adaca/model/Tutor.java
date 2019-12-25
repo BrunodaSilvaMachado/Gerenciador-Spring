@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,5 +45,10 @@ public class Tutor implements Serializable, BaseId {
 
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getId());
     }
 }

@@ -1,8 +1,6 @@
 package br.com.adaca.model;
 
 import br.com.adaca.util.BaseId;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,16 +13,11 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_sessao")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 public class Sessao implements Serializable, BaseId {
 
     private static final long serialVersionUID = 1755709092642701098L;
@@ -52,5 +45,10 @@ public class Sessao implements Serializable, BaseId {
 
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getId());
     }
 }

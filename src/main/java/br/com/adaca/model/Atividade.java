@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,4 +39,9 @@ public class Atividade implements Serializable, BaseId {
     private List<Labirinto> labirintoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idatividade")
     private List<Resultado> resultadoList;
+
+    @Override
+    public String toString() {
+        return String.valueOf(getId());
+    }
 }

@@ -4,7 +4,6 @@ import br.com.adaca.util.BaseId;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +16,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,10 +36,10 @@ public class Autista implements Serializable, BaseId {
     private String nome;
     @Column(nullable = false, length = 15)
     private String sexo;
+    @NotNull
+    @Basic
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Data é uma informação obrigatória.")
     private Date dtnasc;
     @Column(nullable = false, length = 70)
     private String classificacao;
@@ -86,4 +84,9 @@ public class Autista implements Serializable, BaseId {
     private List<Grafico> graficoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idautista")
     private List<Relatorio> relatorioList;
+
+    @Override
+    public String toString() {
+        return String.valueOf(getId());
+    }
 }

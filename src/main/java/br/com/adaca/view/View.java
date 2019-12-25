@@ -46,7 +46,7 @@ public abstract class View<O extends BaseId> {
      * @return uma lista de objetos do tipo <O>
      */
     @GetMapping("/list")
-    protected ModelAndView mvListar() {
+    private ModelAndView mvListar() {
         ModelAndView mv = new ModelAndView(homeViewName);
         mv.addObject(ATTRIBUTE_NAME, listar().getBody());
 

@@ -14,7 +14,8 @@
         <strong>Cadastro de Resutados</strong>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" th:object="${entitys}" th:action="@{/Gerenciador/Resutados/save}" method="POST" style="margin: 10px">
+        <form class="form-horizontal" th:object="${entitys}" th:action="@{/Gerenciador/Resultados/save}" method="POST"
+              style="margin: 10px">
             <div class="form-group">
                 <fieldset>
                     <div class="form-group row">
@@ -100,8 +101,9 @@
                 </fieldset>
             </div>
             <div class="form-group row">
-                <button type="submit" class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Resutados/list/}">Salvar</button>
-                <a th:href="@{/Gerenciador/Resutados/list/}" class="btn btn-sm btn-default">Cancelar</a>
+                <button type="submit" class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Resultados/list/}">Salvar
+                </button>
+                <a th:href="@{/Gerenciador/Resultados/list/}" class="btn btn-sm btn-default">Cancelar</a>
             </div>
         </form>
     </div>

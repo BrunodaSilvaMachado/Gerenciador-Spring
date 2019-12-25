@@ -49,8 +49,10 @@
                     <td th:text="${entity.idatividade}"></td>
                     <td>
                         <div class="btn-group pull-right">
-                            <a class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Resutados/edit/{id}(id=${entity.id})}" >Editar</a>
-                            <a class="delete btn btn-sm btn-danger" th:href="@{/Gerenciador/Resutados/delete/{id}(id=${entity.id})}">Excluir</a>
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{/Gerenciador/Resultados/edit/{id}(id=${entity.id})}">Editar</a>
+                            <a class="delete btn btn-sm btn-danger"
+                               th:href="@{/Gerenciador/Resultados/delete/{id}(id=${entity.id})}">Excluir</a>
                         </div>
                     </td>
                 </tr>
@@ -59,7 +61,7 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-sm btn-success" th:href="@{/Gerenciador/Resutados/add/}" >Adicionar</a>
+        <a class="btn btn-sm btn-success" th:href="@{/Gerenciador/Resultados/add/}">Adicionar</a>
     </div>
 </div>
 </body>

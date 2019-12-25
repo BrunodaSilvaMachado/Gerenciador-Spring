@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -15,12 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/Gerenciador/Resultados")
 public class ResultadoController extends View<Resultado> {
-
     @Autowired
     private ResultadoService resultadoService;
 
     public ResultadoController() {
-        super("resultados", "resultadosAdd");
+        super("resultados", "resultadoAdd");
     }
 
     @GetMapping("")
@@ -59,5 +59,20 @@ public class ResultadoController extends View<Resultado> {
     public ResponseEntity<Void> remover(@RequestBody @Valid Resultado resultado) {
         resultadoService.remover(resultado);
         return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    @Override
+    protected ModelAndView mvListar() {
+        List<Resultado> resultados = listar().getBody();
+
+        assert resultados != null;
+        resultados.forEach((r) -> {
+            r.setIdsessao(null);
+            r.setIdatividade(null);
+            r.setMousepos(r.getMousepos().replace(";", " "));
+            r.setPoserrado(r.getPoserrado().replace(";", " "));
+        });
+
+        return new ModelAndView(getHomeViewName()).addObject(getATTRIBUTE_NAME(), resultados);
     }
 }

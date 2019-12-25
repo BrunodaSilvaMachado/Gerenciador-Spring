@@ -1,10 +1,9 @@
 package br.com.adaca.service;
 
-import br.com.adaca.model.Resultado;
-import br.com.adaca.repository.ResultadoRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
-
+import br.com.adaca.model.Resultado;
+import br.com.adaca.repository.ResultadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,8 @@ public class ResultadoService {
     */
     public List<Resultado> listar() {
         List<Resultado> resultados = new ArrayList<>();
-        for (Resultado resultado : resultadoRepository.findAll()) {
-            resultados.add(resultado);
+        for (Resultado r : resultadoRepository.findAll()) {
+            resultados.add(r);
         }
         if(resultados.isEmpty()) throw new NotFoundException("Nenhum resultado encontrado!");
         return resultados;

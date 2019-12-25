@@ -11,5 +11,5 @@ import java.util.List;
 public interface ResultadoRepository extends CrudRepository<Resultado, Serializable> {
 
     @Query("SELECT r FROM Resultado r WHERE r.idsessao = :sessaoId")
-    public List<Resultado> listBySessao(@Param("sessaoId") Integer sessaoId);
+    List<Resultado> listBySessao(@Param("sessaoId") Integer sessaoId);
 }

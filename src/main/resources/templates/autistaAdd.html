@@ -59,7 +59,8 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('escola')}? 'has-error'">
                             <label>Escola</label>
-                            <select class="custom-select input-sm" th:field="*{escola}" required="true" name="inSexo" id="inSexo">
+                            <select class="custom-select input-sm" th:field="*{escola}" required="true" name="inEscola"
+                                    id="inEscola">
                                 <option value="Escola Regular">Escola Regular</option>
                                 <option value="Escola Especial">Escola Especial</option>
                                 <option value="Não Frequenta">Não Frequenta</option>
@@ -69,18 +70,20 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('mediador')}? 'has-error'">
                             <label>Mediador</label>
-                            <select class="custom-select input-sm" th:field="*{mediador}" required="true" name="inSexo" id="inSexo">
-                                <option value="true">Sim</option>
-                                <option value="false">Não</option>
+                            <select class="custom-select input-sm" th:field="*{mediador}" required="true"
+                                    name="inMediador" id="inMediador">
+                                <option value="sim">Sim</option>
+                                <option value="não">Não</option>
                             </select>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('medicamentos')}? 'has-error'">
                             <label>Medicamentos</label>
-                            <select class="custom-select input-sm" th:field="*{medicamentos}" required="true" name="inSexo" id="inSexo">
-                                <option value="true">Sim</option>
-                                <option value="false">Não</option>
+                            <select class="custom-select input-sm" th:field="*{medicamentos}" required="true"
+                                    name="inMedicamentos" id="inMedicamentos">
+                                <option value="1">Sim</option>
+                                <option value="0">Não</option>
                             </select>
                         </div>
                     </div>
@@ -117,18 +120,20 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('ler')}? 'has-error'">
                             <label>Sabe ler?</label>
-                            <select class="custom-select input-sm" th:field="*{ler}" required="true" name="inSexo" id="inSexo">
-                                <option value="true">Sim</option>
-                                <option value="false">Não</option>
+                            <select class="custom-select input-sm" th:field="*{ler}" required="true" name="inLer"
+                                    id="inLer">
+                                <option value="1">Sim</option>
+                                <option value="0">Não</option>
                             </select>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('escrever')}? 'has-error'">
                             <label>Sabe escrever?</label>
-                            <select class="custom-select input-sm" th:field="*{escrever}" required="true" name="inSexo" id="inSexo">
-                                <option value="true">Sim</option>
-                                <option value="false">Não</option>
+                            <select class="custom-select input-sm" th:field="*{escrever}" required="true"
+                                    name="inEscrever" id="inEscreve">
+                                <option value="1">Sim</option>
+                                <option value="0">Não</option>
                             </select>
                         </div>
                     </div>

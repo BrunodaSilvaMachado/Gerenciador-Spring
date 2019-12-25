@@ -1,17 +1,17 @@
 package br.com.adaca.repository;
 
 import br.com.adaca.model.Autista;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface AutistaRepository extends CrudRepository<Autista, Serializable> {
+@Repository
+public interface AutistaRepository extends JpaRepository<Autista, Integer> {
 
-    @Query("SELECT a.id, a.nome FROM Autista a")
-    public List<Autista> listNamesId();
-
-    @Query("SELECT a FROM Autista a WHERE a.medicamentos = 1")
-    public  List<Autista> listAutistaMedicamentos();
+    /* @Query("SELECT a.id, a.nome FROM Autista a")
+     public List<Autista> listNamesId();*/
+    @Query(value = "SELECT * FROM tb_autista WHERE medicamentos = 1", nativeQuery = true)
+    List<Autista> listAutistaMedicamentos();
 }

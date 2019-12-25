@@ -72,7 +72,7 @@ public abstract class View<O extends BaseId> {
      * @return ModelAndView da pagina de adicao
      */
     @GetMapping("/add")
-    protected ModelAndView mvAdd(O o) {
+    private ModelAndView mvAdd(O o) {
         ModelAndView mv = new ModelAndView(addViewName);
         mv.addObject(ATTRIBUTE_NAME, o);
 

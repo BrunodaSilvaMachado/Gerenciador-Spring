@@ -1,12 +1,10 @@
 package br.com.adaca.model;
 
 import br.com.adaca.util.BaseId;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,12 +17,8 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tb_autista")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+@Builder(toBuilder = true)
+@Entity(name = "tb_autista")
 public class Autista implements Serializable, BaseId {
 
     private static final long serialVersionUID = -2206202474289214951L;
@@ -36,10 +30,9 @@ public class Autista implements Serializable, BaseId {
     private String nome;
     @Column(nullable = false, length = 15)
     private String sexo;
-    @NotNull
-    @Basic
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dtnasc;
     @Column(nullable = false, length = 70)
     private String classificacao;

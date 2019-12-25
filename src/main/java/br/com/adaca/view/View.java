@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * @author Bruno da Silva Machado
- * @version 1
+ * @version 1.1
  */
 @Getter
 @Setter
@@ -27,6 +27,7 @@ public abstract class View<O extends BaseId> {
     private final String ATTRIBUTE_NAME = "entitys";
 
     private String homeViewName;
+
     private String addViewName;
 
     protected abstract ResponseEntity<List<O>> listar();
@@ -45,7 +46,7 @@ public abstract class View<O extends BaseId> {
      * @return uma lista de objetos do tipo <O>
      */
     @GetMapping("/list")
-    private ModelAndView mvListar(){
+    protected ModelAndView mvListar() {
         ModelAndView mv = new ModelAndView(homeViewName);
         mv.addObject(ATTRIBUTE_NAME, listar().getBody());
 
@@ -58,7 +59,7 @@ public abstract class View<O extends BaseId> {
      * @return o objeto do tipo <O> associado ao id
      */
     @GetMapping("/list/{id}")
-    public ModelAndView mvSelecionar(@PathVariable("id") Integer id){
+    protected ModelAndView mvSelecionar(@PathVariable("id") Integer id) {
         ModelAndView mv = new ModelAndView(homeViewName);
         mv.addObject(ATTRIBUTE_NAME, selecionar(id).getBody());
 
@@ -71,8 +72,7 @@ public abstract class View<O extends BaseId> {
      * @return ModelAndView da pagina de adicao
      */
     @GetMapping("/add")
-    private ModelAndView mvAdd(O o) {
-
+    protected ModelAndView mvAdd(O o) {
         ModelAndView mv = new ModelAndView(addViewName);
         mv.addObject(ATTRIBUTE_NAME, o);
 
@@ -85,8 +85,7 @@ public abstract class View<O extends BaseId> {
      * @return ModelAndView de edicao
      */
     @GetMapping("/edit/{id}")
-    public ModelAndView mvAlterar(@PathVariable("id") Integer id) {
-
+    protected ModelAndView mvAlterar(@PathVariable("id") Integer id) {
         return mvAdd(selecionar(id).getBody());
     }
 
@@ -96,7 +95,7 @@ public abstract class View<O extends BaseId> {
      * @return ModelAndView de listagem
      */
     @GetMapping("/delete/{id}")
-    public ModelAndView mvRemover(@PathVariable("id") Integer id) {
+    protected ModelAndView mvRemover(@PathVariable("id") Integer id) {
         remover(id);
         return mvListar();
     }
@@ -108,14 +107,13 @@ public abstract class View<O extends BaseId> {
      * @return ModelAndView home
      */
     @PostMapping("/save")
-    public ModelAndView mvSave(@ModelAttribute @Valid O o, BindingResult bindingResult) {
-        List<O> oList;
-
+    protected ModelAndView mvSave(@ModelAttribute @Valid O o, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return mvAdd(o);
         }
 
-        oList= listar().getBody();
+        List<O> oList = listar().getBody();
+
         assert oList != null;
         for (O adm: oList) {
             if(adm.getId().equals(o.getId())){

@@ -25,6 +25,8 @@ public class ResultadoService {
     public List<Resultado> listar() {
         List<Resultado> resultados = new ArrayList<>();
         for (Resultado r : resultadoRepository.findAll()) {
+            r.setMousepos(r.getMousepos().replace(";", "; "));
+            r.setPoserrado(r.getPoserrado().replace(";", "; "));
             resultados.add(r);
         }
         if(resultados.isEmpty()) throw new NotFoundException("Nenhum resultado encontrado!");
@@ -39,6 +41,10 @@ public class ResultadoService {
     */
     public List<Resultado> listar(Integer sessaoId) {
         List<Resultado> resultados = resultadoRepository.listBySessao(sessaoId);
+        resultados.forEach((r -> {
+            r.setMousepos(r.getMousepos().replace(";", "; "));
+            r.setPoserrado(r.getPoserrado().replace(";", "; "));
+        }));
         if(resultados.isEmpty()) throw new NotFoundException("Nenhum resultado encontrado!");
         return resultados;
     }
@@ -52,7 +58,10 @@ public class ResultadoService {
     public Resultado selecionar(Integer id) {
         Optional<Resultado> resultado = resultadoRepository.findById(id);
         if (!resultado.isPresent()) throw new NotFoundException("Resultado não encontrado! Id: " + id);
-        return resultado.get();
+        Resultado r = resultado.get();
+        r.setMousepos(r.getMousepos().replace(";", "; "));
+        r.setPoserrado(r.getPoserrado().replace(";", "; "));
+        return r;
     }
 
     /**

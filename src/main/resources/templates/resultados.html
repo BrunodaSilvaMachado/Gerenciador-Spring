@@ -24,8 +24,8 @@
                     <th>Clique errado</th>
                     <th>Mouse clique</th>
                     <th>Mouse drag</th>
-                    <th>mouse position</th>
-                    <th>posição errada</th>
+                    <th>Posição do mouse</th>
+                    <th>Posição errada</th>
                     <th>Hora inicio</th>
                     <th>Hora fim</th>
 					<th>Id sessão</th>
@@ -41,9 +41,8 @@
                     <td th:text="${entity.cliqueerrado}"></td>
                     <td th:text="${entity.mouseclique}"></td>
                     <td th:text="${entity.mousedrag}"></td>
-                    <td th:text="${entity.mousepos}"></td>
-                    <td th:text="${entity.cliqueerrado}"></td>
-                    <td th:text="${entity.poserrado}"></td>
+                    <td class="com-sm-9 col-md-6 col-lg-6" th:text="${entity.mousepos}"></td>
+                    <td class="col-md-6" th:text="${entity.poserrado}"></td>
                     <td th:text="${#dates.format(entity.horainicio, 'dd/MM/yyyy hh:mm:ss')}"></td>
                     <td th:text="${#dates.format(entity.horafim, 'dd/MM/yyyy hh:mm:ss')}"></td>
 					<td th:text="${entity.idsessao}"></td>

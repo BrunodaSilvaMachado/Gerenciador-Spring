@@ -45,7 +45,7 @@
                     <td th:text="${entity.id}"></td>
                     <td th:text="${entity.nome}"></td>
                     <td th:text="${entity.sexo}"></td>
-                    <td th:text="${entity.dtnasc}"></td>
+                    <td th:text="${#dates.format(entity.dtnasc, 'dd/MM/yyyy')}"></td>
                     <td th:text="${entity.classificacao}"></td>
                     <td th:text="${entity.escola}"></td>
                     <td th:text="${entity.mediador}"></td>

@@ -1,5 +1,6 @@
 package br.com.adaca.view;
 
+import br.com.adaca.exception.NotFoundException;
 import br.com.adaca.util.BaseId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -54,7 +56,6 @@ public abstract class View<O extends BaseId> {
     }
 
     /**
-     *
      * @param id identidade
      * @return o objeto do tipo <O> associado ao id
      */
@@ -67,7 +68,6 @@ public abstract class View<O extends BaseId> {
     }
 
     /**
-     *
      * @param o uma objeto <O> a ser adicionado
      * @return ModelAndView da pagina de adicao
      */
@@ -81,6 +81,7 @@ public abstract class View<O extends BaseId> {
 
     /**
      * Modifica o objeto apartir do id
+     *
      * @param id identificador
      * @return ModelAndView de edicao
      */
@@ -91,6 +92,7 @@ public abstract class View<O extends BaseId> {
 
     /**
      * Remove um objeto
+     *
      * @param id identificador
      * @return ModelAndView de listagem
      */
@@ -102,23 +104,30 @@ public abstract class View<O extends BaseId> {
 
     /**
      * Salva um objeto
-     * @param o a valid model attribute
+     *
+     * @param o             a valid model attribute
      * @param bindingResult result
      * @return ModelAndView home
      */
     @PostMapping("/save")
-    protected ModelAndView mvSave(@ModelAttribute @Valid O o, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
+    protected ModelAndView mvSave(@ModelAttribute @Valid O o, @NotNull BindingResult bindingResult) {
+        List<O> oList = null;
+
+        if (bindingResult.hasErrors()) {
             return mvAdd(o);
         }
 
-        List<O> oList = listar().getBody();
-
-        assert oList != null;
-        for (O adm: oList) {
-            if(adm.getId().equals(o.getId())){
-                alterar(o);
-                return mvListar();
+        try {
+            oList = listar().getBody();
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        if (oList != null) {
+            for (O adm : oList) {
+                if (adm.getId().equals(o.getId())) {
+                    alterar(o);
+                    return mvListar();
+                }
             }
         }
 

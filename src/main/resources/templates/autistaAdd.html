@@ -53,7 +53,8 @@
                     <div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('classificacao')}? 'has-error'">
                             <label>Classificacao</label>
-                            <input type="text" class="form-control input-sm" th:field="*{classificacao}" autofocus="autofocus" required="true" placeholder="Classificacao TEA" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{classificacao}" required="true"
+                                   placeholder="Classificacao TEA" maxlength="80"/>
                         </div>
                     </div>
 					<div class="form-group row">
@@ -90,31 +91,36 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('brinquedo')}? 'has-error'">
                             <label>Brinquedo Favorito</label>
-                            <input type="text" class="form-control input-sm" th:field="*{brinquedo}" autofocus="autofocus" required="true" placeholder="Informe o brinquedo favorito" maxlength="70"/>
-                        </div>
-                    </div>
-					<div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('bebida')}? 'has-error'">
-                            <label>Bebida Favorita</label>
-                            <input type="text" class="form-control input-sm" th:field="*{bebida}" autofocus="autofocus" required="true" placeholder="Informe a bebida favorita" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{brinquedo}" required="true"
+                                   placeholder="Informe o brinquedo favorito" maxlength="80"/>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('alimento')}? 'has-error'">
                             <label>Alimento Favorito</label>
-                            <input type="text" class="form-control input-sm" th:field="*{alimento}" autofocus="autofocus" required="true" placeholder="Informe a alimento favorito" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{alimento}" required="true"
+                                   placeholder="Informe a alimento favorito" maxlength="80"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('bebida')}? 'has-error'">
+                            <label>Bebida Favorita</label>
+                            <input type="text" class="form-control input-sm" th:field="*{bebida}" required="true"
+                                   placeholder="Informe a bebida favorita" maxlength="80"/>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('atividade')}? 'has-error'">
                             <label>Atividade Favorita</label>
-                            <input type="text" class="form-control input-sm" th:field="*{atividade}" autofocus="autofocus" required="true" placeholder="Informe a atividade favorita" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{atividade}" required="true"
+                                   placeholder="Informe a atividade favorita" maxlength="80"/>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('medo')}? 'has-error'">
                             <label>Medo</label>
-                            <input type="text" class="form-control input-sm" th:field="*{medo}" autofocus="autofocus" required="true" placeholder="Informe o tipo de medo ou fobia" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{medo}" required="true"
+                                   placeholder="Informe o tipo de medo ou fobia" maxlength="80"/>
                         </div>
                     </div>
 					<div class="form-group row">
@@ -140,19 +146,22 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('comunicacao')}? 'has-error'">
                             <label>Comunicação</label>
-                            <input type="text" class="form-control input-sm" th:field="*{comunicacao}" autofocus="autofocus" required="true" placeholder="Comunicação" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{comunicacao}" required="true"
+                                   placeholder="Comunicação" maxlength="80"/>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('terapia')}? 'has-error'">
                             <label>Terapia</label>
-                            <input type="text" class="form-control input-sm" th:field="*{terapia}" autofocus="autofocus" required="true" placeholder="Informe o tipo de terapia que frequenta" maxlength="70"/>
+                            <input type="text" class="form-control input-sm" th:field="*{terapia}" required="true"
+                                   placeholder="Informe o tipo de terapia que frequenta" maxlength="200"/>
                         </div>
                     </div>
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('observacao')}? 'has-error'">
                             <label>Observação</label>
-                            <input type="text" class="form-control input-sm" th:field="*{observacao}" autofocus="autofocus" required="true" placeholder="Notas ou observações importantes" maxlength="70"/>
+                            <textarea class="form-control input-sm" th:field="*{observacao}" rows="5" required="true"
+                                      placeholder="Notas ou observações importantes"></textarea>
                         </div>
                     </div>
                 </fieldset>

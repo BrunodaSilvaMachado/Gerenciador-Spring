@@ -7,7 +7,6 @@ import br.com.adaca.repository.AutistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +21,7 @@ public class AutistaService {
     * @return Lista com todas as crianças cadastradas
     */
     public List<Autista> listar() {
-        List<Autista> autistas = new ArrayList<>();
-        for (Autista autista : autistaRepository.findAll()) {
-            autistas.add(autista);
-        }
+        List<Autista> autistas = autistaRepository.findAll();
         if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
         return (autistas);
     }
@@ -51,7 +47,7 @@ public class AutistaService {
     */
     public Autista selecionar(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (!autista.isPresent()) throw new NotFoundException("Criança não encontrada! Id: " + id);
+        if (autista.isEmpty()) throw new NotFoundException("Criança não encontrada! Id: " + id);
         return (autista.get());
     }
 
@@ -89,7 +85,7 @@ public class AutistaService {
      */
     public void remover(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (!autista.isPresent()) {
+        if (autista.isEmpty()) {
             throw new NotFoundException("id: " + id);
         }
         else {

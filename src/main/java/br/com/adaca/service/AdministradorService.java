@@ -1,12 +1,11 @@
 package br.com.adaca.service;
 
-import br.com.adaca.mapper.AdministradorMapper;
-import br.com.adaca.model.Administrador;
 import br.com.adaca.dto.AdministradorDTO;
-import br.com.adaca.repository.AdministradorRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
-
+import br.com.adaca.mapper.AdministradorMapper;
+import br.com.adaca.model.Administrador;
+import br.com.adaca.repository.AdministradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,7 +46,7 @@ public class AdministradorService {
     */
     public AdministradorDTO selecionar(Integer id) {
         Optional<Administrador> administrador = administradorRepository.findById(id);
-        if (!administrador.isPresent()) throw new NotFoundException("Administrador não encontrado! Id: " + id);
+        if (administrador.isEmpty()) throw new NotFoundException("Administrador não encontrado! Id: " + id);
         return administradorMapper.toDto(administrador.get());
     }
 
@@ -90,7 +89,7 @@ public class AdministradorService {
     */
     public void remover(Integer id) {
         Optional<Administrador> administrador = administradorRepository.findById(id);
-        if (!administrador.isPresent()) {
+        if (administrador.isEmpty()) {
             throw new NotFoundException("id: " + id);
         }
         else {

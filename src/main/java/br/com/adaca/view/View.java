@@ -99,7 +99,7 @@ public abstract class View<O extends BaseId> {
     @GetMapping("/delete/{id}")
     protected ModelAndView mvRemover(@PathVariable("id") Integer id) {
         remover(id);
-        return mvListar();
+        return new ModelAndView("redirect:list");
     }
 
     /**
@@ -126,12 +126,12 @@ public abstract class View<O extends BaseId> {
             for (O adm : oList) {
                 if (adm.getId().equals(o.getId())) {
                     alterar(o);
-                    return mvListar();
+                    return new ModelAndView("redirect:list");
                 }
             }
         }
 
         salvar(o);
-        return mvListar();
+        return new ModelAndView("redirect:list");
     }
 }

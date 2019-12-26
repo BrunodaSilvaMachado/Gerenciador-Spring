@@ -5,12 +5,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Cadastro de configurações</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/styleConfig.css" th:ref="@{/css/styleConfig.css}">
+    <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
+    <script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$(".acidjs-css3-treeview").delegate("label input:checkbox", "change", function() {
+				var
+				checkbox = $(this),
+					nestedList = checkbox.parent().next().next(),
+					selectNestedListCheckbox = nestedList.find("label:not([for]) input:checkbox");
+
+				if (checkbox.is(":checked")) {
+					return selectNestedListCheckbox.prop("checked", true);
+				}
+				selectNestedListCheckbox.prop("checked", false);
+				// Não alterar essa função
+			});
+		});
+
+    </script>
 </head>
 <body>
 <!-- incompleto-->
-		<div th:fragment="menu">
+<div th:fragment="menu" align="center">
 			<div class="divs" id="divJogos">
 				<div class="acidjs-css3-treeview" id="divTreeView">
 					<label id="labelJogos">Seleção dos Jogos</label>

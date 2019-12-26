@@ -30,21 +30,23 @@
                         </div>
                     </div>					
 					<div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idautista')}? 'has-error'">
+                        <div class="col-md-1" th:classappend="${#fields.hasErrors('idautista')}? 'has-error'">
                             <label>Id autista</label>
-                            <input type="text" class="form-control input-sm" th:field="*{idautista}" required="true" placeholder="Id autista"/>
+                            <input type="text" class="form-control input-sm" th:field="*{idautista}"
+                                   readOnly="readonly"/>
                         </div>
                     </div>
 					<div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idsessao')}? 'has-error'">
+                        <div class="col-md-1" th:classappend="${#fields.hasErrors('idsessao')}? 'has-error'">
                             <label>Id Sessão</label>
-                            <input type="text" class="form-control input-sm" th:field="*{idsessao}" required="true" placeholder="Informe o numero da seção"/>
+                            <input type="text" class="form-control input-sm" th:field="*{idsessao}"
+                                   readOnly="readonly"/>
                         </div>
                     </div> 
 					<div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('idtutor')}? 'has-error'">
+                        <div class="col-md-1" th:classappend="${#fields.hasErrors('idtutor')}? 'has-error'">
                             <label>Id tutor</label>
-                            <input type="text" class="form-control input-sm" th:field="*{idtutor}" required="true" placeholder="Informe o id do tutor"/>
+                            <input type="text" class="form-control input-sm" th:field="*{idtutor}" readOnly="readonly"/>
                         </div>
                     </div>		
 					<div class="form-group row">
@@ -56,7 +58,8 @@
                     <div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('som')}? 'has-error'">
                             <label>Som de Comemoração</label>
-                            <select class="custom-select input-sm" th:field="*{som}" required="true" name="inNivelacesso" id="inputNivelacesso">
+                            <select class="custom-select input-sm" th:field="*{som}" required="true"
+                                    name="inComemoracao" id="inputComemoracao">
 								<option value="0">Sem Som</option>
 								<option value="1">Palmas</option>
 								<option value="2">Plim Plim Plim</option>									
@@ -66,7 +69,8 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('musica')}? 'has-error'">
                             <label>Musica</label>
-                            <select class="custom-select input-sm" th:field="*{musica}" required="true" name="inNivelacesso" id="inputNivelacesso">
+                            <select class="custom-select input-sm" th:field="*{musica}" required="true" name="inMusica"
+                                    id="inputMusica">
                                 <option value="0">Sem Comemoração Sonora</option>                             
                             </select>
                         </div>
@@ -74,7 +78,8 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('dicatempo')}? 'has-error'">
                             <label>Dica por tempo</label>
-                            <select class="custom-select input-sm" th:field="*{dicatempo}" required="true" name="inSexo" id="inSexo">
+                            <select class="custom-select input-sm" th:field="*{dicatempo}" required="true"
+                                    name="inDicaTempo" id="inDicaTempo">
                                 <option value="true">Sim</option>
                                 <option value="false">Não</option>
                             </select>
@@ -83,7 +88,8 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('dicacaminho')}? 'has-error'">
                             <label>Dica por caminho</label>
-                            <select class="custom-select input-sm" th:field="*{dicacaminho}" required="true" name="inSexo" id="inSexo">
+                            <select class="custom-select input-sm" th:field="*{dicacaminho}" required="true"
+                                    name="inDicaCaminho" id="inDicaCaminho">
                                 <option value="true">Sim</option>
                                 <option value="false">Não</option>
                             </select>
@@ -92,7 +98,8 @@
 					<div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('tipodica')}? 'has-error'">
                             <label>Tipo de dica</label>
-                            <select class="custom-select input-sm" th:field="*{tipodica}" required="true" name="inNivelacesso" id="inputNivelacesso">
+                            <select class="custom-select input-sm" th:field="*{tipodica}" required="true"
+                                    name="inTipodica" id="inputTipodica">
                                 <option value="seta">Seta</option>
                                 <option value="pisca">Pisca</option>
                             </select>

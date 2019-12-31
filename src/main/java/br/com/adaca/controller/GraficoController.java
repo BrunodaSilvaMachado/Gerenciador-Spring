@@ -20,7 +20,7 @@ public class GraficoController extends View<Grafico> {
     private GraficoService graficoService;
 
     public GraficoController() {
-        super("graficos", "graficosAdd");
+        super("Gerenciador/graficos", "Gerenciador/graficosAdd");
     }
 
     @GetMapping()
@@ -30,7 +30,7 @@ public class GraficoController extends View<Grafico> {
 
     // ta no padrão REST ?
     @GetMapping("/autista/{autistaId}")
-    public ResponseEntity<List<Grafico>> listar(@PathVariable("autistaId")Integer autistaId) {
+    public ResponseEntity<List<Grafico>> listar(@PathVariable("autistaId") Integer autistaId) {
         return ResponseEntity.status(HttpStatus.OK).body(graficoService.listar(autistaId));
     }
 

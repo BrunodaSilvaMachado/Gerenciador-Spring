@@ -19,7 +19,7 @@ public class ResultadoController extends View<Resultado> {
     private ResultadoService resultadoService;
 
     public ResultadoController() {
-        super("resultados", "resultadoAdd");
+        super("Gerenciador/resultados", "Gerenciador/resultadoAdd");
     }
 
     @GetMapping("")

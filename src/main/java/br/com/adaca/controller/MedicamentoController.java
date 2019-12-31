@@ -21,7 +21,7 @@ public class MedicamentoController extends View<Medicamento> {
     private MedicamentoService medicamentoService;
 
     public MedicamentoController() {
-        super("medicamentos", "medicamentoAdd");
+        super("Gerenciador/medicamentos", "Gerenciador/medicamentoAdd");
     }
 
     @GetMapping()

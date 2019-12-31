@@ -20,7 +20,7 @@ public class ResponsavelController extends View<Responsavel> {
     private ResponsavelService responsavelService;
 
     public ResponsavelController() {
-        super("responsaveis", "responsavelAdd");
+        super("Gerenciador/responsaveis", "Gerenciador/responsavelAdd");
     }
 
     @GetMapping()

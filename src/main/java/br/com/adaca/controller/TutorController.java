@@ -20,7 +20,7 @@ public class TutorController extends View<Tutor> {
     private TutorService tutorService;
 
     public TutorController() {
-        super("tutores", "tutorAdd");
+        super("Gerenciador/tutores", "Gerenciador/tutorAdd");
     }
 
     @GetMapping()

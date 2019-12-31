@@ -19,7 +19,7 @@ public class AtividadeController extends View<Atividade> {
     private AtividadeService atividadeService;
 
     public AtividadeController() {
-        super("atividades", "atividadeAdd");
+        super("Gerenciador/atividades", "Gerenciador/atividadeAdd");
     }
 
     @GetMapping()
@@ -39,11 +39,11 @@ public class AtividadeController extends View<Atividade> {
 
     @PutMapping()
     public ResponseEntity<Atividade> alterar(@RequestBody @Valid Atividade atividade) {
-        return  ResponseEntity.status(HttpStatus.OK).body(atividadeService.alterar(atividade));
+        return ResponseEntity.status(HttpStatus.OK).body(atividadeService.alterar(atividade));
     }
 
     @DeleteMapping("/{atividadeId}")
-    public ResponseEntity<Void> remover(@PathVariable("atividadeId")Integer atividadeId) {
+    public ResponseEntity<Void> remover(@PathVariable("atividadeId") Integer atividadeId) {
         atividadeService.remover(atividadeId);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

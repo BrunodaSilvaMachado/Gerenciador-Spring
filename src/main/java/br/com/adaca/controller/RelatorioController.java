@@ -1,27 +1,40 @@
 package br.com.adaca.controller;
 
+import br.com.adaca.dto.AdministradorDTO;
+import br.com.adaca.dto.RelatorioEstatisticaDTOListWrapper;
+import br.com.adaca.mapper.AdministradorMapper;
 import br.com.adaca.model.Relatorio;
-import br.com.adaca.service.RelatorioService;
-import br.com.adaca.view.View;
+import br.com.adaca.model.TutorAndAutista;
+import br.com.adaca.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/Gerenciador/Relatorios")
-public class RelatorioController extends View<Relatorio> {
+public class RelatorioController {
 
     @Autowired
     private RelatorioService relatorioService;
-
-    public RelatorioController() {
-        super("relatorios", "relatorioAdd");
-    }
+    @Autowired
+    private RelatorioEstatisticaService relatorioEstatisticaService;
+    @Autowired
+    private AdministradorService administradorService;
+    @Autowired
+    private AdministradorMapper administradorMapper;
+    @Autowired
+    private TutorService tutorService;
+    @Autowired
+    private AutistaService autistaService;
 
     @GetMapping()
     public ResponseEntity<List<Relatorio>> listar() {
@@ -60,4 +73,81 @@ public class RelatorioController extends View<Relatorio> {
         relatorioService.remover(relatorio);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
+
+    @GetMapping("/list")
+    private ModelAndView mvListar() {
+        ModelAndView mv = new ModelAndView("Gerenciador/relatorios");
+
+        try {
+            mv.addObject("entitys", listar().getBody());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.addObject("autistas", autistaService.listar());
+        mv.addObject("tutores", tutorService.listar());
+        mv.addObject("consultas", new TutorAndAutista());
+
+        return mv;
+    }
+
+    @GetMapping("/show/{id}")
+    private ModelAndView mvShow(@PathVariable("id") Integer id) {
+        ModelAndView mv = new ModelAndView();
+        Relatorio relatorio = selecionar(id).getBody();
+
+        if (relatorio == null) {
+            relatorio = new Relatorio();
+        }
+
+        mv.setViewName("Gerenciador/relatorioView");
+        mv.addObject("entitys",
+                relatorioService.relatorioToRelatorioConteinerDTOListWrapper(relatorio)
+        );
+
+        return mv;
+    }
+
+    @PostMapping("/add")
+    public ModelAndView mvAdd(@ModelAttribute @Valid TutorAndAutista tutorAndAutista, @NotNull BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:invalid-request");
+        }
+
+        int idtutor = tutorAndAutista.getIdtutor();
+        int idautista = tutorAndAutista.getIdautista();
+
+        ModelAndView mv = new ModelAndView("Gerenciador/relatorioView");
+        mv.addObject("entitys",
+                relatorioEstatisticaService.relatorioEstatisticaFactory(idtutor, idautista)
+        );
+        return mv;
+    }
+
+    @PostMapping("/save")
+    private ModelAndView mvSave(@Valid @ModelAttribute RelatorioEstatisticaDTOListWrapper relatorioEstatisticaDTOListWrapper,
+                                @NotNull BindingResult bindingResult, Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:invalid-request");
+        }
+
+        AdministradorDTO administradorDTO = administradorService.findByUsuario(principal.getName());
+        Relatorio relatorio = relatorioService.relatorioConteinerDTOListWrapperToRelatorio(relatorioEstatisticaDTOListWrapper);
+        relatorio.setIdadministrador(administradorMapper.toEntity(administradorDTO));
+        salvar(relatorio);
+
+        return new ModelAndView("redirect:list");
+    }
+
+    @GetMapping("/delete/{id}")
+    protected ModelAndView mvRemover(@PathVariable("id") Integer id) {
+        remover(id);
+        return mvListar();
+    }
+
+    @RequestMapping(value = "/invalid-request", method = RequestMethod.GET)
+    public ModelAndView invalidRequest() {
+        return new ModelAndView("error/400");
+    }
+
 }

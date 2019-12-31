@@ -20,7 +20,7 @@ public class LabirintoController extends View<Labirinto> {
     private LabirintoService labirintoService;
 
     public LabirintoController() {
-        super("labirintos", "labirintoAdd");
+        super("Gerenciador/labirintos", "Gerenciador/labirintoAdd");
     }
 
     @GetMapping()

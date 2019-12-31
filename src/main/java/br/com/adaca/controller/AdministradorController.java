@@ -20,7 +20,7 @@ public class AdministradorController extends View<AdministradorDTO> {
     private AdministradorService administradorService;
 
     public AdministradorController() {
-        super("administradores", "administradorAdd");
+        super("Gerenciador/administradores", "Gerenciador/administradorAdd");
     }
 
     @GetMapping()
@@ -42,6 +42,7 @@ public class AdministradorController extends View<AdministradorDTO> {
     public ResponseEntity<AdministradorDTO> alterar(@RequestBody @Valid AdministradorDTO administrador) {
         return ResponseEntity.status(HttpStatus.OK).body(administradorService.alterar(administrador));
     }
+
     @DeleteMapping("/{administradorId}")
     public ResponseEntity<Void> remover(@PathVariable("administradorId") Integer administradorId) {
         administradorService.remover(administradorId);
@@ -56,4 +57,4 @@ public class AdministradorController extends View<AdministradorDTO> {
 }
 
 /* https://lh3.googleusercontent.com/-cpYCrP36Nc8/VsWO7emBMRI/AAAAAAAAAyU/0rv7Lnl0aNI/s1600-h/image%25255B5%25255D.png
-* http://shengwangi.blogspot.com/2016/02/response-for-get-post-put-delete-in-rest.html*/
+ * http://shengwangi.blogspot.com/2016/02/response-for-get-post-put-delete-in-rest.html*/

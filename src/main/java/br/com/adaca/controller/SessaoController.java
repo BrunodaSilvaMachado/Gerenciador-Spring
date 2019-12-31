@@ -20,7 +20,7 @@ public class SessaoController extends View<Sessao> {
     private SessaoService sessaoService;
 
     public SessaoController() {
-        super("sessoes", "sessaoAdd");
+        super("Gerenciador/sessoes", "Gerenciador/sessaoAdd");
     }
 
     @GetMapping()

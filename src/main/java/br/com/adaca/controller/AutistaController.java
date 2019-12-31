@@ -19,7 +19,7 @@ public class AutistaController extends View<Autista> {
     private AutistaService autistaService;
 
     public AutistaController() {
-        super("autistas", "autistaAdd");
+        super("Gerenciador/autistas", "Gerenciador/autistaAdd");
     }
 
     @GetMapping()

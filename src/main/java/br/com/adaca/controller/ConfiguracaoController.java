@@ -20,7 +20,7 @@ public class ConfiguracaoController extends View<ConfiguracaoDTO> {
     private ConfiguracaoService configuracaoService;
 
     public ConfiguracaoController() {
-        super("configuracoes", "configuracaoAdd");
+        super("Gerenciador/configuracoes", "Gerenciador/configuracaoAdd");
     }
 
     @GetMapping()
@@ -29,8 +29,8 @@ public class ConfiguracaoController extends View<ConfiguracaoDTO> {
     }
 
     @GetMapping("/{autistaId}/{tutorId}")
-    public ResponseEntity<List<ConfiguracaoDTO>> listar(@PathVariable("autistaId") Integer autistaId,@PathVariable("tutorId") Integer tutorId) {
-        return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.listarConfigAutistaTutor(autistaId,tutorId));
+    public ResponseEntity<List<ConfiguracaoDTO>> listar(@PathVariable("autistaId") Integer autistaId, @PathVariable("tutorId") Integer tutorId) {
+        return ResponseEntity.status(HttpStatus.OK).body(configuracaoService.listarConfigAutistaTutor(autistaId, tutorId));
     }
 
     @GetMapping("/{configuracaoId}")

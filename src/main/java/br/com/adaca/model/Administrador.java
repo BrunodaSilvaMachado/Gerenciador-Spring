@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -14,7 +15,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,4 +44,21 @@ public class Administrador implements Serializable, BaseId {
     private List<Grafico> graficoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador")
     private List<Relatorio> relatorioList;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
+    @Override
+    public String toString() {
+        return "Administrador{" +
+                "id=" + getId() +
+                ", nome='" + getNome() + "'" +
+                ", usuario='" + getUsuario() + "'" +
+                ", senha='" + "********" + "'" +
+                ", nivelacesso=" + getNivelacesso() +
+                ", graficoList=" + "null" +
+                ", relatorioList=" + "null" +
+                ", roles=" + getRoles() + "}";
+    }
 }

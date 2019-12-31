@@ -9,6 +9,6 @@ import java.io.Serializable;
 
 public interface AdministradorRepository extends CrudRepository<Administrador, Serializable> {
 
-    @Query("SELECT a FROM Administrador a WHERE a.usuario = :usuario AND a.senha = :senha")
-    public Administrador login(@Param("usuario") String usuario, @Param("senha") String senha);
+    @Query("SELECT a FROM Administrador a WHERE a.usuario = :usuario")
+    Administrador findByUsuario(@Param("usuario") String usuario);
 }

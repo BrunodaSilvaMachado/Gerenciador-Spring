@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width" name="viewport"/>
+    <title>Cadastro de Medicamento</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Cadastro de Medicamento</strong>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" method="POST" style="margin: 10px" th:action="@{/Gerenciador/Medicamentos/save}"
+              th:object="${entitys}">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+                            <input class="form-control input-sm" id="id" readOnly="readonly" th:field="*{id}"
+                                   type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+                            <label>Nome</label>
+                            <input autofocus="autofocus" class="form-control input-sm" maxlength="70" placeholder="Informe o Nome do administrador"
+                                   required="true" th:field="*{nome}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('tipo')}? 'has-error'">
+                            <label>Tipo</label>
+                            <input class="form-control input-sm" maxlength="50" placeholder="Informe o tipo de medicamento" required="true"
+                                   th:field="*{tipo}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('composicao')}? 'has-error'">
+                            <label>Composicao</label>
+                            <input class="form-control input-sm" maxlength="50" placeholder="Informe o tipo de composição" required="true"
+                                   th:field="*{composicao}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('laboratorio')}? 'has-error'">
+                            <label>Laboratorio</label>
+                            <input class="form-control input-sm" maxlength="50" placeholder="Informe o nome do laboratorio" required="true"
+                                   th:field="*{laboratorio}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('posologia')}? 'has-error'">
+                            <label>Posologia</label>
+                            <input class="form-control input-sm" maxlength="50" placeholder="Informe o tipo de posologia" required="true"
+                                   th:field="*{posologia}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('observacao')}? 'has-error'">
+                            <label>Observacao</label>
+                            <input class="form-control input-sm" maxlength="50" placeholder="Informe alguma observação" required="true"
+                                   th:field="*{observacao}" type="text"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Medicamentos/list/}" type="submit">
+                    Salvar
+                </button>
+                <a class="btn btn-sm btn-default" th:href="@{/Gerenciador/Medicamentos/list/}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

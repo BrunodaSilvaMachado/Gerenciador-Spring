@@ -33,7 +33,7 @@ public class Relatorio implements Serializable, BaseId {
     private Integer id;
     @Lob
     @Column(nullable = false)
-    private Byte[] relatorio;
+    private byte[] relatorio;
     @Column(nullable = false, length = 30)
     private String tiporelatorio;
     @Temporal(TemporalType.TIMESTAMP)

@@ -43,8 +43,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Relatório</th>
-                    <th>Tipo relatorio</th>
+                    <th>Tipo relatório</th>
                     <th>Data gerado</th>
                     <th>Id autista</th>
                     <th>Id administrador</th>
@@ -54,11 +53,10 @@
                 <tbody>
                 <tr th:each="entity : ${entitys}">
                     <td th:text="${entity.id}"></td>
-                    <td th:text="${entity.relatorio}"></td>
                     <td th:text="${entity.tiporelatorio}"></td>
                     <td th:text="${#dates.format(entity.datagerado, 'dd/MM/yyyy hh:mm:ss')}"></td>
                     <td th:text="${entity.idautista}"></td>
-                    <td th:text="${entity.idadministrador}"></td>
+                    <td th:text="${entity.idadministrador.id}"></td>
                     <td>
                         <div class="btn-group pull-right">
                             <a class="btn btn-sm btn-primary"

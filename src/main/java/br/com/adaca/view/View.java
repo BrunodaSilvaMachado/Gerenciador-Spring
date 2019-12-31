@@ -50,7 +50,12 @@ public abstract class View<O extends BaseId> {
     @GetMapping("/list")
     private ModelAndView mvListar() {
         ModelAndView mv = new ModelAndView(homeViewName);
-        mv.addObject(ATTRIBUTE_NAME, listar().getBody());
+
+        try {
+            mv.addObject(ATTRIBUTE_NAME, listar().getBody());
+        } catch (Exception ignored) {
+
+        }
 
         return mv;
     }
@@ -99,7 +104,7 @@ public abstract class View<O extends BaseId> {
     @GetMapping("/delete/{id}")
     protected ModelAndView mvRemover(@PathVariable("id") Integer id) {
         remover(id);
-        return new ModelAndView("redirect:list");
+        return mvListar();
     }
 
     /**

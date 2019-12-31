@@ -116,7 +116,7 @@ public class RelatorioController {
         int idtutor = tutorAndAutista.getIdtutor();
         int idautista = tutorAndAutista.getIdautista();
 
-        ModelAndView mv = new ModelAndView("Gerenciador/relatorioView");
+        ModelAndView mv = new ModelAndView("Gerenciador/relatorioAdd");
         mv.addObject("entitys",
                 relatorioEstatisticaService.relatorioEstatisticaFactory(idtutor, idautista)
         );

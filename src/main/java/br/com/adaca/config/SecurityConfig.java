@@ -1,65 +1,71 @@
-/*
 package br.com.adaca.config;
 
-import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
-import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
-import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
-import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
+import br.com.adaca.handler.LoggingAccessDeniedHandler;
+import br.com.adaca.service.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
-import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-*/
-/*bug do keycloak
- workaround: https://stackoverflow.com/questions/53318134/unable-to-use-keycloak-in-spring-boot-2-1-due-to-duplicated-bean-registration-ht
- *//*
 
-@Configuration
-@ComponentScan(
-        basePackageClasses = KeycloakSecurityComponents.class,
-        excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "org.keycloak.adapters.springsecurity.management.HttpSessionManager"))
 @EnableWebSecurity
-class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    public void configureGlobal(
-            AuthenticationManagerBuilder auth) throws Exception {
+    private LoggingAccessDeniedHandler accessDeniedHandler;
 
-        KeycloakAuthenticationProvider keycloakAuthenticationProvider
-                = keycloakAuthenticationProvider();
-        keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(
-                new SimpleAuthorityMapper());
-        auth.authenticationProvider(keycloakAuthenticationProvider);
-    }
+    @Autowired
+    private AdministradorService userService;
 
     @Bean
-    public KeycloakSpringBootConfigResolver KeycloakConfigResolver() {
-        return new KeycloakSpringBootConfigResolver();
-    }
-
-    @Bean
-    @Override
-    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-        return new RegisterSessionAuthenticationStrategy(
-                new SessionRegistryImpl());
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(9);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-        http.authorizeRequests()
-                .antMatchers("/Gerenciador*")
-                .hasRole("USER")
-                .anyRequest()
-                .permitAll();
+        http
+                .authorizeRequests()
+                .antMatchers(
+                        "/",
+                        "/js/**",
+                        "/css/**"
+                ).permitAll()
+                .antMatchers("/Gerenciador/**").hasAnyAuthority("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/Gerenciador/login")
+                .defaultSuccessUrl("/Gerenciador/menu")
+                .permitAll()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/Gerenciador/logout"))
+                .logoutSuccessUrl("/Gerenciador/login?logout")
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler);
     }
-}*/
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(userService);
+        auth.setPasswordEncoder(passwordEncoder());
+
+        return auth;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
+}

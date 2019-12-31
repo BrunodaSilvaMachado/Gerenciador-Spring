@@ -11,5 +11,5 @@ import java.util.List;
 public interface ResponsavelRepository extends CrudRepository<Responsavel, Serializable> {
 
     @Query("SELECT r FROM Responsavel r WHERE r.idautista = :autistaId")
-    public List<Responsavel> listByAutista(@Param("autistaId") Integer autistaId);
+    List<Responsavel> listByAutista(@Param("autistaId") Integer autistaId);
 }

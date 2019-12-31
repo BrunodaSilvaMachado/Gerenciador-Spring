@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.io.Serializable;
 
-public interface TutorRepository extends CrudRepository<Tutor, Serializable>  {
+public interface TutorRepository extends CrudRepository<Tutor, Serializable> {
 
     @Query("SELECT t FROM Tutor t WHERE upper(t.usuario) = :usuario AND t.senha = :senha")
-    public Tutor login(@Param("usuario") String usuario, @Param("senha") String senha);
+    Tutor login(@Param("usuario") String usuario, @Param("senha") String senha);
 }

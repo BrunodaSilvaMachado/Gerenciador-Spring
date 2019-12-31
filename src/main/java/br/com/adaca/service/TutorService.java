@@ -1,10 +1,9 @@
 package br.com.adaca.service;
 
-import br.com.adaca.model.Tutor;
-import br.com.adaca.repository.TutorRepository;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
-
+import br.com.adaca.model.Tutor;
+import br.com.adaca.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,38 +20,39 @@ public class TutorService {
     private TutorRepository tutorRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     /**
-    * Lista todos os tutores cadastrados no banco de dados
-    *
-    * @return Lista com todos os tutores cadastrados
-    */
+     * Lista todos os tutores cadastrados no banco de dados
+     *
+     * @return Lista com todos os tutores cadastrados
+     */
     public List<Tutor> listar() {
         List<Tutor> tutores = new ArrayList<>();
         for (Tutor tutor : tutorRepository.findAll()) {
             tutores.add(tutor);
         }
-        if(tutores.isEmpty()) throw new NotFoundException("Nenhum tutor encontrado!");
+        if (tutores.isEmpty()) throw new NotFoundException("Nenhum tutor encontrado!");
         return tutores;
     }
 
     /**
-    * Efetua uma busca por ID do tutor cadastrado
-    *
-    * @param id ID do tutor já existente no banco de dados
-    * @return Objeto do tutor encontrado
-    */
+     * Efetua uma busca por ID do tutor cadastrado
+     *
+     * @param id ID do tutor já existente no banco de dados
+     * @return Objeto do tutor encontrado
+     */
     public Tutor selecionar(Integer id) {
         Optional<Tutor> tutor = tutorRepository.findById(id);
-        if (!tutor.isPresent()) throw new NotFoundException("Tutor não encontrado! Id: " + id);
+        if (tutor.isEmpty()) throw new NotFoundException("Tutor não encontrado! Id: " + id);
         return tutor.get();
     }
 
     /**
-    * Salva o tutor da criança no banco de dados
-    *
-    * @param tutor Objeto preenchido do tutor a ser gravado
-    * @return Objeto salvo
-    */
+     * Salva o tutor da criança no banco de dados
+     *
+     * @param tutor Objeto preenchido do tutor a ser gravado
+     * @return Objeto salvo
+     */
     public Tutor salvar(Tutor tutor) {
         if (tutor.getId() != null) {
             Optional<Tutor> op = tutorRepository.findById(tutor.getId());
@@ -63,14 +63,14 @@ public class TutorService {
     }
 
     /**
-    * Altera o cadastro do tutor no bando de dados
-    *
-    * @param tutor Objeto preenchido com os dados já alterados
-    * @return Objeto alterado
-    */
+     * Altera o cadastro do tutor no bando de dados
+     *
+     * @param tutor Objeto preenchido com os dados já alterados
+     * @return Objeto alterado
+     */
     public Tutor alterar(Tutor tutor) {
         Tutor sess = null;
-        if(tutor.getId() != null) {
+        if (tutor.getId() != null) {
             tutor.setSenha(passwordEncoder.encode(tutor.getSenha()));
             sess = tutorRepository.save(tutor);
         }
@@ -78,25 +78,24 @@ public class TutorService {
     }
 
     /**
-    * Efetua uma busca por ID do tutor cadastrado e remove-o do banco de dados
-    *
-    * @param id ID do tutor já existente no banco de dados
-    */
+     * Efetua uma busca por ID do tutor cadastrado e remove-o do banco de dados
+     *
+     * @param id ID do tutor já existente no banco de dados
+     */
     public void remover(Integer id) {
         Optional<Tutor> tutor = tutorRepository.findById(id);
-        if (!tutor.isPresent()){
+        if (tutor.isEmpty()) {
             throw new NotFoundException("Id: " + id);
-        }
-        else {
+        } else {
             tutorRepository.delete(tutor.get());
         }
     }
 
     /**
-    * Remove o cadastro do tutor do banco de dados
-    *
-    * @param tutor Objeto preenchido do cadastro já existente no banco de dados
-    */
+     * Remove o cadastro do tutor do banco de dados
+     *
+     * @param tutor Objeto preenchido do cadastro já existente no banco de dados
+     */
     public void remover(Tutor tutor) {
         tutorRepository.delete(tutor);
     }

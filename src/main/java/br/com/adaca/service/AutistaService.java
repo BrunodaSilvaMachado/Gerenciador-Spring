@@ -15,11 +15,12 @@ public class AutistaService {
 
     @Autowired
     private AutistaRepository autistaRepository;
+
     /**
-    * Lista todas as crianças cadastradas no banco de dados
-    *
-    * @return Lista com todas as crianças cadastradas
-    */
+     * Lista todas as crianças cadastradas no banco de dados
+     *
+     * @return Lista com todas as crianças cadastradas
+     */
     public List<Autista> listar() {
         List<Autista> autistas = autistaRepository.findAll();
         if (autistas.isEmpty()) throw new NotFoundException("Nenhuma criança encontrada!");
@@ -27,10 +28,10 @@ public class AutistaService {
     }
 
     /*
-    * Lista id e nome de todas as crianças cadastradas no banco de dados
-    *
-    * @return Lista de ids e nomes de todas as crianças cadastradas
-    */
+     * Lista id e nome de todas as crianças cadastradas no banco de dados
+     *
+     * @return Lista de ids e nomes de todas as crianças cadastradas
+     */
     /*
         public List<AutistaDTO> listarNomesId() {
             List<Autista> autistas = autistaRepository.listNamesId();
@@ -40,11 +41,11 @@ public class AutistaService {
     */
 
     /**
-    * Efetua uma busca por ID da criança cadastrada
-    *
-    * @param id ID da criança já existente no banco de dados
-    * @return Objeto da criança encontrada
-    */
+     * Efetua uma busca por ID da criança cadastrada
+     *
+     * @param id ID da criança já existente no banco de dados
+     * @return Objeto da criança encontrada
+     */
     public Autista selecionar(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
         if (autista.isEmpty()) throw new NotFoundException("Criança não encontrada! Id: " + id);
@@ -52,11 +53,11 @@ public class AutistaService {
     }
 
     /**
-    * Salva o cadastro da criança no banco de dados
-    *
-    * @param autista Objeto preenchido do cadastro a ser gravado
-    * @return Objeto da criança salva
-    */
+     * Salva o cadastro da criança no banco de dados
+     *
+     * @param autista Objeto preenchido do cadastro a ser gravado
+     * @return Objeto da criança salva
+     */
     public Autista salvar(Autista autista) {
         if (autista.getId() != null) {
             Optional<Autista> op = autistaRepository.findById(autista.getId());
@@ -73,11 +74,12 @@ public class AutistaService {
      */
     public Autista alterar(Autista autista) {
         Autista aut = null;
-        if(autista.getId() != null) {
+        if (autista.getId() != null) {
             aut = (autistaRepository.save((autista)));
         }
         return aut;
     }
+
     /**
      * Efetua uma busca por ID da criança cadastrada e remove-a do banco de dados
      *
@@ -87,8 +89,7 @@ public class AutistaService {
         Optional<Autista> autista = autistaRepository.findById(id);
         if (autista.isEmpty()) {
             throw new NotFoundException("id: " + id);
-        }
-        else {
+        } else {
             autistaRepository.delete(autista.get());
         }
     }

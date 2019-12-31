@@ -11,103 +11,80 @@
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Relatório</strong>
+        <strong>Visualizador de Relatórios</strong>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" method="POST" style="margin: 10px" th:action="@{/Gerenciador/Relatorios/save}"
-              th:object="${entitys}">
-            <fieldset>
-                <div class="table-responsive">
-                    <table class="table table-sm table-striped table-hover table-bordered">
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <div th:each="entity, item : *{wrapper}">
-                            <tr>
-                                <td><h3 style="color:#00ee99">Informações de série:</h3></td>
-                                <td>
-                                    <b>ID do tutor:</b><br>
-                                    <b>ID da Criança:</b><br>
-                                    <b>Nome da atividade:</b><br>
-                                    <b>Mascara da atividade:</b><br>
-                                    <b>Classificação:</b><br>
-                                </td>
-                                <td>
-                                    <div th:text="${entity.idTutor}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].idTutor}" type="hidden"/>
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-hover table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                <div th:each="entity : {entitys.wrapper}">
+                    <tr>
+                        <td><h3 style="color:#00ee99">Informações de série:</h3></td>
+                        <td>
+                            <b>ID do tutor:</b><br>
+                            <b>ID da Criança:</b><br>
+                            <b>Nome da atividade:</b><br>
+                            <b>Mascara da atividade:</b><br>
+                            <b>Classificação:</b><br>
+                        </td>
+                        <td>
+                            <div th:text="${entity.idTutor}"></div>
 
-                                    <div th:text="${entity.idAutista}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].idAutista}" type="hidden"/>
+                            <div th:text="${entity.idAutista}"></div>
 
-                                    <div th:text="${entity.nome}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].nome}" type="hidden"/>
+                            <div th:text="${entity.nome}"></div>
 
-                                    <div th:text="${entity.mask}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].mask}" type="hidden"/>
+                            <div th:text="${entity.mask}"></div>
 
-                                    <div th:text="${entity.classificacao}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].classificacao}" type="hidden"/>
+                            <div th:text="${entity.classificacao}"></div>
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><h3 style="color:#00ee99">Estatísticas:</h3></td>
-                                <td>
-                                    <b>Numero de Partidas: </b><br>
-                                    <b>Tempo máximo (s):</b><br>
-                                    <b>Tempo mínimo (s):</b><br>
-                                    <b>Tempo por partida (s):</b><br>
-                                    <b>Dicas por partida:</b><br>
-                                    <b>Média de cliques Totais:</b><br>
-                                    <b>Média percentual de cliques certos (%):</b><br>
-                                    <b>Média percentual de cliques errados (%):</b><br>
-                                    <b>Média de assertividade:</b><br>
-                                    <b>Média de desempenho (1/s):</b><br>
-                                </td>
-                                <td>
-                                    <div th:text="${entity.nPartidas}"></div>
-                                    <input readOnly="readonly"
-                                           th:field="*{wrapper[__${item.index}__].nPartidas}" type="hidden"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h3 style="color:#00ee99">Estatísticas:</h3></td>
+                        <td>
+                            <b>Numero de Partidas: </b><br>
+                            <b>Tempo máximo (s):</b><br>
+                            <b>Tempo mínimo (s):</b><br>
+                            <b>Tempo por partida (s):</b><br>
+                            <b>Dicas por partida:</b><br>
+                            <b>Média de cliques Totais:</b><br>
+                            <b>Média percentual de cliques certos (%):</b><br>
+                            <b>Média percentual de cliques errados (%):</b><br>
+                            <b>Média de assertividade:</b><br>
+                            <b>Média de desempenho (1/s):</b><br>
+                        </td>
+                        <td>
+                            <div th:text="${entity.nPartidas}"></div>
 
-                                    <div th:text="${entity.tempoMax}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].tempoMax}" type="hidden"/>
+                            <div th:text="${entity.tempoMax}"></div>
 
-                                    <div th:text="${entity.tempoMin}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].tempoMin}" type="hidden"/>
+                            <div th:text="${entity.tempoMin}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.dicaPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].dicaPorPartida}" type="hidden"/>
+                            <div th:text="${#numbers.formatDecimal(entity.dicaPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.tempoPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].tempoPorPartida}" type="hidden"/>
+                            <div th:text="${#numbers.formatDecimal(entity.tempoPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.mdCliquesTotais,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].mdCliquesTotais}" type="hidden"/>
+                            <div th:text="${#numbers.formatDecimal(entity.mdCliquesTotais,1,'DEFAULT',3,'DEFAULT')}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.mdPerCliquesCertos,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].mdPerCliquesCertos}" type="hidden"/>
+                            <div th:text="${#numbers.formatDecimal(entity.mdPerCliquesCertos,1,'DEFAULT',3,'DEFAULT')}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.mdPerCliquesErrados,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].mdPerCliquesErrados}" type="hidden"/>
+                            <div th:text="${#numbers.formatDecimal(entity.mdPerCliquesErrados,1,'DEFAULT',3,'DEFAULT')}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.mdAssertividade,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].mdAssertividade}" type="hidden"/>
+                            <div th:text="${#numbers.formatDecimal(entity.mdAssertividade,1,'DEFAULT',3,'DEFAULT')}"></div>
 
-                                    <div th:text="${#numbers.formatDecimal(entity.mdDesempenho,1,'DEFAULT',3,'DEFAULT')}"></div>
-                                    <input readOnly="readonly" th:field="*{wrapper[__${item.index}__].mdDesempenho}" type="hidden"/>
-
-                                </td>
-                            </tr>
-                        </div>
-                        </tbody>
-                    </table>
+                            <div th:text="${#numbers.formatDecimal(entity.mdDesempenho,1,'DEFAULT',3,'DEFAULT')}"></div>
+                        </td>
+                    </tr>
                 </div>
-            </fieldset>
-            <div class="form-group row">
-                <button class="btn btn-sm btn-primary" type="submit">Salvar</button>
-                <a class="btn btn-sm btn-default" th:href="@{/Gerenciador/Relatorios/list/}">Voltar</a>
-            </div>
-        </form>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group row">
+            <a class="btn btn-sm btn-default" th:href="@{/Gerenciador/Relatorios/list/}">Voltar</a>
+        </div>
     </div>
 </div>
 </body>

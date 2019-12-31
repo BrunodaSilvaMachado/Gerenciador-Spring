@@ -3,7 +3,6 @@ package br.com.adaca.mapper;
 import br.com.adaca.dto.RelatorioDTO;
 import br.com.adaca.model.Relatorio;
 import br.com.adaca.util.BaseMapper;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

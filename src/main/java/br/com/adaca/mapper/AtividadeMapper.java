@@ -3,7 +3,6 @@ package br.com.adaca.mapper;
 import br.com.adaca.dto.AtividadeDTO;
 import br.com.adaca.model.Atividade;
 import br.com.adaca.util.BaseMapper;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

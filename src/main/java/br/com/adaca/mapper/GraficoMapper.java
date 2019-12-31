@@ -3,7 +3,6 @@ package br.com.adaca.mapper;
 import br.com.adaca.dto.GraficoDTO;
 import br.com.adaca.model.Grafico;
 import br.com.adaca.util.BaseMapper;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

@@ -65,7 +65,7 @@ public class AutistaDTO implements Serializable, BaseId {
     @NotBlank
     @Size(max = 200, message = "Máximo 200 caracteres.")
     private String terapia;
-    @Size(max  = 65535, message = "Máximo 65535 caracteres.")
+    @Size(max = 65535, message = "Máximo 65535 caracteres.")
     private String observacao;
     private Byte[] foto;
     private List<MedicamentoDTO> medicamentoList;

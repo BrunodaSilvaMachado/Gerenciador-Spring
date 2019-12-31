@@ -1,5 +1,6 @@
 package br.com.adaca.dto;
 
+import br.com.adaca.model.Role;
 import br.com.adaca.util.BaseId;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,6 +36,7 @@ public class AdministradorDTO implements Serializable, BaseId {
     private Integer nivelacesso;
     private List<GraficoDTO> graficoList;
     private List<RelatorioDTO> relatorioList;
+    private Set<Role> roles;
 
     public Integer getId() {
         return id;

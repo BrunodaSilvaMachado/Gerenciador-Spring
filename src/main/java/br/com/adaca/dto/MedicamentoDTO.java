@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class MedicamentoDTO implements Serializable  {
+public class MedicamentoDTO implements Serializable {
 
     private static final long serialVersionUID = 261925704169274139L;
     private Integer id;

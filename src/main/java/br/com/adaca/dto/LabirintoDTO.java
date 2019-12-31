@@ -3,7 +3,6 @@ package br.com.adaca.dto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -15,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class LabirintoDTO implements Serializable  {
+public class LabirintoDTO implements Serializable {
 
     private static final long serialVersionUID = -5204466311220667434L;
     private Integer id;

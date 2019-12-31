@@ -1,10 +1,9 @@
 package br.com.adaca.handler;
 
-import br.com.adaca.exception.EmptyException;
-import br.com.adaca.util.ErrorDetails;
 import br.com.adaca.exception.ConflictException;
+import br.com.adaca.exception.EmptyException;
 import br.com.adaca.exception.NotFoundException;
-
+import br.com.adaca.util.ErrorDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -13,7 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 

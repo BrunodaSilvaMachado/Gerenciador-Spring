@@ -19,7 +19,7 @@
                 <thead>
                 </thead>
                 <tbody>
-                <div th:each="entity : {entitys.wrapper}">
+                <div th:each="entity : ${entitys.wrapper}">
                     <tr>
                         <td><h3 style="color:#00ee99">Informações de série:</h3></td>
                         <td>
@@ -81,9 +81,8 @@
                 </div>
                 </tbody>
             </table>
-        </div>
-        <div class="form-group row">
-            <a class="btn btn-sm btn-default" th:href="@{/Gerenciador/Relatorios/list/}">Voltar</a>
+            <a class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Relatorios/list/}">Voltar</a>
+
         </div>
     </div>
 </div>

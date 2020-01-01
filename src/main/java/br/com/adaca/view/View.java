@@ -53,8 +53,8 @@ public abstract class View<O extends BaseId> {
 
         try {
             mv.addObject(ATTRIBUTE_NAME, listar().getBody());
-        } catch (Exception ignored) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return mv;

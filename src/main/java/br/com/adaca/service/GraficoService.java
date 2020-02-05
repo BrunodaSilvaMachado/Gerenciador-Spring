@@ -1,5 +1,6 @@
 package br.com.adaca.service;
 
+import br.com.adaca.dto.RelatorioEstatisticaDTOListWrapper;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
 import br.com.adaca.model.Grafico;
@@ -7,6 +8,7 @@ import br.com.adaca.repository.GraficoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -104,5 +106,10 @@ public class GraficoService {
      */
     public void remover(Grafico grafico) {
         graficoRepository.delete(grafico);
+    }
+
+    public RelatorioEstatisticaDTOListWrapper graficoToRelatorioEstatisticaDTOList(Grafico grafico) {
+        String graficoEstatisticaDTOString = new String(grafico.getGrafico(), StandardCharsets.UTF_8);
+        return RelatorioEstatisticaDTOListWrapper.parseRelatorioConteinerListWrapper(graficoEstatisticaDTOString);
     }
 }

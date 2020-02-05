@@ -33,7 +33,7 @@ public class Grafico implements Serializable, BaseId {
     private Integer id;
     @Lob
     @Column(nullable = false)
-    private Byte[] grafico;
+    private byte[] grafico;
     @Column(nullable = false, length = 30)
     private String tipografico;
     @Temporal(TemporalType.TIMESTAMP)

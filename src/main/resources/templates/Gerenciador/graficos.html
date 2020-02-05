@@ -19,9 +19,8 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Gráficos</th>
-                    <th>Tipo relatorio</th>
-                    <th>Data gerado</th>
+                    <th>Tipo de Gráfico</th>
+                    <th>Data geração</th>
                     <th>Id autista</th>
                     <th>Id administrador</th>
                     <th></th>
@@ -30,15 +29,14 @@
                 <tbody>
                 <tr th:each="entity : ${entitys}">
                     <td th:text="${entity.id}"></td>
-                    <td th:text="${entity.graficos}"></td>
-                    <td th:text="${entity.tiporelatorio}"></td>
+                    <td th:text="${entity.tipografico}"></td>
                     <td th:text="${#dates.format(entity.datagerado, 'dd/MM/yyyy hh:mm:ss')}"></td>
                     <td th:text="${entity.idautista}"></td>
-                    <td th:text="${entity.idadministrador}"></td>
+                    <td th:text="${entity.idadministrador.id}"></td>
                     <td>
                         <div class="btn-group pull-right">
                             <a class="btn btn-sm btn-primary"
-                               th:href="@{/Gerenciador/Graficos/edit/{id}(id=${entity.id})}">Editar</a>
+                               th:href="@{/Gerenciador/Graficos/view/{id}(id=${entity.id})}">Visualizar</a>
                             <a class="delete btn btn-sm btn-danger"
                                th:href="@{/Gerenciador/Graficos/delete/{id}(id=${entity.id})}">Excluir</a>
                         </div>
@@ -47,9 +45,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="panel-footer">
-        <a class="btn btn-sm btn-success" th:href="@{/Gerenciador/Graficos/add/}">Adicionar</a>
     </div>
 </div>
 </body>

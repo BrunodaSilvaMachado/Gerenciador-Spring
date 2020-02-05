@@ -1,9 +1,7 @@
 package br.com.adaca.service;
 
-import br.com.adaca.dto.AdministradorDTO;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
-import br.com.adaca.mapper.AdministradorMapper;
 import br.com.adaca.model.Administrador;
 import br.com.adaca.model.Role;
 import br.com.adaca.repository.AdministradorRepository;
@@ -28,8 +26,6 @@ public class AdministradorService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private AdministradorMapper administradorMapper;
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     /**
@@ -37,13 +33,13 @@ public class AdministradorService implements UserDetailsService {
      *
      * @return Lista com todos os administradores cadastrados
      */
-    public List<AdministradorDTO> listar() {
+    public List<Administrador> listar() {
         List<Administrador> administradores = new ArrayList<>();
         for (Administrador administrador : administradorRepository.findAll()) {
             administradores.add(administrador);
         }
         if (administradores.isEmpty()) throw new NotFoundException("Nenhum administrador encontrado!");
-        return administradorMapper.toDto(administradores);
+        return (administradores);
     }
 
     /**
@@ -52,10 +48,10 @@ public class AdministradorService implements UserDetailsService {
      * @param id ID de administrador já existente no banco de dados
      * @return Objeto do administrador encontrado
      */
-    public AdministradorDTO selecionar(Integer id) {
+    public Administrador selecionar(Integer id) {
         Optional<Administrador> administrador = administradorRepository.findById(id);
-        if (administrador.isEmpty()) throw new NotFoundException("Administrador não encontrado! Id: " + id);
-        return administradorMapper.toDto(administrador.get());
+        if (!administrador.isPresent()) throw new NotFoundException("Administrador não encontrado! Id: " + id);
+        return (administrador.get());
     }
 
     /**
@@ -64,7 +60,7 @@ public class AdministradorService implements UserDetailsService {
      * @param administrador Objeto preenchido do cadastro a ser gravado
      * @return Objeto do administador salvo
      */
-    public AdministradorDTO salvar(AdministradorDTO administrador) {
+    public Administrador salvar(Administrador administrador) {
         if (administrador.getId() != null) {
             Optional<Administrador> op = administradorRepository.findById(administrador.getId());
             if (op.isPresent()) throw new ConflictException("O administrador já existe!");
@@ -72,7 +68,7 @@ public class AdministradorService implements UserDetailsService {
         administrador.setSenha(passwordEncoder.encode(administrador.getSenha()));
         Role userRole = roleRepository.findByRole("ADMIN");
         administrador.setRoles(new HashSet<>(Collections.singletonList(userRole)));
-        return administradorMapper.toDto(administradorRepository.save(administradorMapper.toEntity(administrador)));
+        return (administradorRepository.save((administrador)));
     }
 
     /**
@@ -81,11 +77,11 @@ public class AdministradorService implements UserDetailsService {
      * @param administrador Objeto preenchido com os dados já alterados
      * @return Objeto do administrador alterado
      */
-    public AdministradorDTO alterar(AdministradorDTO administrador) {
-        AdministradorDTO adm = null;
+    public Administrador alterar(Administrador administrador) {
+        Administrador adm = null;
         if (administrador.getId() != null) {
             administrador.setSenha(passwordEncoder.encode(administrador.getSenha()));
-            adm = administradorMapper.toDto(administradorRepository.save(administradorMapper.toEntity(administrador)));
+            adm = (administradorRepository.save((administrador)));
         }
         return adm;
     }
@@ -99,7 +95,7 @@ public class AdministradorService implements UserDetailsService {
      */
     public void remover(Integer id) {
         Optional<Administrador> administrador = administradorRepository.findById(id);
-        if (administrador.isEmpty()) {
+        if (!administrador.isPresent()) {
             throw new NotFoundException("id: " + id);
         } else {
             administradorRepository.delete(administrador.get());
@@ -111,17 +107,17 @@ public class AdministradorService implements UserDetailsService {
      *
      * @param administrador Objeto preenchido do cadastro já existente no banco de dados
      */
-    public void remover(AdministradorDTO administrador) {
-        administradorRepository.delete(administradorMapper.toEntity(administrador));
+    public void remover(Administrador administrador) {
+        administradorRepository.delete((administrador));
     }
 
-    public AdministradorDTO findByUsuario(String usuario) {
-        return administradorMapper.toDto(administradorRepository.findByUsuario(usuario));
+    public Administrador findByUsuario(String usuario) {
+        return (administradorRepository.findByUsuario(usuario));
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Administrador administrador = administradorRepository.findByUsuario(username);
+        Administrador administrador = findByUsuario(username);
         if (administrador == null) {
             throw new UsernameNotFoundException("Usuario ou senha invalidos.");
         }

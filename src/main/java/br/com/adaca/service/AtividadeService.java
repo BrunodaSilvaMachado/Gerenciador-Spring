@@ -39,7 +39,7 @@ public class AtividadeService {
      */
     public Atividade selecionar(Integer id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
-        if (atividade.isEmpty()) throw new NotFoundException("Atividade não encontrada! Id: " + id);
+        if (!atividade.isPresent()) throw new NotFoundException("Atividade não encontrada! Id: " + id);
         return (atividade.get());
     }
 
@@ -78,7 +78,7 @@ public class AtividadeService {
      */
     public void remover(Integer id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
-        if (atividade.isEmpty()) {
+        if (!atividade.isPresent()) {
             throw new NotFoundException("id: " + id);
         } else {
             atividadeRepository.delete(atividade.get());

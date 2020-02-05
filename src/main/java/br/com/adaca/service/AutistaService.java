@@ -48,7 +48,7 @@ public class AutistaService {
      */
     public Autista selecionar(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (autista.isEmpty()) throw new NotFoundException("Criança não encontrada! Id: " + id);
+        if (!autista.isPresent()) throw new NotFoundException("Criança não encontrada! Id: " + id);
         return (autista.get());
     }
 
@@ -87,7 +87,7 @@ public class AutistaService {
      */
     public void remover(Integer id) {
         Optional<Autista> autista = autistaRepository.findById(id);
-        if (autista.isEmpty()) {
+        if (!autista.isPresent()) {
             throw new NotFoundException("id: " + id);
         } else {
             autistaRepository.delete(autista.get());

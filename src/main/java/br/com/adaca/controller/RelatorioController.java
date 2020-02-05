@@ -1,8 +1,8 @@
 package br.com.adaca.controller;
 
-import br.com.adaca.dto.AdministradorDTO;
 import br.com.adaca.dto.RelatorioEstatisticaDTOListWrapper;
-import br.com.adaca.mapper.AdministradorMapper;
+import br.com.adaca.model.Administrador;
+import br.com.adaca.model.Grafico;
 import br.com.adaca.model.Relatorio;
 import br.com.adaca.model.TutorAndAutista;
 import br.com.adaca.service.*;
@@ -30,11 +30,11 @@ public class RelatorioController {
     @Autowired
     private AdministradorService administradorService;
     @Autowired
-    private AdministradorMapper administradorMapper;
-    @Autowired
     private TutorService tutorService;
     @Autowired
     private AutistaService autistaService;
+    @Autowired
+    private GraficoService graficoService;
 
     @GetMapping()
     public ResponseEntity<List<Relatorio>> listar() {
@@ -80,18 +80,19 @@ public class RelatorioController {
 
         try {
             mv.addObject("entitys", listar().getBody());
+            mv.addObject("autistas", autistaService.listar());
+            mv.addObject("tutores", tutorService.listar());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mv.addObject("autistas", autistaService.listar());
-        mv.addObject("tutores", tutorService.listar());
+
         mv.addObject("consultas", new TutorAndAutista());
 
         return mv;
     }
 
-    @GetMapping("/show/{id}")
-    private ModelAndView mvShow(@PathVariable("id") Integer id) {
+    @GetMapping("/view/{id}")
+    private ModelAndView mvView(@PathVariable("id") Integer id) {
         ModelAndView mv = new ModelAndView();
         Relatorio relatorio = selecionar(id).getBody();
 
@@ -131,12 +132,26 @@ public class RelatorioController {
             return new ModelAndView("redirect:invalid-request");
         }
 
-        AdministradorDTO administradorDTO = administradorService.findByUsuario(principal.getName());
-        Relatorio relatorio = relatorioService.relatorioConteinerDTOListWrapperToRelatorio(relatorioEstatisticaDTOListWrapper);
-        relatorio.setIdadministrador(administradorMapper.toEntity(administradorDTO));
-        salvar(relatorio);
+        salvarRelatorioGrafico(relatorioEstatisticaDTOListWrapper, principal.getName());
 
         return new ModelAndView("redirect:list");
+    }
+
+    private void salvarRelatorioGrafico(RelatorioEstatisticaDTOListWrapper relatorioEstatisticaDTOListWrapper, String name) {
+        Grafico grafico = new Grafico();
+
+        Administrador administrador = administradorService.findByUsuario(name);
+        Relatorio relatorio = relatorioService.relatorioConteinerDTOListWrapperToRelatorio(relatorioEstatisticaDTOListWrapper);
+
+        relatorio.setIdadministrador(administrador);
+        grafico.setIdadministrador(administrador);
+        grafico.setIdautista(relatorio.getIdautista());
+        grafico.setDatagerado(relatorio.getDatagerado());
+        grafico.setTipografico("Canva");
+        grafico.setGrafico(relatorio.getRelatorio());
+
+        salvar(relatorio);
+        graficoService.salvar(grafico);
     }
 
     @GetMapping("/delete/{id}")

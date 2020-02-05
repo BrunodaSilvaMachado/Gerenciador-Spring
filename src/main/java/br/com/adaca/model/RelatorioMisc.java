@@ -36,4 +36,18 @@ public class RelatorioMisc implements Serializable {
     private String classificacao;
     @Column(nullable = false)
     private String nome;
+
+    public RelatorioMisc(Integer id, Integer idSessao, Integer idAtividade, Integer dicas, Integer cliqueCerto,
+                         Integer cliqueErrado, Integer tempo, String classificacao, String nome) {
+
+        setId(id);
+        setIdSessao(idSessao);
+        setIdAtividade(idAtividade);
+        setDicas(dicas);
+        setCliqueCerto(cliqueCerto);
+        setCliqueErrado(cliqueErrado);
+        setTempo(tempo.doubleValue());
+        setClassificacao(classificacao);
+        setNome(nome);
+    }
 }

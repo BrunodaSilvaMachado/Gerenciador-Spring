@@ -7,6 +7,7 @@
     <title>Relatório</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/Chart.bundle.js" th:src="@{/js/Chart.bundle.js}"></script>
 </head>
 <body>
 <div class="panel panel-default">
@@ -81,6 +82,7 @@
                 </div>
                 </tbody>
             </table>
+            <div th:insert="Gerenciador/graficoView::graficoview"></div>
             <a class="btn btn-sm btn-primary" th:href="@{/Gerenciador/Relatorios/list/}">Voltar</a>
 
         </div>

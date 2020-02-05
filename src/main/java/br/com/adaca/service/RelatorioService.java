@@ -5,6 +5,7 @@ import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
 import br.com.adaca.model.Autista;
 import br.com.adaca.model.Relatorio;
+import br.com.adaca.repository.AutistaRepository;
 import br.com.adaca.repository.RelatorioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,12 @@ import java.util.Optional;
 @Service
 public class RelatorioService {
     private RelatorioRepository relatorioRepository;
+    private AutistaRepository autistaRepository;
 
     @Autowired
-    public RelatorioService(RelatorioRepository relatorioRepository) {
+    public RelatorioService(RelatorioRepository relatorioRepository, AutistaRepository autistaRepository) {
         this.relatorioRepository = relatorioRepository;
+        this.autistaRepository = autistaRepository;
     }
 
     /**
@@ -59,7 +62,7 @@ public class RelatorioService {
      */
     public Relatorio selecionar(Integer id) {
         Optional<Relatorio> relatorio = relatorioRepository.findById(id);
-        if (relatorio.isEmpty()) throw new NotFoundException("Relatório não encontrado! Id: " + id);
+        if (!relatorio.isPresent()) throw new NotFoundException("Relatório não encontrado! Id: " + id);
         return relatorio.get();
     }
 
@@ -98,7 +101,7 @@ public class RelatorioService {
      */
     public void remover(Integer id) {
         Optional<Relatorio> relatorio = relatorioRepository.findById(id);
-        if (relatorio.isEmpty()) {
+        if (!relatorio.isPresent()) {
             throw new NotFoundException("Id: " + id);
         } else {
             relatorioRepository.delete(relatorio.get());
@@ -116,9 +119,9 @@ public class RelatorioService {
 
     public Relatorio relatorioConteinerDTOListWrapperToRelatorio(@NotNull RelatorioEstatisticaDTOListWrapper relatorioEstatisticaDTOListWrapper) {
         Relatorio relatorio = new Relatorio();
-        Autista autista = new Autista();
-
-        autista.setId(relatorioEstatisticaDTOListWrapper.getWrapper().get(0).getIdAutista());
+        Autista autista = autistaRepository.findById(
+                relatorioEstatisticaDTOListWrapper.getWrapper().get(0).getIdAutista()
+        ).orElse(new Autista());
         relatorio.setIdautista(autista);
         relatorio.setDatagerado(new Date());
         relatorio.setTiporelatorio("plain/text");

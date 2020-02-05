@@ -1,239 +1,22 @@
-body{
-	/*background-image: url('logoadacafinal.jpg');
-	background-repeat: no-repeat;
-	-moz-background-size: 100% 100%;
-	-webkit-background-size: 100% 100%;
-	background-size: 100% 100%;}*/
-	background-color: #49bdff
-}
-/*.frame{
-background-color: #FFF;
-position: absolute;
-width: 450px;
-height: 750px;
-left: 1%;
-top:1%;
-
-}*/
-/*alterar dimensão do iframe da pagina da configuração*/
-
-#input-tempo-dica{
-
-	margin-top: 100px;
-	margin-left: 100px;
-}
-#campoTempoDica{
-	width: 60px;
-}
-
-.input-div{
-	margin:10px;
-	margin-top: 5px;
-	padding:5px;
-	height: 30px;
-	width:185px;
-	background-color:#f2f5f7;
-	border-radius:3px;
-}
-
-.input-div input{
-	width:180px;
-	height:30px;
-	padding-left:5px;
-	/*margin-top: 0px;*/
-	margin-left: -15px;
-	font: normal 13px sans-serif;
-	color:#aeaeae;
-	border-radius:3px;
-	border:1px solid #bfc4c6;
-	outline:none;
-}
-.input-div:hover{
-	background-color:#e0f1fc;
-}
-.input-div:hover input{
-	border-color:#7d6cdd;
-}
-
-#login-box{
-	background-color:#1992b7;
-	width:791px;
-	height:691px;                 /*Aqui é o tamanho da da borda*/
-	margin:10px -5px -10px 5px;
-	border-radius:5px;
-	overflow-x: hidden;
-	overflow-y: hidden;
-}
 .divs{
-	position: absolute;
+	position: relative;
 	text-align: center;
 }
 
-#divDica{
-	top:50px;
-	left:0px;
-	width:300px;
-	height:240px;
-	/*background-color: yellow;*/
-	box-shadow:1px 0px 6px 0px black;
-}
-
-#divParabens{
-	top:300px;
-	left:0px;
-	width:300px;
-	height:160px;
-	/*background-color: blue;*/
-	box-shadow:1px 0px 6px black;
-}
-
-
-#divSom{
-	top:470px;
-	left:0px;
-	width:300px;
-	height:230px;
-	/*background-color: black;*/
-	box-shadow:1px 0px 6px black;
-}
-
 #divJogos{
-	top:50px;
-	left:300px;
-	width:680px;
-	height:550px;
+	/*top:50px;*/
+    /*left:300px;*/
+	width:100%;
+	height:auto;
 	/*background-color: green;*/
 	box-shadow:1px 0px 6px black;
 	overflow: auto;
-	/*pesquisar como colocar um scroll aparecendo*/
 }
-
-#divBotao{
-	margin-top:555px;
-	margin-left:300px;
-	width:470px;
-	height:120px;
-	/*background-color: orange;*/
-	box-shadow:1px 0px 6px black;
-	overflow: hidden;
-
-}
-
-#loginF{
-	width:770px;
-	height:670px;
-}
-
-#comboboxSom{
-	margin:20px;
-	padding:5px;
-	background-color:#f2f5f7;
-	border-radius:3px;
-}
-
-#login-box-interno{
-	background-color:#fdfdfd;
-	width:770px;
-	height:670px;  /*Aqui é o tamanho da caixa cinza*/
-	position: absolute; 
-	margin:10px;
-	border-radius:5px;
-	box-shadow:0px 0px 5px black;
-	overflow: hidden;
-}
-#login-box-label{
-	height:50px;
-
-	text-align:center;
-
-	font: bold 14px/45px sans-serif;
-	border-top-left-radius:5px;
-	border-top-right-radius:5px;
-
-	/* Permalink - use to edit and share this gradient:   http://colorzilla.com/gradient-editor/#f2f5f6+0,e3eaed+37,c8d7dc+100;Grey+3D+%234 */
-	background: #f2f5f6; /* Old browsers */
-	background: -moz-linear-gradient(top,  #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f5f6), color-stop(37%,#e3eaed), color-stop(100%,#c8d7dc)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
-
-	border-bottom:1px solid white;
-	box-shadow:1px 0px 6px black;
-	color: #555555;
-	text-shadow:1px 0px 1px white;
-
-}
-
 
 #labelJogos{
 	margin-left: 130px;
 	font: bold 14px/45px sans-serif;
 
-}
-
-#botaoConfigAnterior{
-	width: 140px;
-
-}
-
-.botoes{
-	width: 120px; 
-	height: 30px;
-	text-align:center;
-	margin-right:20px;
-	margin-top:20px;
-	float:right;
-	background-color:red;
-	padding:5px 15px;
-	font: bold 12px sans-serif;
-	border-radius:20px;
-	text-shadow:0px 1px 0px white;
-	border:1px solid #9eb9c3;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edf6f9+0,cde5ee+100 */
-	background: #edf6f9; /* Old browsers */
-	background: -moz-linear-gradient(top,  #edf6f9 0%, #cde5ee 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#edf6f9), color-stop(100%,#cde5ee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #edf6f9 0%,#cde5ee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #edf6f9 0%,#cde5ee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #edf6f9 0%,#cde5ee 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #edf6f9 0%,#cde5ee 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#edf6f9', endColorstr='#cde5ee',GradientType=0 ); /* IE6-9 */
-
-	color: #527988;
-	box-shadow:0px 0px 10px #c9c9c9;
-	cursor: pointer;
-}
-
-.botoes2{
-	width: 120px; 
-	height: 30px;
-	text-align:center;
-	margin-right:-140px;
-	margin-top:10px;
-	margin-left: 10px;
-	float:left;
-	background-color:red;
-	padding:5px 15px;
-	font: bold 10px sans-serif;
-	border-radius:20px;
-	text-shadow:0px 1px 0px white;
-	border:1px solid #9eb9c3;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#edf6f9+0,cde5ee+100 */
-	background: #edf6f9; /* Old browsers */
-	background: -moz-linear-gradient(top,  #edf6f9 0%, #cde5ee 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#edf6f9), color-stop(100%,#cde5ee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #edf6f9 0%,#cde5ee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #edf6f9 0%,#cde5ee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #edf6f9 0%,#cde5ee 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #edf6f9 0%,#cde5ee 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#edf6f9', endColorstr='#cde5ee',GradientType=0 ); /* IE6-9 */
-
-	color: #527988;
-	box-shadow:0px 0px 10px #c9c9c9;
-	cursor: pointer;
 }
 
 #botaoSessao:hover, #botaoConfigAnterior:hover{
@@ -248,18 +31,10 @@ top:1%;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cde5ee', endColorstr='#edf6f9',GradientType=0 ); /* IE6-9 */
 }
 
-#comboboxParabens{
-	background-color: #F6F7F9;
-	border-radius: 2px;
-	margin-bottom: 24px;
-	padding: 24px 30px; 
-}
-
-
 #divTreeView
 {
-	top:200px;
-	left:400px;
+	/*top:200px;*/
+	/*left:400px;*/
 	width:500px;
 	height:500px;
 	margin-top:0px;
@@ -267,122 +42,6 @@ top:1%;
 	/*background-color: purple;*/
 	text-align: left;
 }
-
-
-.container {
-	margin-top: 30px;
-	margin-left: 55px;
-	width: 50px;
-	text-align: center;
-}
-
-.container > #dropdownCome{
-	margin: 0 20px;
-	vertical-align: top;
-}
-.container > .dropdown {
-	margin: -30 20px;
-	vertical-align: top;
-}
-
-.dropdown:hover{
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c8d7dc+0,e3eaed+63,f2f5f6+100 */
-	background: #c8d7dc; /* Old browsers */
-	background: -moz-linear-gradient(top,  #c8d7dc 0%, #e3eaed 63%, #f2f5f6 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c8d7dc), color-stop(63%,#e3eaed), color-stop(100%,#f2f5f6)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #c8d7dc 0%,#e3eaed 63%,#f2f5f6 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #c8d7dc 0%,#e3eaed 63%,#f2f5f6 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #c8d7dc 0%,#e3eaed 63%,#f2f5f6 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #c8d7dc 0%,#e3eaed 63%,#f2f5f6 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c8d7dc', endColorstr='#f2f5f6',GradientType=0 ); /* IE6-9 */
-
-}
-
-.dropdown {
-
-	display: inline-block;
-	position: relative;
-	overflow: hidden;
-	height: 28px;
-	width: 150px;
-	background: #f2f2f2;
-	border: 1px solid;
-	border-color: white #f7f7f7 #f5f5f5;
-	border-radius: 3px;
-	background: #f2f5f6; /* Old browsers */
-	background: -moz-linear-gradient(top,  #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f5f6), color-stop(37%,#e3eaed), color-stop(100%,#c8d7dc)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */ 
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-}
-.dropdown:before, .dropdown:after {
-	content: '';
-	position: absolute;
-	z-index: 2;
-	top: 9px;
-	right: 10px;
-	width: 0;
-	height: 0;
-	border: 4px dashed;
-	border-color: #888 transparent;
-	pointer-events: none;
-}
-.dropdown:before {
-	border-bottom-style: solid;
-	border-top: none;
-}
-.dropdown:after {
-	margin-top: 7px;
-	border-top-style: solid;
-	border-bottom: none;
-}
-
-.dropdown-select {
-	position: relative;
-	width: 130%;
-	margin: 0;
-	padding: 6px 8px 6px 10px;
-	height: 28px;
-	line-height: 14px;
-	font-size: 12px;
-	color: #62717a;
-	text-shadow: 0 1px white;
-	/* Fallback for IE 8 */
-	background: #f2f2f2;
-	/* "transparent" doesn't work with Opera */
-	background: rgba(0, 0, 0, 0) !important;
-	border: 0;
-	border-radius: 0;
-	-webkit-appearance: none;
-}
-
-.dropdown-select:hover {
-
-}
-
-.dropdown-select:focus {
-	z-index: 3;
-	width: 100%;
-	color: #394349;
-	outline: 2px solid #49aff2;
-	outline: 2px solid -webkit-focus-ring-color;
-	outline-offset: -2px;
-}
-.dropdown-select > option {
-	margin: 3px;
-	padding: 6px 8px;
-	text-shadow: none;
-	background: #f2f2f2;
-	border-radius: 3px;
-	cursor: pointer;
-}
-
-
 
 /* CSS Tree menu styles */
 .acidjs-css3-treeview,
@@ -508,7 +167,7 @@ top:1%;
 	background-repeat: no-repeat;
 }
 .jogo4 {
-	background-image: url("Jogo_4-Turma%20da%20M%C3%B4nica2/botao.png");
+	background-image: url("Jogo_4-Turma%20da%20Monica2/botao.png");
 	background-size: 14px 14px;
 	background-repeat: no-repeat;
 }

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width" name="viewport"/>
+    <title>Visualizador de Grafico</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/Chart.bundle.js" th:src="@{/js/Chart.bundle.js}"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Visualizador de Grafico</strong>
+    </div>
+    <div class="panel-body" th:fragment="graficoview">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            window.onload = function(){
+                var estatisticas = /*[[${entitys.wrapper}]]*/
+                var labels = new Array();
+                var npartidas = new Array();
+                var desempenhos = new Array();
+                var assertividades = new Array();
+                var backgroundColor = new Array();
+                var r = 0;
+                var g = 0;
+                var b = 0;
+
+                estatisticas.forEach(function(estatistica, indice, array){
+                    r += 4;
+                    g = r * indice;
+                    b += (24 + g);
+
+                    labels.push(estatistica.mask);
+                    npartidas.push(estatistica.npartidas);
+                    desempenhos.push(Math.round(100 * estatistica.mdDesempenho));
+                    assertividades.push(Math.round(100 * estatistica.mdAssertividade));
+                    backgroundColor.push('rgba(' + r + ',' + g%255 + ',' + b%255 + ',0.5)');
+                });
+
+                var desempenhoContext = document.getElementById('canvas-desempenho');
+                var chart = new Chart(desempenhoContext,{
+                    type: 'bar',
+                    data:{
+                        labels: labels,
+                        datasets:[{
+                            label: 'Desempenho %',
+                            data: desempenhos,
+                            backgroundColor: backgroundColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options:{
+                        scales:{
+                            yAxes:[{
+                                ticks:{
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+					}
+                });
+
+                var assertividadeContext = document.getElementById('canvas-assertividade');
+                var chart = new Chart(assertividadeContext,{
+                    type: 'bar',
+                    data:{
+                        labels: labels,
+                        datasets:[{
+                            label: 'Assertividade %',
+                            data: assertividades,
+                            backgroundColor: backgroundColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options:{
+                        scales:{
+                            yAxes:[{
+                                ticks:{
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+					}
+                });
+
+                var partidasContext = document.getElementById('canvas-partidas');
+                var chart = new Chart(partidasContext,{
+                    type: 'bar',
+                    data:{
+                        labels: labels,
+                        datasets:[{
+                            label: 'Nº partidas',
+                            data: npartidas,
+                            backgroundColor: backgroundColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options:{
+                        scales:{
+                            yAxes:[{
+                                ticks:{
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+					}
+                });
+            }
+            /*]]>*/
+
+        </script>
+
+        <canvas id="canvas-desempenho">
+            Unsupported HTML5 canvas
+        </canvas>
+
+        <canvas id="canvas-assertividade">
+            Unsupported HTML5 canvas
+        </canvas>
+
+        <canvas id="canvas-partidas">
+            Unsupported HTML5 canvas
+        </canvas>
+    </div>
+</div>
+</body>
+</html>

@@ -43,7 +43,7 @@ public class TutorService {
      */
     public Tutor selecionar(Integer id) {
         Optional<Tutor> tutor = tutorRepository.findById(id);
-        if (tutor.isEmpty()) throw new NotFoundException("Tutor não encontrado! Id: " + id);
+        if (!tutor.isPresent()) throw new NotFoundException("Tutor não encontrado! Id: " + id);
         return tutor.get();
     }
 
@@ -84,7 +84,7 @@ public class TutorService {
      */
     public void remover(Integer id) {
         Optional<Tutor> tutor = tutorRepository.findById(id);
-        if (tutor.isEmpty()) {
+        if (!tutor.isPresent()) {
             throw new NotFoundException("Id: " + id);
         } else {
             tutorRepository.delete(tutor.get());

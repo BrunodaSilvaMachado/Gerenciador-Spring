@@ -1,6 +1,5 @@
 package br.com.adaca.service;
 
-import br.com.adaca.dto.ConfiguracaoDTO;
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
 import br.com.adaca.mapper.ConfiguracaoMapper;
@@ -26,13 +25,13 @@ public class ConfiguracaoService {
      *
      * @return Lista com todas as configurações gravadas
      */
-    public List<ConfiguracaoDTO> listar() {
+    public List<Configuracao> listar() {
         List<Configuracao> configuracoes = new ArrayList<>();
         for (Configuracao configuracao : configuracaoRepository.findAll()) {
             configuracoes.add(configuracao);
         }
         if (configuracoes.isEmpty()) throw new NotFoundException("Nenhuma configuração encontrada!");
-        return configuracaoMapper.toDto(configuracoes);
+        return (configuracoes);
     }
 
     /**
@@ -42,10 +41,10 @@ public class ConfiguracaoService {
      * @param tutorId   ID do tutor logado no jogo
      * @return Lista com todas as configurações gravadas para aquela criança e aquele tutor
      */
-    public List<ConfiguracaoDTO> listarConfigAutistaTutor(Integer autistaId, Integer tutorId) {
+    public List<Configuracao> listarConfigAutistaTutor(Integer autistaId, Integer tutorId) {
         List<Configuracao> configuracoes = configuracaoRepository.listIdAutistaTutor(autistaId, tutorId);
         if (configuracoes.isEmpty()) throw new NotFoundException("Nenhuma configuração encontrada!");
-        return configuracaoMapper.toDto(configuracoes);
+        return (configuracoes);
     }
 
     /**
@@ -54,10 +53,10 @@ public class ConfiguracaoService {
      * @param id ID da configuração já existente no banco de dados
      * @return Objeto da configuração encontrada
      */
-    public ConfiguracaoDTO selecionar(Integer id) {
+    public Configuracao selecionar(Integer id) {
         Optional<Configuracao> configuracao = configuracaoRepository.findById(id);
         if (!configuracao.isPresent()) throw new NotFoundException("Configuração não encontrada! Id: " + id);
-        return configuracaoMapper.toDto(configuracao.get());
+        return (configuracao.get());
     }
 
     /**
@@ -66,12 +65,12 @@ public class ConfiguracaoService {
      * @param configuracao Objeto preenchido da configuração a ser gravada
      * @return Objeto salvo
      */
-    public ConfiguracaoDTO salvar(ConfiguracaoDTO configuracao) {
+    public Configuracao salvar(Configuracao configuracao) {
         if (configuracao.getId() != null) {
             Optional<Configuracao> op = configuracaoRepository.findById(configuracao.getId());
             if (op.isPresent()) throw new ConflictException("A configuração já existe!");
         }
-        return configuracaoMapper.toDto(configuracaoRepository.save(configuracaoMapper.toEntity(configuracao)));
+        return (configuracaoRepository.save((configuracao)));
     }
 
     /**
@@ -80,10 +79,10 @@ public class ConfiguracaoService {
      * @param configuracao Objeto preenchido com a configuração já alterada
      * @return Objeto alterado
      */
-    public ConfiguracaoDTO alterar(ConfiguracaoDTO configuracao) {
-        ConfiguracaoDTO conf = null;
+    public Configuracao alterar(Configuracao configuracao) {
+        Configuracao conf = null;
         if (configuracao.getId() != null) {
-            conf = configuracaoMapper.toDto(configuracaoRepository.save(configuracaoMapper.toEntity(configuracao)));
+            conf = (configuracaoRepository.save((configuracao)));
         }
         return conf;
     }
@@ -107,7 +106,7 @@ public class ConfiguracaoService {
      *
      * @param configuracao Objeto preenchido da configuração já existente no banco de dados
      */
-    public void remover(ConfiguracaoDTO configuracao) {
-        configuracaoRepository.delete(configuracaoMapper.toEntity(configuracao));
+    public void remover(Configuracao configuracao) {
+        configuracaoRepository.delete((configuracao));
     }
 }

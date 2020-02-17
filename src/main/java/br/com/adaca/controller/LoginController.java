@@ -13,6 +13,11 @@ public class LoginController {
     @Autowired
     private AdministradorService loginService;
 
+    @GetMapping("/")
+    public ModelAndView index() {
+        return new ModelAndView("redirect:/Gerenciador/login");
+    }
+
     @GetMapping("/Gerenciador/login")
     public ModelAndView loginForm() {
         return new ModelAndView("login");

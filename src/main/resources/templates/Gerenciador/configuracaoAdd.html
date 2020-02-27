@@ -20,10 +20,10 @@
     </div>
     <div class="panel-body">
         <form name="configForm" id="configForm" class="form-horizontal" method="POST" style="margin: 10px"
-              th:action="@{/Jogos/Configuracoes/save}" th:object="${entitys}">
+              th:action="@{/Gerenciador/Configuracoes/save}" th:object="${entitys}">
             <div class="form-group row">
                 <button class="btn btn-sm btn-primary" type="button" id="botaoSessao">Salvar</button>
-                <a class="btn btn-sm btn-default" th:href="@{/Jogos/Configuracoes/list/}">Cancelar</a>
+                <a class="btn btn-sm btn-default" th:href="@{/Gerenciador/Configuracoes/list/}">Cancelar</a>
             </div>
             <fieldset>
                 <div class="form-group row">

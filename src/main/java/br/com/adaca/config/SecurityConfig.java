@@ -52,10 +52,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler)
-                .and()
-                .requiresChannel()
-                .antMatchers("/**").requiresSecure();
+                .accessDeniedHandler(accessDeniedHandler);
     }
 
     @Bean

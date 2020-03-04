@@ -40,6 +40,20 @@
                     backgroundColor.push('rgba(' + r + ',' + g%255 + ',' + b%255 + ',0.5)');
                 });
 
+                function normalize(x){
+                    var max = Math.max.apply(Math,x);
+                    var min = Math.min.apply(Math,x);
+
+                    x = x.map(function(v){
+                        return (v - min)/(max - min) * 100;
+                    });
+                    return x;
+                }
+
+                /*npartidas = normalize(npartidas);
+                desempenhos = normalize(desempenhos);
+                assertividades = normalize(assertividades);*/
+
                 var desempenhoContext = document.getElementById('canvas-desempenho');
                 var chart = new Chart(desempenhoContext,{
                     type: 'bar',
@@ -86,17 +100,41 @@
 					}
                 });
 
+                var desempAssertContext = document.getElementById('canvas-desempenho-assertividade');
+                var coords = assertividades.map((v,i) => ({x:v/100, y:desempenhos[i]/100}));
+
+                var chart = new Chart(desempAssertContext,{
+                    type: 'scatter',
+                    data:{
+                        datasets:[{
+                            label: 'Assertividade x Desempenho',
+                            data: coords,
+                            backgroundColor: '#b76e70'
+                        }]
+                    },
+                    options:{
+                        showLines: false,
+                        scales:{
+                            yAxes:[{
+                                ticks:{
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+					}
+                });
+
                 var partidasContext = document.getElementById('canvas-partidas');
                 var chart = new Chart(partidasContext,{
-                    type: 'bar',
+                    type: 'pie',
                     data:{
                         labels: labels,
                         datasets:[{
                             label: 'Nº partidas',
                             data: npartidas,
                             backgroundColor: backgroundColor,
-                            borderWidth: 1
-                        }]
+                            borderWidth: 0.5
+                        }],
                     },
                     options:{
                         scales:{
@@ -118,6 +156,10 @@
         </canvas>
 
         <canvas id="canvas-assertividade">
+            Unsupported HTML5 canvas
+        </canvas>
+
+        <canvas id="canvas-desempenho-assertividade">
             Unsupported HTML5 canvas
         </canvas>
 

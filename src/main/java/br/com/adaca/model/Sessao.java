@@ -16,7 +16,8 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Builder(toBuilder = true)
+@Entity()
 @Table(name = "tb_sessao")
 public class Sessao implements Serializable, BaseId {
 
@@ -42,10 +43,6 @@ public class Sessao implements Serializable, BaseId {
     private Tutor idtutor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsessao")
     private List<Configuracao> configuracaoList;
-
-    public Integer getId() {
-        return id;
-    }
 
     @Override
     public String toString() {

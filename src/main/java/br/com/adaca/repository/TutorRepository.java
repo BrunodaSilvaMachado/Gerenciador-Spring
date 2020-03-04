@@ -1,14 +1,7 @@
 package br.com.adaca.repository;
 
 import br.com.adaca.model.Tutor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.io.Serializable;
-
-public interface TutorRepository extends CrudRepository<Tutor, Serializable> {
-
-    @Query("SELECT t FROM Tutor t WHERE upper(t.usuario) = :usuario AND t.senha = :senha")
-    Tutor login(@Param("usuario") String usuario, @Param("senha") String senha);
+public interface TutorRepository extends JpaRepository<Tutor, Integer> {
 }

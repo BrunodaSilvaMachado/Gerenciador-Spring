@@ -1,12 +1,16 @@
 package br.com.adaca.controller;
 
 import br.com.adaca.model.Configuracao;
+import br.com.adaca.service.AutistaService;
 import br.com.adaca.service.ConfiguracaoService;
+import br.com.adaca.service.SessaoService;
+import br.com.adaca.service.TutorService;
 import br.com.adaca.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -18,6 +22,12 @@ public class ConfiguracaoController extends View<Configuracao> {
 
     @Autowired
     private ConfiguracaoService configuracaoService;
+    @Autowired
+    private TutorService tutorService;
+    @Autowired
+    private AutistaService autistaService;
+    @Autowired
+    private SessaoService sessaoService;
 
     public ConfiguracaoController() {
         super("Gerenciador/configuracoes", "Gerenciador/configuracaoAdd");
@@ -58,5 +68,20 @@ public class ConfiguracaoController extends View<Configuracao> {
     public ResponseEntity<Void> remover(@RequestBody @Valid Configuracao configuracao) {
         configuracaoService.remover(configuracao);
         return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    protected ModelAndView mvAdd(Configuracao o) {
+        ModelAndView mv = new ModelAndView(getAddViewName());
+
+        try {
+            o.setIdsessao(sessaoService.getLastCurrentSessao());
+            mv.addObject(getATTRIBUTE_NAME(), o);
+            mv.addObject("autistas", autistaService.listar());
+            mv.addObject("tutores", tutorService.listar());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mv;
     }
 }

@@ -17,8 +17,9 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tb_tutor", uniqueConstraints = {@UniqueConstraint(columnNames = {"USUARIO"})})
+@Builder(toBuilder = true)
+@Entity(name = "tb_tutor")
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"USUARIO"})})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
@@ -42,10 +43,6 @@ public class Tutor implements Serializable, BaseId {
     private List<Sessao> sessaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtutor")
     private List<Configuracao> configuracaoList;
-
-    public Integer getId() {
-        return id;
-    }
 
     @Override
     public String toString() {

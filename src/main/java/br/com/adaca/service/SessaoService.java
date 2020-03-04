@@ -105,4 +105,8 @@ public class SessaoService {
     public void remover(Sessao sessao) {
         sessaoRepository.delete(sessao);
     }
+
+    public Sessao getLastCurrentSessao(){
+        return sessaoRepository.getLastCurrentSessao();
+    }
 }

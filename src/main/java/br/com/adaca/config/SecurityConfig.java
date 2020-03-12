@@ -45,6 +45,8 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/Gerenciador/menu")
                 .permitAll()
                 .and()
+                .rememberMe()
+                .and()
                 .logout()
                 .invalidateHttpSession(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/Gerenciador/logout"))

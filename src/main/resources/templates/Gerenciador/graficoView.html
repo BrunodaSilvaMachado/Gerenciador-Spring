@@ -40,20 +40,6 @@
                     backgroundColor.push('rgba(' + r + ',' + g%255 + ',' + b%255 + ',0.5)');
                 });
 
-                function normalize(x){
-                    var max = Math.max.apply(Math,x);
-                    var min = Math.min.apply(Math,x);
-
-                    x = x.map(function(v){
-                        return (v - min)/(max - min) * 100;
-                    });
-                    return x;
-                }
-
-                /*npartidas = normalize(npartidas);
-                desempenhos = normalize(desempenhos);
-                assertividades = normalize(assertividades);*/
-
                 var desempenhoContext = document.getElementById('canvas-desempenho');
                 var chart = new Chart(desempenhoContext,{
                     type: 'bar',

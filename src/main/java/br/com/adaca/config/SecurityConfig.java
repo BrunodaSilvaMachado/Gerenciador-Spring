@@ -48,7 +48,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .key("adaca-12-03-20202T13:07")
                 .userDetailsService(userService)
-                .tokenValiditySeconds(3600)
+                .tokenValiditySeconds(86400)
                 .and()
                 .logout()
                 .invalidateHttpSession(true)

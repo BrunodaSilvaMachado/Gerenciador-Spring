@@ -64,9 +64,9 @@
 
                             <div th:text="${entity.tempoMin}"></div>
 
-                            <div th:text="${#numbers.formatDecimal(entity.dicaPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
-
                             <div th:text="${#numbers.formatDecimal(entity.tempoPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
+							
+							<div th:text="${#numbers.formatDecimal(entity.dicaPorPartida,1,'DEFAULT',3,'DEFAULT')}"></div>
 
                             <div th:text="${#numbers.formatDecimal(entity.mdCliquesTotais,1,'DEFAULT',3,'DEFAULT')}"></div>
 

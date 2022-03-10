@@ -7,6 +7,7 @@ import br.com.adaca.model.Role;
 import br.com.adaca.repository.AdministradorRepository;
 import br.com.adaca.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class AdministradorService implements UserDetailsService {
+public class AdministradorService implements UserDetailsService, CommandLineRunner {
 
     @Autowired
     private AdministradorRepository administradorRepository;
@@ -129,5 +130,14 @@ public class AdministradorService implements UserDetailsService {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        Role role = roleRepository.findByRole("ADMIN");
+
+        if (role == null) {
+            roleRepository.save(new Role("ADMIN"));
+        }
     }
 }

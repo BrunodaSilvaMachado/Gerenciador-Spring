@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.lang.NonNull;
 
 @EnableJpaRepositories(basePackages = {"br.com.adaca.repository"})
 @EntityScan(basePackages = {"br.com.adaca.model"})
@@ -17,7 +18,7 @@ public class GerenciadorApplication extends SpringBootServletInitializer {
     }
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    protected SpringApplicationBuilder configure(@NonNull SpringApplicationBuilder builder) {
         return builder.sources(GerenciadorApplication.class);
     }
 }

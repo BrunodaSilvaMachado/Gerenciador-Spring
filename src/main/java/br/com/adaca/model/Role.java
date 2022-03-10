@@ -1,12 +1,16 @@
 package br.com.adaca.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "role")
 public class Role {
@@ -16,6 +20,10 @@ public class Role {
     private int id;
     @Column(name = "nome")
     private String role;
+
+    public Role(String role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {

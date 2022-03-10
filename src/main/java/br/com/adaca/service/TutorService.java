@@ -2,24 +2,32 @@ package br.com.adaca.service;
 
 import br.com.adaca.exception.ConflictException;
 import br.com.adaca.exception.NotFoundException;
+import br.com.adaca.model.Role;
 import br.com.adaca.model.Tutor;
+import br.com.adaca.repository.RoleRepository;
 import br.com.adaca.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class TutorService {
+public class TutorService implements UserDetailsService {
 
 
     @Autowired
     private TutorRepository tutorRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
 
     /**
      * Lista todos os tutores cadastrados no banco de dados
@@ -27,10 +35,7 @@ public class TutorService {
      * @return Lista com todos os tutores cadastrados
      */
     public List<Tutor> listar() {
-        List<Tutor> tutores = new ArrayList<>();
-        for (Tutor tutor : tutorRepository.findAll()) {
-            tutores.add(tutor);
-        }
+        List<Tutor> tutores = new ArrayList<>(tutorRepository.findAll());
         if (tutores.isEmpty()) throw new NotFoundException("Nenhum tutor encontrado!");
         return tutores;
     }
@@ -59,6 +64,8 @@ public class TutorService {
             if (op.isPresent()) throw new ConflictException("O tutor já existe!");
         }
         tutor.setSenha(passwordEncoder.encode(tutor.getSenha()));
+        Role userRole = roleRepository.findByRole("TUTOR");
+        tutor.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         return tutorRepository.save(tutor);
     }
 
@@ -98,5 +105,25 @@ public class TutorService {
      */
     public void remover(Tutor tutor) {
         tutorRepository.delete(tutor);
+    }
+
+    public Tutor findByUsuario(String usuario) {
+        return (tutorRepository.findByUsuario(usuario));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Tutor tutor = findByUsuario(username);
+        if (tutor == null) {
+            throw new UsernameNotFoundException("Usuario ou senha invalidos.");
+        }
+        return new org.springframework.security.core.userdetails.User(tutor.getUsuario(), tutor.getSenha(),
+                mapRolesToAuthorities(tutor.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+                .collect(Collectors.toList());
     }
 }

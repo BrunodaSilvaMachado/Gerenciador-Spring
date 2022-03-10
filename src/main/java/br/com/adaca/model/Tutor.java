@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,6 +44,10 @@ public class Tutor implements Serializable, BaseId {
     private List<Sessao> sessaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtutor")
     private List<Configuracao> configuracaoList;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     @Override
     public String toString() {

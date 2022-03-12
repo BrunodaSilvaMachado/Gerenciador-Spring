@@ -7,6 +7,8 @@ import br.com.adaca.model.Tutor;
 import br.com.adaca.repository.RoleRepository;
 import br.com.adaca.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class TutorService implements UserDetailsService {
+public class TutorService implements UserDetailsService, CommandLineRunner {
 
 
     @Autowired
@@ -121,9 +123,18 @@ public class TutorService implements UserDetailsService {
                 mapRolesToAuthorities(tutor.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(@NonNull Collection<Role> roles) {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        Role role = roleRepository.findByRole("TUTOR");
+
+        if (role == null) {
+            roleRepository.save(new Role("TUTOR"));
+        }
     }
 }

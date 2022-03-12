@@ -19,8 +19,8 @@ import java.util.Optional;
 
 @Service
 public class RelatorioService {
-    private RelatorioRepository relatorioRepository;
-    private AutistaRepository autistaRepository;
+    private final RelatorioRepository relatorioRepository;
+    private final AutistaRepository autistaRepository;
 
     @Autowired
     public RelatorioService(RelatorioRepository relatorioRepository, AutistaRepository autistaRepository) {
@@ -29,7 +29,7 @@ public class RelatorioService {
     }
 
     /**
-     * Lista todos os sessões cadastradas no banco de dados
+     * Listar todas as sessões cadastradas no banco de dados
      *
      * @return Lista com todos os relatorios cadastrados
      */

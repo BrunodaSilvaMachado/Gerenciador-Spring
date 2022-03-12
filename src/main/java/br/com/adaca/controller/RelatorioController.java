@@ -79,9 +79,9 @@ public class RelatorioController {
         ModelAndView mv = new ModelAndView("Gerenciador/relatorios");
 
         try {
-            mv.addObject("entitys", listar().getBody());
             mv.addObject("autistas", autistaService.listar());
             mv.addObject("tutores", tutorService.listar());
+            mv.addObject("entitys", listar().getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -139,5 +139,15 @@ public class AdministradorService implements UserDetailsService, CommandLineRunn
         if (role == null) {
             roleRepository.save(new Role("ADMIN"));
         }
+
+        if (administradorRepository.count() == 0) {
+            Administrador admin = new Administrador();
+            admin.setNome("Administrador Inicial");
+            admin.setUsuario("admin");
+            admin.setSenha("admin123"); // Troque a senha após o primeiro login!
+            admin.setNivelacesso(1); // Ajuste conforme sua lógica de níveis
+            salvar(admin);
+            System.out.println("Administrador padrão criado: usuário=admin, senha=admin123");
+        }
     }
 }

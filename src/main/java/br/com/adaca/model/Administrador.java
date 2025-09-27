@@ -44,7 +44,7 @@ public class Administrador implements Serializable, BaseId {
     private List<Grafico> graficoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idadministrador")
     private List<Relatorio> relatorioList;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;

@@ -35,9 +35,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/js/**",
-                        "/css/**",
-                        "/Gerenciador/Administradores/add/",
-                        "/Gerenciador/Administradores/save" /**warning: Vulmenrabilidade bem aqui! Remover isso em versões futuras**/
+                        "/css/**"
                 ).permitAll()
                 .antMatchers("/Gerenciador/**").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
